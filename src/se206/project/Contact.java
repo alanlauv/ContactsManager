@@ -62,39 +62,38 @@ public class Contact {
 	}
 
 	public String getFullName() {
-		//return firstName + " " + lastName;
-		return "Alan Lau";
+		return firstName + " " + lastName;
 	}
 
 	public String getFirstName() {
-		return "Alan";
+		return firstName;
 	}
 
 	public String getLastName() {
-		return "Lau";
+		return lastName;
 	}
 
 	public String getMobileph() {
-		return "021 0210 2121";
+		return mobileph;
 	}
 
 	public String getHomeph() {
-		return "09 321 3213";
+		return homeph;
 	}
 
 	public String getWorkph() {
-		return "09 123 1231";
+		return workph;
 	}
 
 	public String getEmail() {
-		return "alau645@aucklanduni.ac.nz";
+		return email;
 	}
 
 	public String getDoa() {
-		return "1234/01/31";
+		return doa;
 	}
 
 	public String getGroup() {
-		return "group name";
+		return group;
 	}
 }
