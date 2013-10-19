@@ -1,5 +1,8 @@
 package se206.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class represents a list of contacts in a particular group currently in
  * the contacts manager application.
@@ -20,7 +23,7 @@ public class GroupList extends ContactList {
 	}
 	
 	public String getGroupName() {
-		return "group name";
+		return groupName;
 	}
 
 }
