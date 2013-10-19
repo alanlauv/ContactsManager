@@ -14,15 +14,15 @@ public class ListOfGroups {
 	private List<GroupList> listOfGroups = new ArrayList<GroupList>();
 	
 	public void add(GroupList g) {
-		
+		listOfGroups.add(g);
 	}
 	
-	public void remove() {
-		
+	public void remove(GroupList g) {
+		listOfGroups.remove(g);
 	}
 	
 	public GroupList getGroupList(int index) {
-		return new GroupList("Random");
+		return listOfGroups.get(index);
 	}
 	
 }
