@@ -1,0 +1,186 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AddEditContactActivity" >
+
+    <Button
+        android:id="@+id/add_button_done"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/done" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/add_button_done" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/add_firstname_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name"
+                android:textColor="#33B5E5" />
+
+            <ImageButton
+                android:id="@+id/add_button_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:id="@+id/add_firstname_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_firstname_label"
+                android:layout_toLeftOf="@+id/add_button_photo"
+                android:inputType="textPersonName"
+                android:labelFor="@+id/add_firstname_input" />
+
+            <TextView
+                android:id="@+id/add_lastname_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_firstname_input"
+                android:text="@string/last_name"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_lastname_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_lastname_label"
+                android:inputType="textPersonName"
+                android:labelFor="@+id/add_lastname_input" />
+
+            <TextView
+                android:id="@+id/add_mobileph_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_lastname_input"
+                android:text="@string/mobile_phone"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_mobileph_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_mobileph_label"
+                android:inputType="phone"
+                android:labelFor="@+id/add_mobileph_input" />
+
+            <TextView
+                android:id="@+id/add_homeph_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_mobileph_input"
+                android:text="@string/home_phone"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_homeph_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_homeph_label"
+                android:inputType="phone"
+                android:labelFor="@+id/add_homeph_input" />
+
+            <TextView
+                android:id="@+id/add_workph_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_homeph_input"
+                android:text="@string/work_phone"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_workph_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_workph_label"
+                android:inputType="phone"
+                android:labelFor="@+id/add_workph_input" />
+
+            <TextView
+                android:id="@+id/add_email_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_workph_input"
+                android:text="@string/email"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_email_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_email_label"
+                android:inputType="textEmailAddress"
+                android:labelFor="@+id/add_email_input" />
+
+            <TextView
+                android:id="@+id/add_homeadd_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_email_input"
+                android:text="@string/homeAdd"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_homeadd_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_homeadd_label"
+                android:inputType="textPostalAddress"
+                android:labelFor="@+id/add_homeadd_input" />
+
+            <TextView
+                android:id="@+id/add_doa_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_homeadd_input"
+                android:text="@string/doa"
+                android:textColor="#33B5E5" />
+
+            <EditText
+                android:id="@+id/add_doa_input"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_doa_label"
+                android:inputType="date"
+                android:labelFor="@+id/add_doa_input" />
+
+            <TextView
+                android:id="@+id/add_group_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_doa_input"
+                android:text="@string/group"
+                android:textColor="#33B5E5" />
+
+            <Spinner
+                android:id="@+id/add_spinner_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_group_label"
+                android:layout_toLeftOf="@+id/add_button_group" />
+            
+            <Button
+                android:id="@+id/add_button_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_group_label"
+                android:layout_alignParentRight="true"
+                android:text="@string/new_str" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
