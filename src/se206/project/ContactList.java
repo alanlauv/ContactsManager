@@ -1,6 +1,7 @@
 package se206.project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 /**
@@ -11,28 +12,37 @@ import java.util.List;
  *
  */
 public class ContactList implements Iterable<Contact> {
-	
+
 	protected List<Contact> contactsList = new ArrayList<Contact>();
-	
+
 	public void add(Contact c) {
-		contactsList.add(new Contact("Alan", "Lau", "021 0210 2121", "", "", "", "", "", ""));
-	}
-	
-	public void remove() {
-		contactsList.remove(new Contact("Alan", "Lau", "021 0210 2121", "", "", "", "", "", ""));
-	}
-	
-	public Contact getContact(int index) {
-		return new Contact("Alan", "Lau", "021 0210 2121", "", "", "", "", "", "");
+		contactsList.add(c);
 	}
 
-	public void sortList() {
-		
+	public void remove(Contact c) {
+		contactsList.remove(c);
 	}
-	
+
+	public Contact getContact(int index) {
+		return contactsList.get(index);
+	}
+
+	public void sortByFirstName() {
+		Collections.sort(contactsList, Contact.Comparators.FIRSTNAME);
+	}
+
+	public void sortByLastName() {
+		Collections.sort(contactsList, Contact.Comparators.LASTNAME);
+	}
+
+	public void sortByMobilePh() {
+		Collections.sort(contactsList, Contact.Comparators.MOBILEPH);
+	}
+
+	// Fix this up
 	@Override
 	public Iterator<Contact> iterator() {        
-        Iterator<Contact> contact = contactsList.iterator();
-        return contact; 
-    }
+		Iterator<Contact> contact = contactsList.iterator();
+		return contact; 
+	}
 }

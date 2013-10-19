@@ -1,12 +1,14 @@
 package se206.project;
 
+import java.util.Comparator;
+
 /**
  * This class represents a single contact for the contacts manager application
  * 
  * @author Alan Lau, alau645, 2714269
  *
  */
-public class Contact {
+public class Contact implements Comparable<Contact> {
 	private String firstName;
 	private String lastName;
 	private String mobileph;
@@ -95,5 +97,34 @@ public class Contact {
 
 	public String getGroup() {
 		return group;
+	}
+
+	@Override
+	public int compareTo(Contact c) {
+		return Comparators.FIRSTNAME.compare(this, c);
+	}
+
+	public static class Comparators {
+
+		public static Comparator<Contact> FIRSTNAME = new Comparator<Contact>() {
+			@Override
+			public int compare(Contact c1, Contact c2) {
+				return c1.firstName.compareTo(c2.firstName);
+			}
+		};
+
+		public static Comparator<Contact> LASTNAME = new Comparator<Contact>() {
+			@Override
+			public int compare(Contact c1, Contact c2) {
+				return c1.lastName.compareTo(c2.lastName);
+			}
+		};
+
+		public static Comparator<Contact> MOBILEPH = new Comparator<Contact>() {
+			@Override
+			public int compare(Contact c1, Contact c2) {
+				return c1.mobileph.compareTo(c2.mobileph);
+			}
+		};
 	}
 }
