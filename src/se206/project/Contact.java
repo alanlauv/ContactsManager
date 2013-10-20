@@ -1,5 +1,6 @@
 package se206.project;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import android.graphics.drawable.Drawable;
@@ -10,7 +11,7 @@ import android.graphics.drawable.Drawable;
  * @author Alan Lau, alau645, 2714269
  *
  */
-public class Contact implements Comparable<Contact> {
+public class Contact implements Comparable<Contact>, Serializable {
 	private String firstName;
 	private String lastName;
 	private String mobileph;

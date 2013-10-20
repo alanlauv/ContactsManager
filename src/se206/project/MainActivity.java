@@ -183,8 +183,9 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// View contact which start the view contact activity
 						if (which == 0) {
-							Intent intent = new Intent();
+							Intent intent = new Intent("se206.project.ViewContactActivity");
 							intent.setClass(MainActivity.this, ViewContactActivity.class);
+							intent.putExtra("Contact", selectedContact);
 							startActivity(intent);
 						// Edit contact which will start the edit contact activity
 						} else if (which == 1) {
