@@ -12,6 +12,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	
 	public static final String CONTACT_ID = "_id";
 	public static final String CONTACT_FIRSTNAME = "firstName";
+	public static final String CONTACT_LASTNAME = "lastName";
 	public static final String CONTACT_MOBILEPH = "mobileph";
 	public static final String CONTACT_HOMEPH = "homeph";
 	public static final String CONTACT_WORKPH = "workph";
@@ -24,6 +25,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS + " ("
 			+ CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ CONTACT_FIRSTNAME + " TEXT,"
+			+ CONTACT_LASTNAME  + " TEXT,"
 			+ CONTACT_MOBILEPH + " TEXT,"
 			+ CONTACT_HOMEPH + " TEXT,"
 			+ CONTACT_WORKPH + " TEXT,"
