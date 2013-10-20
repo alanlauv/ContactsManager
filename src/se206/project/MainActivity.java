@@ -47,7 +47,8 @@ public class MainActivity extends Activity {
 
 		//buttonAll.setEnabled(true);
 
-		setupListView();
+		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
+		setupListView(database);
 
 		// Button listener for adding a new contact. Starts the add contact activity
 		buttonAddContact.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +112,13 @@ public class MainActivity extends Activity {
 
 	}
 
-	private void setupListView() {
+	private void setupListView(ContactsDatabaseHelper database) {
 		// large amount of stub contact data for testing and formatting
 		List<Map<String, String>> aList =  new ArrayList<Map<String, String>>();
 
 		final String TEXT1 = "text1";
 		final String TEXT2 = "text2";
-
+/*
 		for(Contact c : contactList) {
 			// do nothing
 		}
@@ -130,11 +131,11 @@ public class MainActivity extends Activity {
 		listItemMap2.put(TEXT1, "Alex Ander");
 		listItemMap2.put(TEXT2, "022 0270 2727");
 		aList.add(listItemMap2);*/
-		final Map<String, String> listItemMap3 = new HashMap<String, String>();
+/*		final Map<String, String> listItemMap3 = new HashMap<String, String>();
 		listItemMap3.put(TEXT1, "Joe Bloggs");
 		listItemMap3.put(TEXT2, "022 0220 2222");
 		aList.add(listItemMap3);
-
+*/
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
