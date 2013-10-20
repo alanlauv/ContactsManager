@@ -120,12 +120,23 @@ public class MainActivity extends Activity {
 
 		});
 
+		// Button listener for group list contact view
 		buttonGroup.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				displayList.clear();
-				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+
+				//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+			}
+		});
+		
+		// Button listener for showing all contacts (default view)
+		buttonAll.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 
@@ -141,21 +152,6 @@ public class MainActivity extends Activity {
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
 		sortDisplayList(1);
-
-		/*
-		final Map<String, String> listItemMap1 = new HashMap<String, String>();
-		listItemMap1.put(TEXT1, "Alan Lau");
-		listItemMap1.put(TEXT2, "021 0210 2121");
-		aList.add(listItemMap1);
-		final Map<String, String> listItemMap2 = new HashMap<String, String>();
-		listItemMap2.put(TEXT1, "Alex Ander");
-		listItemMap2.put(TEXT2, "022 0270 2727");
-		aList.add(listItemMap2);
-		final Map<String, String> listItemMap3 = new HashMap<String, String>();
-		listItemMap3.put(TEXT1, "Joe Bloggs");
-		listItemMap3.put(TEXT2, "022 0220 2222");
-		aList.add(listItemMap3);
-		 */
 
 		// Using the simple_list_item_2 layout to show Name at top line and phone number
 		// at the bottom line
