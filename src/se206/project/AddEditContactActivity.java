@@ -104,9 +104,6 @@ public class AddEditContactActivity extends Activity {
 			editTextDoa.setText("1234/01/31");
 			
 		}
-		
-		// stub contact
-		Contact c = new Contact("Alan", "Lau", "021 0210 2121", "", "", "", "", "", "");
 
 	}
 
