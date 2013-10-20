@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	private Button buttonGroup;
 	private Button buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
+	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class MainActivity extends Activity {
 						// The 'which' argument contains the index position
 						// of the selected item
 						Collections.sort(contactList, Contact.Comparators.LASTNAME);
-						
+
 						((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 					}
 
@@ -118,11 +119,20 @@ public class MainActivity extends Activity {
 
 		});
 
+		buttonGroup.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				displayList.clear();
+				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+			}
+		});
+
 	}
 
-	private void setupListView(ContactsDatabaseHelper database) {
+	private void setupListView(final ContactsDatabaseHelper database) {
 		// large amount of stub contact data for testing and formatting
-		List<Map<String, String>> aList =  new ArrayList<Map<String, String>>();
+		
 		contactList = database.getAllContacts();
 
 		final String TEXT1 = "text1";
@@ -134,7 +144,7 @@ public class MainActivity extends Activity {
 			final Map<String, String> listItemMap = new HashMap<String, String>();
 			listItemMap.put(TEXT1, c.getFullName());
 			listItemMap.put(TEXT2, c.getMobileph());
-			aList.add(listItemMap);
+			displayList.add(listItemMap);
 		}
 
 		/*
@@ -154,7 +164,7 @@ public class MainActivity extends Activity {
 
 		// Using the simple_list_item_2 layout to show Name at top line and phone number
 		// at the bottom line
-		SimpleAdapter la = new SimpleAdapter(MainActivity.this, aList,
+		SimpleAdapter la = new SimpleAdapter(MainActivity.this, displayList,
 				android.R.layout.simple_list_item_2, fromMapKey, ids);
 		listView.setAdapter(la);
 
@@ -164,11 +174,12 @@ public class MainActivity extends Activity {
 			// options: view contact, edit contact, delete contact
 			@Override
 			public void onItemClick(AdapterView<?> parentView, View clickedView,
-					int clickedViewPos, long id) {
+					final int clickedViewPos, long id) {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				Contact selectedContact = contactList.get(clickedViewPos);
+				final Contact selectedContact = contactList.get(clickedViewPos);
+
 				builder.setTitle(selectedContact.getFullName());
 				String[] contactOptions = {"View contact", "Edit contact", "Delete contact"};
 				builder.setItems(contactOptions, new DialogInterface.OnClickListener() {
@@ -197,8 +208,10 @@ public class MainActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									
-									//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+									database.deleteContact(selectedContact);
+									displayList.remove(clickedViewPos);
+									contactList.remove(clickedViewPos);
+									((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 								}
 
 							});
@@ -213,6 +226,10 @@ public class MainActivity extends Activity {
 			}
 
 		});
+	}
+	
+	private void setupContactList() {
+		
 	}
 
 	@Override
