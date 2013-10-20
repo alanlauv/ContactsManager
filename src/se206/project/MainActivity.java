@@ -1,6 +1,7 @@
 package se206.project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,7 +33,7 @@ public class MainActivity extends Activity {
 	private Button buttonSearch;
 	private Button buttonGroup;
 	private Button buttonAll;
-	private ContactList contactList = new ContactList();
+	private List<Contact> contactList = new ArrayList<Contact>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class MainActivity extends Activity {
 
 		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
+		database.addContact(new Contact("James", "Chen", "023 0230 0230", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
+		database.addContact(new Contact("John", "Lee", "022 0220 0220", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		setupListView(database);
 
 		// Button listener for adding a new contact. Starts the add contact activity
@@ -79,6 +83,9 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// The 'which' argument contains the index position
 						// of the selected item
+						Collections.sort(contactList, Contact.Comparators.LASTNAME);
+						
+						((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 					}
 
 				});
@@ -116,7 +123,6 @@ public class MainActivity extends Activity {
 	private void setupListView(ContactsDatabaseHelper database) {
 		// large amount of stub contact data for testing and formatting
 		List<Map<String, String>> aList =  new ArrayList<Map<String, String>>();
-		List<Contact> contactList = new ArrayList<Contact>();
 		contactList = database.getAllContacts();
 
 		final String TEXT1 = "text1";
@@ -162,8 +168,8 @@ public class MainActivity extends Activity {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				//Contact selectedContact = contactList.get(clickedViewPos);
-				builder.setTitle("Alan Lau");
+				Contact selectedContact = contactList.get(clickedViewPos);
+				builder.setTitle(selectedContact.getFullName());
 				String[] contactOptions = {"View contact", "Edit contact", "Delete contact"};
 				builder.setItems(contactOptions, new DialogInterface.OnClickListener() {
 
@@ -191,7 +197,7 @@ public class MainActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									// Delete
+									
 									//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 								}
 
