@@ -1,5 +1,8 @@
 package se206.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -86,7 +89,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_MOBILEPH,
 				CONTACT_HOMEPH, CONTACT_WORKPH, CONTACT_EMAIL, CONTACT_HOMEADD,
 				CONTACT_DOA, CONTACT_GROUP }, CONTACT_ID + "=?",
-						new String[] { String.valueOf(id) }, null, null, null, null);
+				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
@@ -96,5 +99,29 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				cursor.getString(8), cursor.getString(9));
 
 		return contact;
+	}
+
+	// A little cropspas, change the while loop later
+	public List<Contact> getAllContacts() {
+		List<Contact> contactList = new ArrayList<Contact>();
+		// Select All Query
+		String buildSQL = "SELECT  * FROM " + TABLE_CONTACTS;
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(buildSQL, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Contact contact = new Contact(cursor.getString(1),
+						cursor.getString(2), cursor.getString(3), cursor.getString(4),
+						cursor.getString(5), cursor.getString(6), cursor.getString(7),
+						cursor.getString(8), cursor.getString(9));
+				// Adding contact to list
+				contactList.add(contact);
+			} while (cursor.moveToNext());
+		}
+
+		return contactList;
 	}
 }
