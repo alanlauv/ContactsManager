@@ -2,6 +2,8 @@ package se206.project;
 
 import java.util.Comparator;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * This class represents a single contact for the contacts manager application
  * 
@@ -17,7 +19,7 @@ public class Contact implements Comparable<Contact> {
 	private String email;
 	private String homeAdd;
 	private String doa;
-	private String photo;
+	private Drawable photo = null;
 	private String group;
 
 	Contact(String firstName,
@@ -98,6 +100,14 @@ public class Contact implements Comparable<Contact> {
 	public String getGroup() {
 		return group;
 	}
+	
+	public void setPhoto(byte[] imageData) {
+        photo = ImageUtils.byteToDrawable(imageData);
+    }
+
+    public byte[] getPhoto(){
+        return ImageUtils.drawableToByteArray(photo);
+    }
 
 	@Override
 	public int compareTo(Contact c) {
