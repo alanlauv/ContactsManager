@@ -147,7 +147,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, contact.getHomeph());
 		values.put(ContactsDatabaseHelper.CONTACT_WORKPH, contact.getWorkph());
 		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, contact.getEmail());
-		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeAdd());
 		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
 		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
 		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
