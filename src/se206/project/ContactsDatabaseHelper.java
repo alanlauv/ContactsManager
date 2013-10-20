@@ -1,27 +1,28 @@
 package se206.project;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class ContactsDatabaseHelper extends SQLiteOpenHelper {
-	
-	public static final int DATABASE_VERSION = 1;
-	public static final String DATABASE_NAME = "ContactsDatabase.db";
-	public static final String TABLE_CONTACTS = "ContactsTable";
-	
-	public static final String CONTACT_ID = "_id";
-	public static final String CONTACT_FIRSTNAME = "firstName";
-	public static final String CONTACT_LASTNAME = "lastName";
-	public static final String CONTACT_MOBILEPH = "mobileph";
-	public static final String CONTACT_HOMEPH = "homeph";
-	public static final String CONTACT_WORKPH = "workph";
-	public static final String CONTACT_EMAIL = "email";
-	public static final String CONTACT_HOMEADD = "homeAdd";
-	public static final String CONTACT_DOA = "doa";
-	public static final String CONTACT_PHOTO = "photo";
-	public static final String CONTACT_GROUP = "group";
-	
+
+	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "ContactsDatabase.db";
+	private static final String TABLE_CONTACTS = "ContactsTable";
+
+	private static final String CONTACT_ID = "_id";
+	private static final String CONTACT_FIRSTNAME = "firstName";
+	private static final String CONTACT_LASTNAME = "lastName";
+	private static final String CONTACT_MOBILEPH = "mobileph";
+	private static final String CONTACT_HOMEPH = "homeph";
+	private static final String CONTACT_WORKPH = "workph";
+	private static final String CONTACT_EMAIL = "email";
+	private static final String CONTACT_HOMEADD = "homeAdd";
+	private static final String CONTACT_DOA = "doa";
+	private static final String CONTACT_PHOTO = "photo";
+	private static final String CONTACT_GROUP = "group";
+
 	private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS + " ("
 			+ CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ CONTACT_FIRSTNAME + " TEXT,"
@@ -49,5 +50,24 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(DELETE_CONTACTS_TABLE);
 		onCreate(db);
+	}
+
+	public void addContact(Contact c) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(ContactsDatabaseHelper.CONTACT_FIRSTNAME, c.getFirstName());
+		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, c.getLastName());
+		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, c.getMobileph());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, c.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getWorkph());
+		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, c.getEmail());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, c.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_DOA, c.getDoa());
+		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
+		values.put(ContactsDatabaseHelper.CONTACT_GROUP, c.getGroup());
+
+		db.insert(TABLE_CONTACTS, null, values);
+		db.close();
 	}
 }
