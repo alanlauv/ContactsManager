@@ -92,6 +92,9 @@ public class AddEditContactActivity extends Activity {
 				Contact contact = new Contact(firstName, lastName, mobileph,
 						homeph, workph, email, homeAdd, doa, group);
 
+				Intent resultIntent = new Intent();
+				resultIntent.putExtra("Contact", contact);
+				setResult(Activity.RESULT_OK, resultIntent);
 				finish();
 			}
 		});
