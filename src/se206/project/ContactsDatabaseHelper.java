@@ -85,12 +85,13 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 
 	public void deleteContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-				new String[] { String.valueOf(contact.getID()) });
-		//db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
+		//db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
+		//		new String[] { String.valueOf(contact.getID()) });
+		db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
 		db.close();
 	}
 
+	// { String.valueOf(id) }
 	public Contact getContact(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -111,7 +112,6 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		return contact;
 	}
 
-	// A little cropspas, change the while loop later
 	public List<Contact> getAllContacts() {
 		List<Contact> contactList = new ArrayList<Contact>();
 		// Select All Query
@@ -136,7 +136,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		return contactList;
 	}
 	
-	// A little cropspas, change return int??
+	// A little cropspas, change return int?? // { String.valueOf(id) }
 	public int updateContact(Contact contact) {
 	    SQLiteDatabase db = this.getWritableDatabase();
 	 

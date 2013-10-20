@@ -178,8 +178,7 @@ public class MainActivity extends Activity {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				Contact selectedContact = contactList.get(clickedViewPos);
-				database.deleteContact(selectedContact);
+				final Contact selectedContact = contactList.get(clickedViewPos);
 
 				builder.setTitle(selectedContact.getFullName());
 				String[] contactOptions = {"View contact", "Edit contact", "Delete contact"};
@@ -192,14 +191,14 @@ public class MainActivity extends Activity {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, ViewContactActivity.class);
 							startActivity(intent);
-							// Edit contact which will start the edit contact activity
+						// Edit contact which will start the edit contact activity
 						} else if (which == 1) {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
 							intent.putExtra("Action", "edit");
 							startActivity(intent);
-							// Delete contact which will show a dialog box asking user to confirm deletion
-							// of the selected contact
+						// Delete contact which will show a dialog box asking user to confirm deletion
+						// of the selected contact
 						} else if (which == 2) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 							builder.setTitle("Delete this contact?");
@@ -209,7 +208,7 @@ public class MainActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									//database.deleteContact(selectedContact);
+									database.deleteContact(selectedContact);
 									displayList.remove(clickedViewPos);
 									contactList.remove(clickedViewPos);
 									((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
