@@ -27,11 +27,11 @@ import android.widget.SimpleAdapter;
  */
 public class MainActivity extends Activity {
 	
-	private final int SORT_FIRSTNAME = 1;
-	private final int SORT_LASTNAME = 2;
-	private final int SORT_MOBILEPH = 3;
-	private final String TEXT1 = "text1";
-	private final String TEXT2 = "text2";
+	private static final int SORT_FIRSTNAME = 1;
+	private static final int SORT_LASTNAME = 2;
+	private static final int SORT_MOBILEPH = 3;
+	private static final String TEXT1 = "text1";
+	private static final String TEXT2 = "text2";
 
 	private ListView listView;
 	private Button buttonAddContact;
