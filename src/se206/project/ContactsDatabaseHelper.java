@@ -2,6 +2,7 @@ package se206.project;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -33,7 +34,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 			+ CONTACT_EMAIL + " TEXT,"
 			+ CONTACT_HOMEADD + " TEXT,"
 			+ CONTACT_DOA + " TEXT,"
-			+ CONTACT_PHOTO + " TEXT,"
+			//+ CONTACT_PHOTO + " TEXT,"
 			+ CONTACT_GROUP + " TEXT);";
 	private static final String DELETE_CONTACTS_TABLE = "DROP TABLE IF EXISTS " + TABLE_CONTACTS;
 
@@ -60,7 +61,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, c.getLastName());
 		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, c.getMobileph());
 		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, c.getHomeph());
-		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getWorkph());
+		values.put(ContactsDatabaseHelper.CONTACT_WORKPH, c.getWorkph());
 		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, c.getEmail());
 		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, c.getHomeph());
 		values.put(ContactsDatabaseHelper.CONTACT_DOA, c.getDoa());
@@ -70,11 +71,30 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		db.insert(TABLE_CONTACTS, null, values);
 		db.close();
 	}
-	
+
 	public void deleteContact(Contact c) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-	            new String[] { String.valueOf(c.getID()) });
-	    db.close();
+				new String[] { String.valueOf(c.getID()) });
+		db.close();
+	}
+
+	public Contact getContact(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TABLE_CONTACTS, new String[] { CONTACT_ID,
+				CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_MOBILEPH,
+				CONTACT_HOMEPH, CONTACT_WORKPH, CONTACT_EMAIL, CONTACT_HOMEADD,
+				CONTACT_DOA, CONTACT_GROUP }, CONTACT_ID + "=?",
+						new String[] { String.valueOf(id) }, null, null, null, null);
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		Contact contact = new Contact(cursor.getString(1),
+				cursor.getString(2), cursor.getString(3), cursor.getString(4),
+				cursor.getString(5), cursor.getString(6), cursor.getString(7),
+				cursor.getString(8), cursor.getString(9));
+
+		return contact;
 	}
 }
