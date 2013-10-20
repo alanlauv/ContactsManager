@@ -84,9 +84,18 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// The 'which' argument contains the index position
 						// of the selected item
-						Collections.sort(contactList, Contact.Comparators.LASTNAME);
+						if (which >= 0 && which <= 2) {
+							if (which == 0) {
+								Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+							} else if (which == 1) {
+								Collections.sort(contactList, Contact.Comparators.LASTNAME);
+							} else if (which == 2) {
+								Collections.sort(contactList, Contact.Comparators.MOBILEPH);
+							}
+							updateDisplayList();
 
-						((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+							((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+						}
 					}
 
 				});
@@ -131,7 +140,6 @@ public class MainActivity extends Activity {
 	}
 
 	private void setupListView(final ContactsDatabaseHelper database) {
-		// large amount of stub contact data for testing and formatting
 		
 		contactList = database.getAllContacts();
 
@@ -140,12 +148,7 @@ public class MainActivity extends Activity {
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
-		for(Contact c : contactList) {
-			final Map<String, String> listItemMap = new HashMap<String, String>();
-			listItemMap.put(TEXT1, c.getFullName());
-			listItemMap.put(TEXT2, c.getMobileph());
-			displayList.add(listItemMap);
-		}
+		updateDisplayList();
 
 		/*
 		final Map<String, String> listItemMap1 = new HashMap<String, String>();
@@ -228,8 +231,18 @@ public class MainActivity extends Activity {
 		});
 	}
 	
-	private void setupContactList() {
-		
+	private void updateDisplayList() {
+		final String TEXT1 = "text1";
+		final String TEXT2 = "text2";
+
+		displayList.clear();
+
+		for(Contact c : contactList) {
+			final Map<String, String> listItemMap = new HashMap<String, String>();
+			listItemMap.put(TEXT1, c.getFullName());
+			listItemMap.put(TEXT2, c.getMobileph());
+			displayList.add(listItemMap);
+		}
 	}
 
 	@Override
