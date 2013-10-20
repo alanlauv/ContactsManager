@@ -93,6 +93,10 @@ public class Contact implements Comparable<Contact> {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getHomeAdd() {
+		return homeAdd;
+	}
 
 	public String getDoa() {
 		return doa;
