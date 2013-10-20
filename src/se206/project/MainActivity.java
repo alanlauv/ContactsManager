@@ -85,15 +85,7 @@ public class MainActivity extends Activity {
 						// The 'which' argument contains the index position
 						// of the selected item
 						if (which >= 0 && which <= 2) {
-							if (which == 0) {
-								Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
-							} else if (which == 1) {
-								Collections.sort(contactList, Contact.Comparators.LASTNAME);
-							} else if (which == 2) {
-								Collections.sort(contactList, Contact.Comparators.MOBILEPH);
-							}
-							updateDisplayList();
-
+							sortDisplayList(which);
 							((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 						}
 					}
@@ -148,7 +140,7 @@ public class MainActivity extends Activity {
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
-		updateDisplayList();
+		sortDisplayList(1);
 
 		/*
 		final Map<String, String> listItemMap1 = new HashMap<String, String>();
@@ -231,17 +223,39 @@ public class MainActivity extends Activity {
 		});
 	}
 	
-	private void updateDisplayList() {
+	private void sortDisplayList(int sortType) {
+		final int SORT_FIRSTNAME = 1;
+		final int SORT_LASTNAME = 2;
+		final int SORT_MOBILEPH = 3;
 		final String TEXT1 = "text1";
 		final String TEXT2 = "text2";
 
 		displayList.clear();
 
-		for(Contact c : contactList) {
-			final Map<String, String> listItemMap = new HashMap<String, String>();
-			listItemMap.put(TEXT1, c.getFullName());
-			listItemMap.put(TEXT2, c.getMobileph());
-			displayList.add(listItemMap);
+		if (sortType == SORT_FIRSTNAME) {
+			Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+			for(Contact c : contactList) {
+				final Map<String, String> listItemMap = new HashMap<String, String>();
+				listItemMap.put(TEXT1, c.getFullName());
+				listItemMap.put(TEXT2, c.getMobileph());
+				displayList.add(listItemMap);
+			}
+		} else if (sortType == SORT_LASTNAME) {
+			Collections.sort(contactList, Contact.Comparators.LASTNAME);
+			for(Contact c : contactList) {
+				final Map<String, String> listItemMap = new HashMap<String, String>();
+				listItemMap.put(TEXT1, c.getLastName() + " " + c.getFirstName());
+				listItemMap.put(TEXT2, c.getMobileph());
+				displayList.add(listItemMap);
+			}
+		} else if (sortType == SORT_MOBILEPH) {
+			Collections.sort(contactList, Contact.Comparators.MOBILEPH);
+			for(Contact c : contactList) {
+				final Map<String, String> listItemMap = new HashMap<String, String>();
+				listItemMap.put(TEXT1, c.getFullName());
+				listItemMap.put(TEXT2, c.getMobileph());
+				displayList.add(listItemMap);
+			}
 		}
 	}
 
