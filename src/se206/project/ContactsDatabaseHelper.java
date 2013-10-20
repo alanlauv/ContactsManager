@@ -56,29 +56,29 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void addContact(Contact c) {
+	public void addContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(ContactsDatabaseHelper.CONTACT_FIRSTNAME, c.getFirstName());
-		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, c.getLastName());
-		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, c.getMobileph());
-		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, c.getHomeph());
-		values.put(ContactsDatabaseHelper.CONTACT_WORKPH, c.getWorkph());
-		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, c.getEmail());
-		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, c.getHomeph());
-		values.put(ContactsDatabaseHelper.CONTACT_DOA, c.getDoa());
+		values.put(ContactsDatabaseHelper.CONTACT_FIRSTNAME, contact.getFirstName());
+		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, contact.getLastName());
+		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, contact.getMobileph());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, contact.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_WORKPH, contact.getWorkph());
+		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, contact.getEmail());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
 		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
-		values.put(ContactsDatabaseHelper.CONTACT_GROUP, c.getGroup());
+		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
 
 		db.insert(TABLE_CONTACTS, null, values);
 		db.close();
 	}
 
-	public void deleteContact(Contact c) {
+	public void deleteContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-				new String[] { String.valueOf(c.getID()) });
+				new String[] { String.valueOf(contact.getID()) });
 		db.close();
 	}
 
@@ -123,5 +123,26 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		}
 
 		return contactList;
+	}
+	
+	// A little cropspas, change return int??
+	public int updateContact(Contact contact) {
+	    SQLiteDatabase db = this.getWritableDatabase();
+	 
+	    ContentValues values = new ContentValues();
+		values.put(ContactsDatabaseHelper.CONTACT_FIRSTNAME, contact.getFirstName());
+		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, contact.getLastName());
+		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, contact.getMobileph());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEPH, contact.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_WORKPH, contact.getWorkph());
+		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, contact.getEmail());
+		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeph());
+		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
+		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
+		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
+	 
+	    // updating row
+	    return db.update(TABLE_CONTACTS, values, CONTACT_ID + " = ?",
+	            new String[] { String.valueOf(contact.getID()) });
 	}
 }
