@@ -24,6 +24,26 @@ public class Contact implements Comparable<Contact>, Serializable {
 	private String group;
 	private int id;
 
+	/*
+	Contact(String firstName,
+			String lastName,
+			String mobileph,
+			String homeph,
+			String workph,
+			String email,
+			String homeAdd,
+			String doa) {
+
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileph = mobileph;
+		this.homeph = homeph;
+		this.workph = workph;
+		this.email = email;
+		this.homeAdd = homeAdd;
+		this.doa = doa;
+	}*/
+
 	Contact(String firstName,
 			String lastName,
 			String mobileph,
@@ -94,7 +114,7 @@ public class Contact implements Comparable<Contact>, Serializable {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public String getHomeAdd() {
 		return homeAdd;
 	}
@@ -110,11 +130,11 @@ public class Contact implements Comparable<Contact>, Serializable {
 	public int getID() {
 		return id;
 	}
-	
+
 	public void setID(int id) {
 		this.id = id;
 	}
-	
+
 	/*
 	public void setPhoto(byte[] imageData) {
         photo = ImageUtils.byteToDrawable(imageData);
@@ -123,7 +143,7 @@ public class Contact implements Comparable<Contact>, Serializable {
     public byte[] getPhoto(){
         return ImageUtils.drawableToByteArray(photo);
     }
-    */
+	 */
 
 	@Override
 	public int compareTo(Contact c) {
