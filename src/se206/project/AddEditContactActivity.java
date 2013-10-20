@@ -96,15 +96,15 @@ public class AddEditContactActivity extends Activity {
 		// activity running in edit mode, presets all EditText fields with info
 		// from the selected contact
 		if (isEdit) { // stub fields
-			setTitle("Edit Contact");
-			editTextFirstName.setText("Alan");
-			editTextLastName.setText("Lau");
-			editTextMobileph.setText("021 0210 2121");
-			editTextHomeph.setText("09 321 3213");
-			editTextWorkph.setText("09 123 1231");
-			editTextEmail.setText("alau645@aucklanduni.ac.nz");
-			editTextHomeAdd.setText("123 Random St");
-			editTextDoa.setText("1234/01/31");
+			setTitle(contact.getFullName());
+			editTextFirstName.setText(contact.getFirstName());
+			editTextLastName.setText(contact.getLastName());
+			editTextMobileph.setText(contact.getMobileph());
+			editTextHomeph.setText(contact.getHomeph());
+			editTextWorkph.setText(contact.getWorkph());
+			editTextEmail.setText(contact.getEmail());
+			editTextHomeAdd.setText(contact.getHomeAdd());
+			editTextDoa.setText(contact.getDoa());
 			
 		}
 
