@@ -27,9 +27,9 @@ import android.widget.SimpleAdapter;
  */
 public class MainActivity extends Activity {
 	
-	private static final int SORT_FIRSTNAME = 1;
-	private static final int SORT_LASTNAME = 2;
-	private static final int SORT_MOBILEPH = 3;
+	private static final int SORT_FIRSTNAME = 0;
+	private static final int SORT_LASTNAME = 1;
+	private static final int SORT_MOBILEPH = 2;
 	private static final String TEXT1 = "text1";
 	private static final String TEXT2 = "text2";
 
