@@ -10,16 +10,16 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME = "ContactsDatabase.db";
 	public static final String TABLE_CONTACTS = "ContactsTable";
 	
-	private static final String CONTACT_ID = "_id";
-	private static final String CONTACT_FIRSTNAME = "firstName";
-	private static final String CONTACT_MOBILEPH = "mobileph";
-	private static final String CONTACT_HOMEPH = "homeph";
-	private static final String CONTACT_WORKPH = "workph";
-	private static final String CONTACT_EMAIL = "email";
-	private static final String CONTACT_HOMEADD = "homeAdd";
-	private static final String CONTACT_DOA = "doa";
-	private static final String CONTACT_PHOTO = "photo";
-	private static final String CONTACT_GROUP = "group";
+	public static final String CONTACT_ID = "_id";
+	public static final String CONTACT_FIRSTNAME = "firstName";
+	public static final String CONTACT_MOBILEPH = "mobileph";
+	public static final String CONTACT_HOMEPH = "homeph";
+	public static final String CONTACT_WORKPH = "workph";
+	public static final String CONTACT_EMAIL = "email";
+	public static final String CONTACT_HOMEADD = "homeAdd";
+	public static final String CONTACT_DOA = "doa";
+	public static final String CONTACT_PHOTO = "photo";
+	public static final String CONTACT_GROUP = "group";
 	
 	private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS + " ("
 			+ CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
