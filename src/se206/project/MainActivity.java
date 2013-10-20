@@ -51,9 +51,9 @@ public class MainActivity extends Activity {
 		//buttonAll.setEnabled(true);
 
 		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
-		database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
-		database.addContact(new Contact("James", "Chen", "023 0230 0230", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
-		database.addContact(new Contact("John", "Lee", "022 0220 0220", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
+		//database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
+		//database.addContact(new Contact("James", "Chen", "023 0230 0230", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
+		//database.addContact(new Contact("John", "Lee", "022 0220 0220", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		setupListView(database);
 
 		// Button listener for adding a new contact. Starts the add contact activity
@@ -178,7 +178,8 @@ public class MainActivity extends Activity {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				final Contact selectedContact = contactList.get(clickedViewPos);
+				Contact selectedContact = contactList.get(clickedViewPos);
+				database.deleteContact(selectedContact);
 
 				builder.setTitle(selectedContact.getFullName());
 				String[] contactOptions = {"View contact", "Edit contact", "Delete contact"};
@@ -208,7 +209,7 @@ public class MainActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									database.deleteContact(selectedContact);
+									//database.deleteContact(selectedContact);
 									displayList.remove(clickedViewPos);
 									contactList.remove(clickedViewPos);
 									((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();

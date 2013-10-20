@@ -85,8 +85,9 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 
 	public void deleteContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-				new String[] { String.valueOf(contact.getID()) });
+		//db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
+		//		new String[] { String.valueOf(contact.getID()) });
+		db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
 		db.close();
 	}
 
