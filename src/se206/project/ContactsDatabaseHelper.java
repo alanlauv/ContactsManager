@@ -85,9 +85,9 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 
 	public void deleteContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		//db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-		//		new String[] { String.valueOf(contact.getID()) });
-		db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
+		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
+				new String[] { String.valueOf(contact.getID()) });
+		//db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
 		db.close();
 	}
 
@@ -106,6 +106,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				cursor.getString(2), cursor.getString(3), cursor.getString(4),
 				cursor.getString(5), cursor.getString(6), cursor.getString(7),
 				cursor.getString(8), cursor.getString(9));
+		contact.setID(Integer.parseInt(cursor.getString(0)));
 
 		return contact;
 	}
@@ -126,6 +127,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 						cursor.getString(2), cursor.getString(3), cursor.getString(4),
 						cursor.getString(5), cursor.getString(6), cursor.getString(7),
 						cursor.getString(8), cursor.getString(9));
+				contact.setID(Integer.parseInt(cursor.getString(0)));
 				// Adding contact to list
 				contactList.add(contact);
 			} while (cursor.moveToNext());
