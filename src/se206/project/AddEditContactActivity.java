@@ -41,7 +41,7 @@ public class AddEditContactActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		String action = extras.getString("Action");
 		boolean isEdit = action.equals("edit");
-		
+
 		Intent intent = getIntent();
 		Contact contact = (Contact) intent.getSerializableExtra("Contact");
 
@@ -58,6 +58,20 @@ public class AddEditContactActivity extends Activity {
 		buttonGroup = (Button)findViewById(R.id.add_button_group);
 		spinnerGroup = (Spinner)findViewById(R.id.add_spinner_group);
 
+		// activity running in edit mode, presets all EditText fields with info
+		// from the selected contact
+		if (isEdit) { // stub fields
+			setTitle(contact.getFullName());
+			editTextFirstName.setText(contact.getFirstName());
+			editTextLastName.setText(contact.getLastName());
+			editTextMobileph.setText(contact.getMobileph());
+			editTextHomeph.setText(contact.getHomeph());
+			editTextWorkph.setText(contact.getWorkph());
+			editTextEmail.setText(contact.getEmail());
+			editTextHomeAdd.setText(contact.getHomeAdd());
+			editTextDoa.setText(contact.getDoa());
+		}
+
 		// Done button which takes all the info and creates a new contact or finalises
 		// the editing of a contact, then finishes this activity and returns to previous
 		// activity
@@ -65,6 +79,19 @@ public class AddEditContactActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				String firstName = editTextFirstName.getText().toString();
+				String lastName = editTextLastName.getText().toString();
+				String mobileph = editTextMobileph.getText().toString();
+				String homeph = editTextHomeph.getText().toString();
+				String workph = editTextWorkph.getText().toString();
+				String email = editTextEmail.getText().toString();
+				String homeAdd = editTextHomeAdd.getText().toString();
+				String doa = editTextDoa.getText().toString();
+				String group = "";
+
+				Contact contact = new Contact(firstName, lastName, mobileph,
+						homeph, workph, email, homeAdd, doa, group);
+
 				finish();
 			}
 		});
@@ -80,33 +107,18 @@ public class AddEditContactActivity extends Activity {
 
 			}
 		});
-		
+
 		// Group button which transitions to edit group activity
 		buttonGroup.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(AddEditContactActivity.this, EditGroupsActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
-
-		// activity running in edit mode, presets all EditText fields with info
-		// from the selected contact
-		if (isEdit) { // stub fields
-			setTitle(contact.getFullName());
-			editTextFirstName.setText(contact.getFirstName());
-			editTextLastName.setText(contact.getLastName());
-			editTextMobileph.setText(contact.getMobileph());
-			editTextHomeph.setText(contact.getHomeph());
-			editTextWorkph.setText(contact.getWorkph());
-			editTextEmail.setText(contact.getEmail());
-			editTextHomeAdd.setText(contact.getHomeAdd());
-			editTextDoa.setText(contact.getDoa());
-			
-		}
 
 	}
 
