@@ -26,6 +26,12 @@ import android.widget.SimpleAdapter;
  *
  */
 public class MainActivity extends Activity {
+	
+	private final int SORT_FIRSTNAME = 1;
+	private final int SORT_LASTNAME = 2;
+	private final int SORT_MOBILEPH = 3;
+	private final String TEXT1 = "text1";
+	private final String TEXT2 = "text2";
 
 	private ListView listView;
 	private Button buttonAddContact;
@@ -135,8 +141,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				sortDisplayList(0);
+				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
 		});
 
@@ -146,8 +152,6 @@ public class MainActivity extends Activity {
 		
 		contactList = database.getAllContacts();
 
-		final String TEXT1 = "text1";
-		final String TEXT2 = "text2";
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
@@ -220,11 +224,6 @@ public class MainActivity extends Activity {
 	}
 	
 	private void sortDisplayList(int sortType) {
-		final int SORT_FIRSTNAME = 1;
-		final int SORT_LASTNAME = 2;
-		final int SORT_MOBILEPH = 3;
-		final String TEXT1 = "text1";
-		final String TEXT2 = "text2";
 
 		displayList.clear();
 
