@@ -192,6 +192,7 @@ public class MainActivity extends Activity {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
 							intent.putExtra("Action", "edit");
+							intent.putExtra("Contact", selectedContact);
 							startActivity(intent);
 						// Delete contact which will show a dialog box asking user to confirm deletion
 						// of the selected contact
