@@ -110,6 +110,7 @@ public class Contact implements Comparable<Contact> {
 		this.id = id;
 	}
 	
+	/*
 	public void setPhoto(byte[] imageData) {
         photo = ImageUtils.byteToDrawable(imageData);
     }
@@ -117,6 +118,7 @@ public class Contact implements Comparable<Contact> {
     public byte[] getPhoto(){
         return ImageUtils.drawableToByteArray(photo);
     }
+    */
 
 	@Override
 	public int compareTo(Contact c) {
