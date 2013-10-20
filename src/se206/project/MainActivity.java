@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
 		//buttonAll.setEnabled(true);
 
 		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
+		database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		setupListView(database);
 
 		// Button listener for adding a new contact. Starts the add contact activity

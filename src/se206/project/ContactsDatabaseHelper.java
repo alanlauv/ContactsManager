@@ -25,7 +25,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	private static final String CONTACT_HOMEADD = "homeAdd";
 	private static final String CONTACT_DOA = "doa";
 	private static final String CONTACT_PHOTO = "photo";
-	private static final String CONTACT_GROUP = "group";
+	private static final String CONTACT_GROUP = "groupName";
 
 	private static final String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS + " ("
 			+ CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -49,13 +49,13 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_CONTACTS_TABLE);
 		
-		// test
+/*		// test
 		final String FIRST_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('Alan', 'Lau', '021 0210 0210', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
 		db.execSQL(FIRST_ENTRY);
 		final String SECOND_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('James', 'Chen', '022 0220 0220', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
 		db.execSQL(SECOND_ENTRY);
 		final String THIRD_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('John', 'Lee', '023 0230 0230', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
-		db.execSQL(THIRD_ENTRY);
+		db.execSQL(THIRD_ENTRY);*/
 	}
 
 	@Override
