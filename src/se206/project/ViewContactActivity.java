@@ -2,6 +2,7 @@ package se206.project;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,14 +22,16 @@ public class ViewContactActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_contact);
-		
-		setTitle("Alan Lau");
+
+		Intent intent = getIntent();
+		Contact contact = (Contact) intent.getSerializableExtra("Contact");
+
+		setTitle(contact.getFullName());
 		
 		imageView = (ImageView)findViewById(R.id.view_image);
 		listView = (ListView)findViewById(R.id.view_listview);
 		
-		// stub contact
-		Contact c = new Contact("Alan", "Lau", "021 0210 2121", "", "", "", "", "", "");
+
 	}
 
 	@Override
