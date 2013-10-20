@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
 							intent.putExtra("Action", "edit");
 							intent.putExtra("Contact", selectedContact);
-							startActivity(intent);
+							startActivityForResult(intent, 1);
 						// Delete contact which will show a dialog box asking user to confirm deletion
 						// of the selected contact
 						} else if (which == 2) {
@@ -253,6 +253,22 @@ public class MainActivity extends Activity {
 				listItemMap.put(TEXT2, c.getMobileph());
 				displayList.add(listItemMap);
 			}
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		switch(requestCode) {
+		case (1) : {
+			if (resultCode == Activity.RESULT_OK) {
+				Contact contact = (Contact) intent.getSerializableExtra("Contact");
+				contactList.add(contact);
+				sortDisplayList(SORT_FIRSTNAME);
+				// add to database
+			}
+			break;
+		}
 		}
 	}
 
