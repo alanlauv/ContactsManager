@@ -21,6 +21,7 @@ public class Contact implements Comparable<Contact> {
 	private String doa;
 	private Drawable photo = null;
 	private String group;
+	private int id;
 
 	Contact(String firstName,
 			String lastName,
@@ -99,6 +100,14 @@ public class Contact implements Comparable<Contact> {
 
 	public String getGroup() {
 		return group;
+	}
+
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 	public void setPhoto(byte[] imageData) {

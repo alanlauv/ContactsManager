@@ -70,4 +70,11 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		db.insert(TABLE_CONTACTS, null, values);
 		db.close();
 	}
+	
+	public void deleteContact(Contact c) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
+	            new String[] { String.valueOf(c.getID()) });
+	    db.close();
+	}
 }
