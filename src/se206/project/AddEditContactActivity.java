@@ -41,6 +41,9 @@ public class AddEditContactActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		String action = extras.getString("Action");
 		boolean isEdit = action.equals("edit");
+		
+		Intent intent = getIntent();
+		Contact contact = (Contact) intent.getSerializableExtra("Contact");
 
 		buttonDone = (Button)findViewById(R.id.add_button_done);
 		buttonPhoto = (ImageButton)findViewById(R.id.add_button_photo);
