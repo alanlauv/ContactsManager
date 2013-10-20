@@ -115,29 +115,35 @@ public class MainActivity extends Activity {
 	private void setupListView(ContactsDatabaseHelper database) {
 		// large amount of stub contact data for testing and formatting
 		List<Map<String, String>> aList =  new ArrayList<Map<String, String>>();
+		List<Contact> contactList = new ArrayList<Contact>();
+		contactList = database.getAllContacts();
 
 		final String TEXT1 = "text1";
 		final String TEXT2 = "text2";
-/*
+		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
+		int[] ids = {android.R.id.text1, android.R.id.text2};
+
 		for(Contact c : contactList) {
-			// do nothing
+			final Map<String, String> listItemMap = new HashMap<String, String>();
+			listItemMap.put(TEXT1, c.getFullName());
+			listItemMap.put(TEXT2, c.getMobileph());
+			aList.add(listItemMap);
 		}
 
+		/*
 		final Map<String, String> listItemMap1 = new HashMap<String, String>();
 		listItemMap1.put(TEXT1, "Alan Lau");
 		listItemMap1.put(TEXT2, "021 0210 2121");
 		aList.add(listItemMap1);
-		/*final Map<String, String> listItemMap2 = new HashMap<String, String>();
+		final Map<String, String> listItemMap2 = new HashMap<String, String>();
 		listItemMap2.put(TEXT1, "Alex Ander");
 		listItemMap2.put(TEXT2, "022 0270 2727");
-		aList.add(listItemMap2);*/
-/*		final Map<String, String> listItemMap3 = new HashMap<String, String>();
+		aList.add(listItemMap2);
+		final Map<String, String> listItemMap3 = new HashMap<String, String>();
 		listItemMap3.put(TEXT1, "Joe Bloggs");
 		listItemMap3.put(TEXT2, "022 0220 2222");
 		aList.add(listItemMap3);
-*/
-		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
-		int[] ids = {android.R.id.text1, android.R.id.text2};
+		 */
 
 		// Using the simple_list_item_2 layout to show Name at top line and phone number
 		// at the bottom line
