@@ -23,5 +23,6 @@
     <string name="doa">Date of Birth</string>
     <string name="new_str">New</string>
     <string name="new_group">Create a New Group</string>
+    <string name="phone">Phone</string>
 
 </resources>

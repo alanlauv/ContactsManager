@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 /**
  * This class represents the view contact activity of the contacts manager
  * application.
@@ -16,7 +17,7 @@ import android.widget.ListView;
 public class ViewContactActivity extends Activity {
 	
 	private ImageView imageView;
-	private ListView listView;
+	private TextView mobilephTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class ViewContactActivity extends Activity {
 		setTitle(contact.getFullName());
 		
 		imageView = (ImageView)findViewById(R.id.view_image);
-		listView = (ListView)findViewById(R.id.view_listview);
+		mobilephTextView = (TextView)findViewById(R.id.view_phone_mobile);
 		
 
 	}

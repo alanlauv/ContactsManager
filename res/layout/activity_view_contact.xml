@@ -16,18 +16,46 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_launcher" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_image"
-        android:orientation="vertical" >
+        android:layout_height="fill_parent"
+        android:layout_below="@id/view_image" >
 
-        <ListView
-            android:id="@+id/view_listview"
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:text="@string/hello_world" />
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/view_phone_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/phone"
+                android:textColor="#33B5E5" />
+
+            <View
+                android:id="@+id/view_sep_line1"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/view_phone_label"
+                android:background="#33B5E5" />
+            
+            <TextView
+                android:id="@+id/view_phone_mobile_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_sep_line1"
+                android:text="@string/mobile_phone"
+                android:textColor="@android:color/darker_gray" />
+            
+            <TextView
+                android:id="@+id/view_phone_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_phone_mobile_label"
+                android:text="@string/mobile_phone" />
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
