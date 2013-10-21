@@ -36,7 +36,8 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:scaleType="fitXY" />
+                android:src="@drawable/grey_android_logo"
+                android:scaleType="centerInside" />
 
             <EditText
                 android:id="@+id/add_firstname_input"
