@@ -93,6 +93,7 @@ public class AddEditContactActivity extends Activity {
 				String doa = editTextDoa.getText().toString();
 				String group = "";
 
+				// TODO if name is ""
 				Contact contact = new Contact(firstName, lastName, mobileph,
 						homeph, workph, email, homeAdd, doa, group);
 
@@ -104,8 +105,6 @@ public class AddEditContactActivity extends Activity {
 				resultIntent.putExtra("Contact", contact);
 				setResult(Activity.RESULT_OK, resultIntent);
 				finish();
-
-
 			}
 		});
 
