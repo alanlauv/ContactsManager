@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 	private static final String TEXT1 = "text1";
 	private static final String TEXT2 = "text2";
 	private static final int ADD_CONTACT = 1;
-	private static final int EDIT_CONTACT = 2;
+	protected static final int EDIT_CONTACT = 2;
 
 	private ListView listView;
 	private Button buttonAddContact;
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
-				intent.putExtra("Action", "add"); // extra info sent to the transitioning
+				intent.putExtra("Action", ADD_CONTACT); // extra info sent to the transitioning
 				startActivityForResult(intent, ADD_CONTACT); // activity to determine whether it's add or edit
 // TODO change "add" -> ADD_CONTACT
 			}
@@ -197,7 +197,7 @@ public class MainActivity extends Activity {
 						} else if (which == 1) {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
-							intent.putExtra("Action", "edit"); // TODO change "edit" -> EDIT_CONTACT
+							intent.putExtra("Action", EDIT_CONTACT); // TODO change "edit" -> EDIT_CONTACT
 							intent.putExtra("Contact", selectedContact);
 							startActivityForResult(intent, EDIT_CONTACT);
 						// Delete contact which will show a dialog box asking user to confirm deletion

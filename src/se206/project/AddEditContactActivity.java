@@ -51,8 +51,8 @@ public class AddEditContactActivity extends Activity {
 		// extra info sent from previous main activity to determine whether
 		// this activity functions either as an add or edit contacts activity
 		Bundle extras = getIntent().getExtras();
-		String action = extras.getString("Action");
-		isEdit = action.equals("edit");
+		int action = extras.getInt("Action");
+		isEdit = (action == MainActivity.EDIT_CONTACT);
 
 		Intent intent = getIntent();
 		Contact contact = (Contact) intent.getSerializableExtra("Contact");
