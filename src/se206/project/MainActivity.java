@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
 						// of the selected item
 						if (which >= 0 && which <= 2) {
 							sortDisplayList(which);
-							((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+							refreshListView();
 						}
 					}
 
@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				sortDisplayList(SORT_FIRSTNAME);
-				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+				refreshListView();
 			}
 		});
 
@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
 									database.deleteContact(selectedContact);
 									displayList.remove(clickedViewPos);
 									contactList.remove(clickedViewPos);
-									((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+									refreshListView();
 								}
 
 							});
@@ -255,6 +255,11 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
+	
+	private void refreshListView() {
+		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+		listView.setSelection(0);
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -268,7 +273,7 @@ public class MainActivity extends Activity {
 				sortDisplayList(SORT_FIRSTNAME);
 				// TODO add to database
 				database.addContact(contact);
-				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+				refreshListView();
 			}
 			break;
 		}
@@ -279,7 +284,7 @@ public class MainActivity extends Activity {
 				contactList.clear();
 				contactList = database.getAllContacts();
 				sortDisplayList(SORT_FIRSTNAME);
-				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+				refreshListView();
 			}
 		}
 		}
