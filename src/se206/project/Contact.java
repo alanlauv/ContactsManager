@@ -3,14 +3,13 @@ package se206.project;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * This class represents a single contact for the contacts manager application
  * 
  * @author Alan Lau, alau645, 2714269
  *
  */
+@SuppressWarnings("serial")
 public class Contact implements Comparable<Contact>, Serializable {
 	private String firstName;
 	private String lastName;
@@ -20,7 +19,7 @@ public class Contact implements Comparable<Contact>, Serializable {
 	private String email;
 	private String homeAdd;
 	private String doa;
-	private Drawable photo = null;
+	private byte[] photo = null;
 	private String group = null;
 	private int id;
 
@@ -135,15 +134,13 @@ public class Contact implements Comparable<Contact>, Serializable {
 		this.id = id;
 	}
 
-	/*
 	public void setPhoto(byte[] imageData) {
-        photo = ImageUtils.byteToDrawable(imageData);
+        photo = imageData;
     }
 
     public byte[] getPhoto(){
-        return ImageUtils.drawableToByteArray(photo);
+        return photo;
     }
-	 */
 
 	@Override
 	public int compareTo(Contact c) {
