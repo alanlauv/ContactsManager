@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class ViewContactActivity extends Activity {
 		homeAddTextView.setText(contact.getHomeAdd());
 		doaTextView.setText(contact.getDoa());
 		groupTextView.setText(contact.getGroup());
+		//TODO mobilephTextView.setVisibility(View.GONE);
 	}
 
 	@Override
