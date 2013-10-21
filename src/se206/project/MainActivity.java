@@ -73,7 +73,6 @@ public class MainActivity extends Activity {
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", ADD_CONTACT); // extra info sent to the transitioning
 				startActivityForResult(intent, ADD_CONTACT); // activity to determine whether it's add or edit
-// TODO change "add" -> ADD_CONTACT
 			}
 		});
 
@@ -197,7 +196,7 @@ public class MainActivity extends Activity {
 						} else if (which == 1) {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
-							intent.putExtra("Action", EDIT_CONTACT); // TODO change "edit" -> EDIT_CONTACT
+							intent.putExtra("Action", EDIT_CONTACT);
 							intent.putExtra("Contact", selectedContact);
 							startActivityForResult(intent, EDIT_CONTACT);
 						// Delete contact which will show a dialog box asking user to confirm deletion
