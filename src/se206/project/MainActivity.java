@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				sortDisplayList(0);
+				sortDisplayList(SORT_FIRSTNAME);
 				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
 		});
@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
-		sortDisplayList(1);
+		sortDisplayList(SORT_FIRSTNAME);
 
 		// Using the simple_list_item_2 layout to show Name at top line and phone number
 		// at the bottom line
