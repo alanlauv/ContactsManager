@@ -12,9 +12,10 @@
         android:id="@+id/view_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/grey_android_logo" />
 
     <ScrollView
         android:layout_width="fill_parent"
