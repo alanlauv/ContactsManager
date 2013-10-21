@@ -3,6 +3,8 @@ package se206.project;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +47,11 @@ public class ViewContactActivity extends Activity {
 		doaTextView = (TextView)findViewById(R.id.view_doa);
 		groupTextView = (TextView)findViewById(R.id.view_group);
 
-		//imageView.setImageResource(R.drawable.grey_android_logo);
+		byte[] bytesPhoto = contact.getPhoto();
+		if (bytesPhoto != null) {
+			Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
+			imageView.setImageBitmap(bmpPhoto);
+		}
 		mobilephTextView.setText(contact.getMobileph());
 		homephTextView.setText(contact.getHomeph());
 		workphTextView.setText(contact.getWorkph());
