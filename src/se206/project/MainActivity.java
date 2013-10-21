@@ -32,6 +32,8 @@ public class MainActivity extends Activity {
 	private static final int SORT_MOBILEPH = 2;
 	private static final String TEXT1 = "text1";
 	private static final String TEXT2 = "text2";
+	private static final int ADD_CONTACT = 1;
+	private static final int EDIT_CONTACT = 2;
 
 	private ListView listView;
 	private Button buttonAddContact;
@@ -70,8 +72,8 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", "add"); // extra info sent to the transitioning
-				startActivityForResult(intent, 1);			  // activity to determine whether it's add or edit
-// TODO change 1 to constant
+				startActivityForResult(intent, ADD_CONTACT);			  // activity to determine whether it's add or edit
+// TODO change "add" -> ADD_CONTACT
 			}
 		});
 
@@ -191,9 +193,9 @@ public class MainActivity extends Activity {
 						} else if (which == 1) {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
-							intent.putExtra("Action", "edit");
+							intent.putExtra("Action", "edit"); // TODO change "edit" -> EDIT_CONTACT
 							intent.putExtra("Contact", selectedContact);
-							startActivityForResult(intent, 2); // TODO change 2 to constant
+							startActivityForResult(intent, EDIT_CONTACT);
 						// Delete contact which will show a dialog box asking user to confirm deletion
 						// of the selected contact
 						} else if (which == 2) {
@@ -266,18 +268,17 @@ public class MainActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, intent);
 		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		switch(requestCode) {
-		case (1) : {
+		case (ADD_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				contactList.add(contact);
 				sortDisplayList(SORT_FIRSTNAME);
-				// TODO add to database
 				database.addContact(contact);
 				refreshListView();
 			}
 			break;
 		}
-		case (2) : {
+		case (EDIT_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				database.updateContact(contact);
