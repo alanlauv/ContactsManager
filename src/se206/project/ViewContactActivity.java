@@ -44,7 +44,8 @@ public class ViewContactActivity extends Activity {
 		homeAddTextView = (TextView)findViewById(R.id.view_homeAdd);
 		doaTextView = (TextView)findViewById(R.id.view_doa);
 		groupTextView = (TextView)findViewById(R.id.view_group);
-		
+
+		imageView.setImageResource(R.drawable.grey_android_logo);
 		mobilephTextView.setText(contact.getMobileph());
 		homephTextView.setText(contact.getHomeph());
 		workphTextView.setText(contact.getWorkph());
