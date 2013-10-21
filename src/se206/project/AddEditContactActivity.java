@@ -1,6 +1,8 @@
 package se206.project;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,8 +38,10 @@ public class AddEditContactActivity extends Activity {
 	private Button buttonGroup;
 	private Spinner spinnerGroup;
 
-	private boolean isEdit;
+	private boolean isEdit = false;
 	private int contactID;
+	private Uri selectedImage = null;
+	private byte[] bytesPhoto = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class AddEditContactActivity extends Activity {
 			editTextDoa.setText(contact.getDoa());
 			contactID = contact.getID();
 
-			byte[] bytesPhoto = contact.getPhoto();
+			bytesPhoto = contact.getPhoto();
 			if (bytesPhoto != null) {
 				Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 				buttonPhoto.setImageBitmap(bmpPhoto);
@@ -110,6 +114,20 @@ public class AddEditContactActivity extends Activity {
 
 				if (isEdit) {
 					contact.setID(contactID);
+					// Unchanged contact photo
+					if (bytesPhoto != null && selectedImage == null) {
+						contact.setPhoto(bytesPhoto);
+					}
+				}
+				
+				if (selectedImage != null) {
+					byte[] newPhoto;
+					try {
+						newPhoto = readBytes(selectedImage);
+						contact.setPhoto(newPhoto);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 
 				Intent resultIntent = new Intent();
@@ -127,7 +145,6 @@ public class AddEditContactActivity extends Activity {
 				Intent intent = new Intent(Intent.ACTION_PICK,
 						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(intent, 1); //TODO "1"
-
 			}
 		});
 
@@ -144,6 +161,25 @@ public class AddEditContactActivity extends Activity {
 		});
 
 	}
+	
+	public byte[] readBytes(Uri uri) throws IOException {
+		// this dynamically extends to take the bytes you read
+		InputStream inputStream = getContentResolver().openInputStream(uri);
+		ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+		// this is storage overwritten on each iteration with bytes
+		int bufferSize = 1024;
+		byte[] buffer = new byte[bufferSize];
+
+		// we need to know how may bytes were read to write them to the byteBuffer
+		int len = 0;
+		while ((len = inputStream.read(buffer)) != -1) {
+			byteBuffer.write(buffer, 0, len);
+		}
+
+		// and then we can return your byte array.
+		return byteBuffer.toByteArray();
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -151,7 +187,7 @@ public class AddEditContactActivity extends Activity {
 		switch(requestCode) {
 		case 1: //TODO "1"
 			if(resultCode == Activity.RESULT_OK){  
-				Uri selectedImage = intent.getData();
+				selectedImage = intent.getData();
 				buttonPhoto.setImageURI(selectedImage);
 			}
 			break;
