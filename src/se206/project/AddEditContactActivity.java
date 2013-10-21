@@ -30,6 +30,8 @@ public class AddEditContactActivity extends Activity {
 	private EditText editTextDoa;
 	private Button buttonGroup;
 	private Spinner spinnerGroup;
+	
+	private boolean isEdit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class AddEditContactActivity extends Activity {
 		// this activity functions either as an add or edit contacts activity
 		Bundle extras = getIntent().getExtras();
 		String action = extras.getString("Action");
-		boolean isEdit = action.equals("edit");
+		isEdit = action.equals("edit");
 
 		Intent intent = getIntent();
 		Contact contact = (Contact) intent.getSerializableExtra("Contact");
@@ -92,10 +94,12 @@ public class AddEditContactActivity extends Activity {
 				Contact contact = new Contact(firstName, lastName, mobileph,
 						homeph, workph, email, homeAdd, doa, group);
 
-				Intent resultIntent = new Intent();
-				resultIntent.putExtra("Contact", contact);
-				setResult(Activity.RESULT_OK, resultIntent);
-				finish();
+				if (isEdit) {
+					Intent resultIntent = new Intent();
+					resultIntent.putExtra("Contact", contact);
+					setResult(Activity.RESULT_OK, resultIntent);
+					finish();
+				}
 			}
 		});
 
