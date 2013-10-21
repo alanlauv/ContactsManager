@@ -122,6 +122,7 @@ public class AddEditContactActivity extends Activity {
 					}
 				}
 				
+				// Changed contact photo
 				if (selectedImage != null) {
 					byte[] newPhoto;
 					try {
@@ -158,7 +159,7 @@ public class AddEditContactActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(AddEditContactActivity.this, EditGroupsActivity.class);
 				startActivity(intent);
-
+				//TODO
 			}
 		});
 

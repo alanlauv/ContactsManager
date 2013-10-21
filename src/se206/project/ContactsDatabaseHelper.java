@@ -91,7 +91,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_MOBILEPH,
 				CONTACT_HOMEPH, CONTACT_WORKPH, CONTACT_EMAIL, CONTACT_HOMEADD,
 				CONTACT_DOA, CONTACT_PHOTO, CONTACT_GROUP }, CONTACT_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
+				new String[] { String.valueOf(id) }, null, null, null, null); //TODO
 		if (cursor != null)
 			cursor.moveToFirst();
 
@@ -148,6 +148,6 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	 
 	    // updating row
 	    return db.update(TABLE_CONTACTS, values, CONTACT_ID + " = ?",
-	            new String[] { String.valueOf(contact.getID()) });
+	            new String[] { String.valueOf(contact.getID()) }); //TODO
 	}
 }

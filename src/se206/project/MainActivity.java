@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//String value = searchInput.toString();
-
+						// TODO
 					}
 				});
 				builder.create().show();
@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
+				// TODO
 				//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
 		});
@@ -269,7 +269,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		//ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		switch(requestCode) {
 		case (ADD_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
