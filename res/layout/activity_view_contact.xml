@@ -100,6 +100,66 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/view_other_label"
                 android:background="#33B5E5" />
+            
+            <TextView
+                android:id="@+id/view_email_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_sep_line2"
+                android:text="@string/email"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/view_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_email_label"
+                android:text="@string/email" />
+            
+            <TextView
+                android:id="@+id/view_homeAdd_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_email"
+                android:text="@string/homeAdd"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/view_homeAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_homeAdd_label"
+                android:text="@string/homeAdd" />
+            
+            <TextView
+                android:id="@+id/view_doa_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_homeAdd"
+                android:text="@string/doa"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/view_doa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_doa_label"
+                android:text="@string/doa" />
+            
+            <TextView
+                android:id="@+id/view_group_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_doa"
+                android:text="@string/group"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/view_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_group_label"
+                android:text="@string/group" />
         </RelativeLayout>
     </ScrollView>
 

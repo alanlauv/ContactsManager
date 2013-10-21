@@ -24,7 +24,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f080030;
         public static final int add_button_done=0x7f080000;
         public static final int add_button_group=0x7f080014;
         public static final int add_button_photo=0x7f080002;
@@ -54,6 +54,14 @@ public final class R {
         public static final int main_button_search=0x7f08001a;
         public static final int main_button_sort=0x7f08001b;
         public static final int main_listview=0x7f080019;
+        public static final int view_doa=0x7f08002d;
+        public static final int view_doa_label=0x7f08002c;
+        public static final int view_email=0x7f080029;
+        public static final int view_email_label=0x7f080028;
+        public static final int view_group=0x7f08002f;
+        public static final int view_group_label=0x7f08002e;
+        public static final int view_homeAdd=0x7f08002b;
+        public static final int view_homeAdd_label=0x7f08002a;
         public static final int view_image=0x7f08001d;
         public static final int view_other_label=0x7f080026;
         public static final int view_phone_home=0x7f080023;

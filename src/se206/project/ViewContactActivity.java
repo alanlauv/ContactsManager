@@ -20,6 +20,10 @@ public class ViewContactActivity extends Activity {
 	private TextView mobilephTextView;
 	private TextView homephTextView;
 	private TextView workphTextView;
+	private TextView emailTextView;
+	private TextView homeAddTextView;
+	private TextView doaTextView;
+	private TextView groupTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,20 @@ public class ViewContactActivity extends Activity {
 		
 		imageView = (ImageView)findViewById(R.id.view_image);
 		mobilephTextView = (TextView)findViewById(R.id.view_phone_mobile);
+		homephTextView = (TextView)findViewById(R.id.view_phone_home);
+		workphTextView = (TextView)findViewById(R.id.view_phone_work);
+		emailTextView = (TextView)findViewById(R.id.view_email);
+		homeAddTextView = (TextView)findViewById(R.id.view_homeAdd);
+		doaTextView = (TextView)findViewById(R.id.view_doa);
+		groupTextView = (TextView)findViewById(R.id.view_group);
 		
 		mobilephTextView.setText(contact.getMobileph());
 		homephTextView.setText(contact.getHomeph());
 		workphTextView.setText(contact.getWorkph());
+		emailTextView.setText(contact.getEmail());
+		homeAddTextView.setText(contact.getHomeAdd());
+		doaTextView.setText(contact.getDoa());
+		groupTextView.setText(contact.getGroup());
 	}
 
 	@Override
