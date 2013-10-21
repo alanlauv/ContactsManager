@@ -24,5 +24,8 @@
     <string name="new_str">New</string>
     <string name="new_group">Create a New Group</string>
     <string name="phone">Phone</string>
+    <string name="mobile">Mobile</string>
+    <string name="home">Home</string>
+    <string name="work">Work</string>
 
 </resources>

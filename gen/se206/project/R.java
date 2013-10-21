@@ -24,7 +24,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080022;
+        public static final int action_settings=0x7f080026;
         public static final int add_button_done=0x7f080000;
         public static final int add_button_group=0x7f080014;
         public static final int add_button_photo=0x7f080002;
@@ -55,9 +55,13 @@ public final class R {
         public static final int main_button_sort=0x7f08001b;
         public static final int main_listview=0x7f080019;
         public static final int view_image=0x7f08001d;
+        public static final int view_phone_home=0x7f080023;
+        public static final int view_phone_home_label=0x7f080022;
         public static final int view_phone_label=0x7f08001e;
         public static final int view_phone_mobile=0x7f080021;
         public static final int view_phone_mobile_label=0x7f080020;
+        public static final int view_phone_work=0x7f080025;
+        public static final int view_phone_work_label=0x7f080024;
         public static final int view_sep_line1=0x7f08001f;
     }
     public static final class layout {
@@ -83,9 +87,11 @@ public final class R {
         public static final int first_name=0x7f05000c;
         public static final int group=0x7f050006;
         public static final int hello_world=0x7f050002;
+        public static final int home=0x7f050018;
         public static final int homeAdd=0x7f050012;
         public static final int home_phone=0x7f05000f;
         public static final int last_name=0x7f05000d;
+        public static final int mobile=0x7f050017;
         public static final int mobile_phone=0x7f05000e;
         public static final int new_group=0x7f050015;
         public static final int new_str=0x7f050014;
@@ -95,6 +101,7 @@ public final class R {
         public static final int title_activity_add_contact=0x7f050003;
         public static final int title_activity_edit_groups=0x7f050004;
         public static final int title_activity_view_contact=0x7f050005;
+        public static final int work=0x7f050019;
         public static final int work_phone=0x7f050010;
     }
     public static final class style {

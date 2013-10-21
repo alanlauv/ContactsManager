@@ -18,6 +18,8 @@ public class ViewContactActivity extends Activity {
 	
 	private ImageView imageView;
 	private TextView mobilephTextView;
+	private TextView homephTextView;
+	private TextView workphTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,9 @@ public class ViewContactActivity extends Activity {
 		imageView = (ImageView)findViewById(R.id.view_image);
 		mobilephTextView = (TextView)findViewById(R.id.view_phone_mobile);
 		
-
+		mobilephTextView.setText(contact.getMobileph());
+		homephTextView.setText(contact.getHomeph());
+		workphTextView.setText(contact.getWorkph());
 	}
 
 	@Override

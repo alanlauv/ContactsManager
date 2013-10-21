@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view_sep_line1"
-                android:text="@string/mobile_phone"
+                android:text="@string/mobile"
                 android:textColor="@android:color/darker_gray" />
             
             <TextView
@@ -54,6 +54,36 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view_phone_mobile_label"
                 android:text="@string/mobile_phone" />
+            
+            <TextView
+                android:id="@+id/view_phone_home_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_phone_mobile"
+                android:text="@string/home"
+                android:textColor="@android:color/darker_gray" />
+            
+            <TextView
+                android:id="@+id/view_phone_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_phone_home_label"
+                android:text="@string/home_phone" />
+            
+            <TextView
+                android:id="@+id/view_phone_work_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_phone_home"
+                android:text="@string/work"
+                android:textColor="@android:color/darker_gray" />
+            
+            <TextView
+                android:id="@+id/view_phone_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_phone_work_label"
+                android:text="@string/work_phone" />
 
         </RelativeLayout>
     </ScrollView>
