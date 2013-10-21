@@ -115,7 +115,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	public List<Contact> getAllContacts() {
 		List<Contact> contactList = new ArrayList<Contact>();
 		// Select All Query
-		String buildSQL = "SELECT  * FROM " + TABLE_CONTACTS;
+		String buildSQL = "SELECT * FROM " + TABLE_CONTACTS;
 
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(buildSQL, null);
