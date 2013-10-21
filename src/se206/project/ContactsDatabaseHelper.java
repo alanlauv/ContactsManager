@@ -37,7 +37,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 			+ CONTACT_EMAIL + " TEXT,"
 			+ CONTACT_HOMEADD + " TEXT,"
 			+ CONTACT_DOA + " TEXT,"
-			//+ CONTACT_PHOTO + " TEXT,"
+			+ CONTACT_PHOTO + " BLOB,"
 			+ CONTACT_GROUP + " TEXT);";
 	private static final String DELETE_CONTACTS_TABLE = "DROP TABLE IF EXISTS " + TABLE_CONTACTS;
 
@@ -48,14 +48,6 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_CONTACTS_TABLE);
-		
-/*		// test
-		final String FIRST_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('Alan', 'Lau', '021 0210 0210', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
-		db.execSQL(FIRST_ENTRY);
-		final String SECOND_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('James', 'Chen', '022 0220 0220', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
-		db.execSQL(SECOND_ENTRY);
-		final String THIRD_ENTRY = "INSERT INTO " + TABLE_CONTACTS + " VALUES('John', 'Lee', '023 0230 0230', '09123456', '09654321', 'myemail', 'myhomeadd', 'mydoa', 'mygroup')";
-		db.execSQL(THIRD_ENTRY);*/
 	}
 
 	@Override
@@ -76,7 +68,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, contact.getEmail());
 		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeph());
 		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
-		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
+		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, contact.getPhoto());
 		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
 
 		db.insert(TABLE_CONTACTS, null, values);
@@ -98,7 +90,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_CONTACTS, new String[] { CONTACT_ID,
 				CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_MOBILEPH,
 				CONTACT_HOMEPH, CONTACT_WORKPH, CONTACT_EMAIL, CONTACT_HOMEADD,
-				CONTACT_DOA, CONTACT_GROUP }, CONTACT_ID + "=?",
+				CONTACT_DOA, CONTACT_PHOTO, CONTACT_GROUP }, CONTACT_ID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
@@ -106,8 +98,9 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		Contact contact = new Contact(cursor.getString(1),
 				cursor.getString(2), cursor.getString(3), cursor.getString(4),
 				cursor.getString(5), cursor.getString(6), cursor.getString(7),
-				cursor.getString(8), cursor.getString(9));
+				cursor.getString(8), cursor.getString(10));
 		contact.setID(Integer.parseInt(cursor.getString(0)));
+		contact.setPhoto(cursor.getBlob(9));
 
 		return contact;
 	}
@@ -126,8 +119,9 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				Contact contact = new Contact(cursor.getString(1),
 						cursor.getString(2), cursor.getString(3), cursor.getString(4),
 						cursor.getString(5), cursor.getString(6), cursor.getString(7),
-						cursor.getString(8), cursor.getString(9));
+						cursor.getString(8), cursor.getString(10));
 				contact.setID(Integer.parseInt(cursor.getString(0)));
+				contact.setPhoto(cursor.getBlob(9));
 				// Adding contact to list
 				contactList.add(contact);
 			} while (cursor.moveToNext());
@@ -149,7 +143,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_EMAIL, contact.getEmail());
 		values.put(ContactsDatabaseHelper.CONTACT_HOMEADD, contact.getHomeAdd());
 		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
-		//values.put(ContactsDatabaseHelper.CONTACT_PHOTO, c.getPhoto());
+		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, contact.getPhoto());
 		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
 	 
 	    // updating row
