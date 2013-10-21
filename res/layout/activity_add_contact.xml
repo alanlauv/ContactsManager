@@ -33,9 +33,10 @@
 
             <ImageButton
                 android:id="@+id/add_button_photo"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentRight="true" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitXY" />
 
             <EditText
                 android:id="@+id/add_firstname_input"

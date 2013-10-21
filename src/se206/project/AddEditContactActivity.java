@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -88,6 +89,7 @@ public class AddEditContactActivity extends Activity {
 			if (bytesPhoto != null) {
 				Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 				buttonPhoto.setImageBitmap(bmpPhoto);
+				//buttonPhoto.setLayoutParams(new LayoutParams(50,50));
 			}
 		}
 
