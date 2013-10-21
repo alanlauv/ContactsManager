@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
 	private Button buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
 	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
+	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +59,10 @@ public class MainActivity extends Activity {
 
 		//buttonAll.setEnabled(true);
 
-		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		//database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		//database.addContact(new Contact("James", "Chen", "023 0230 0230", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		//database.addContact(new Contact("John", "Lee", "022 0220 0220", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
-		setupListView(database);
+		setupListView();
 
 		// Button listener for adding a new contact. Starts the add contact activity
 		buttonAddContact.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", "add"); // extra info sent to the transitioning
-				startActivityForResult(intent, ADD_CONTACT);			  // activity to determine whether it's add or edit
+				startActivityForResult(intent, ADD_CONTACT); // activity to determine whether it's add or edit
 // TODO change "add" -> ADD_CONTACT
 			}
 		});
@@ -150,7 +150,11 @@ public class MainActivity extends Activity {
 
 	}
 
-	private void setupListView(final ContactsDatabaseHelper database) {
+	/**
+	 * Sets up ListView using android.R.layout.simple_list_item_2
+	 * 
+	 */
+	private void setupListView() {
 		
 		contactList = database.getAllContacts();
 
@@ -266,7 +270,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
+		//ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		switch(requestCode) {
 		case (ADD_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
