@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", "add"); // extra info sent to the transitioning
-				startActivity(intent);			  // activity to determine whether it's add or edit
-
+				startActivityForResult(intent, 1);			  // activity to determine whether it's add or edit
+// TODO change 1 to constant
 			}
 		});
 
@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// View contact which start the view contact activity
 						if (which == 0) {
-							Intent intent = new Intent("se206.project.ViewContactActivity");
+							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, ViewContactActivity.class);
 							intent.putExtra("Contact", selectedContact);
 							startActivity(intent);
@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
 							intent.putExtra("Action", "edit");
 							intent.putExtra("Contact", selectedContact);
-							startActivityForResult(intent, 1);
+							startActivityForResult(intent, 2); // TODO change 2 to constant
 						// Delete contact which will show a dialog box asking user to confirm deletion
 						// of the selected contact
 						} else if (which == 2) {
@@ -259,15 +259,28 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
+		ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 		switch(requestCode) {
 		case (1) : {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				contactList.add(contact);
 				sortDisplayList(SORT_FIRSTNAME);
-				// add to database
+				// TODO add to database
+				database.addContact(contact);
+				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
 			break;
+		}
+		case (2) : {
+			if (resultCode == Activity.RESULT_OK) {
+				Contact contact = (Contact) intent.getSerializableExtra("Contact");
+				database.updateContact(contact);
+				contactList.clear();
+				contactList = database.getAllContacts();
+				sortDisplayList(SORT_FIRSTNAME);
+				((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+			}
 		}
 		}
 	}
