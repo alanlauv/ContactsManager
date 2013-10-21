@@ -30,8 +30,9 @@ public class AddEditContactActivity extends Activity {
 	private EditText editTextDoa;
 	private Button buttonGroup;
 	private Spinner spinnerGroup;
-	
+
 	private boolean isEdit;
+	private int contactID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class AddEditContactActivity extends Activity {
 			editTextEmail.setText(contact.getEmail());
 			editTextHomeAdd.setText(contact.getHomeAdd());
 			editTextDoa.setText(contact.getDoa());
+			contactID = contact.getID();
 		}
 
 		// Done button which takes all the info and creates a new contact or finalises
@@ -95,11 +97,15 @@ public class AddEditContactActivity extends Activity {
 						homeph, workph, email, homeAdd, doa, group);
 
 				if (isEdit) {
-					Intent resultIntent = new Intent();
-					resultIntent.putExtra("Contact", contact);
-					setResult(Activity.RESULT_OK, resultIntent);
-					finish();
+					contact.setID(contactID);
 				}
+
+				Intent resultIntent = new Intent();
+				resultIntent.putExtra("Contact", contact);
+				setResult(Activity.RESULT_OK, resultIntent);
+				finish();
+
+
 			}
 		});
 
