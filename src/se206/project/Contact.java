@@ -21,7 +21,7 @@ public class Contact implements Comparable<Contact>, Serializable {
 	private String homeAdd;
 	private String doa;
 	private Drawable photo = null;
-	private String group;
+	private String group = null;
 	private int id;
 
 	/*
