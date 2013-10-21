@@ -3,6 +3,8 @@ package se206.project;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,6 +73,8 @@ public class AddEditContactActivity extends Activity {
 		editTextDoa = (EditText)findViewById(R.id.add_doa_input);
 		buttonGroup = (Button)findViewById(R.id.add_button_group);
 		spinnerGroup = (Spinner)findViewById(R.id.add_spinner_group);
+		
+		setupSpinner();//TODO
 
 		// activity running in edit mode, presets all EditText fields with info
 		// from the selected contact
@@ -121,7 +126,7 @@ public class AddEditContactActivity extends Activity {
 						contact.setPhoto(bytesPhoto);
 					}
 				}
-				
+
 				// Changed contact photo
 				if (selectedImage != null) {
 					byte[] newPhoto;
@@ -164,7 +169,20 @@ public class AddEditContactActivity extends Activity {
 		});
 
 	}
-	
+// TODO
+	public void setupSpinner() {
+
+		spinnerGroup = (Spinner) findViewById(R.id.add_spinner_group);
+		List list = new ArrayList();
+		list.add("Item 1");
+		list.add("Item 2");
+		list.add("Item 3");
+		list.add("Item 4");
+		ArrayAdapter dataAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerGroup.setAdapter(dataAdapter);
+	}
+
 	public byte[] readBytes(Uri uri) throws IOException {
 		// this dynamically extends to take the bytes you read
 		InputStream inputStream = getContentResolver().openInputStream(uri);
