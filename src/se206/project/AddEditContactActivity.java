@@ -1,8 +1,13 @@
 package se206.project;
 
+import java.io.ByteArrayOutputStream;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +79,12 @@ public class AddEditContactActivity extends Activity {
 			editTextHomeAdd.setText(contact.getHomeAdd());
 			editTextDoa.setText(contact.getDoa());
 			contactID = contact.getID();
+
+			byte[] bytesPhoto = contact.getPhoto();
+			if (bytesPhoto != null) {
+				Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
+				buttonPhoto.setImageBitmap(bmpPhoto);
+			}
 		}
 
 		// Done button which takes all the info and creates a new contact or finalises
@@ -113,9 +124,9 @@ public class AddEditContactActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Intent.ACTION_PICK,
+				Intent intent = new Intent(Intent.ACTION_PICK,
 						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				startActivityForResult(i, 1);
+				startActivityForResult(intent, 1); //TODO "1"
 
 			}
 		});
@@ -132,6 +143,19 @@ public class AddEditContactActivity extends Activity {
 			}
 		});
 
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		switch(requestCode) {
+		case 1: //TODO "1"
+			if(resultCode == Activity.RESULT_OK){  
+				Uri selectedImage = intent.getData();
+				buttonPhoto.setImageURI(selectedImage);
+			}
+			break;
+		}
 	}
 
 	@Override
