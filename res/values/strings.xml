@@ -27,5 +27,6 @@
     <string name="mobile">Mobile</string>
     <string name="home">Home</string>
     <string name="work">Work</string>
+    <string name="other">Other</string>
 
 </resources>
