@@ -125,6 +125,7 @@ public class EditGroupsActivity extends Activity {
 									refreshListView();
 								}
 							});
+							builder.create().show();
 						} else if (which == 2) { // Delete group
 							AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 							builder.setTitle("Delete this group?");
