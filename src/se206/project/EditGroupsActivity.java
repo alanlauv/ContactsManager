@@ -1,6 +1,7 @@
 package se206.project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,27 +27,30 @@ import android.widget.SimpleAdapter;
  *
  */
 public class EditGroupsActivity extends Activity {
-	
-	private Button buttonNewGroup;
-	private ListView listView;
+
+	private static final String TEXT1 = "text1";
+	private static final String TEXT2 = "text2";
 	private GroupsDatabaseHelper database = new GroupsDatabaseHelper(EditGroupsActivity.this);
 	private List<Group> groupList = new ArrayList<Group>();
 	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
+
+	private Button buttonNewGroup;
+	private ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groups);
-		
+
 		setupListView();
-		
+
 		buttonNewGroup = (Button)findViewById(R.id.groups_button_new);
 		listView = (ListView)findViewById(R.id.groups_listview);
-		
+
 		// New group button which shows a dialog box allowing user to input a
 		// new group name and then creates a new group
 		buttonNewGroup.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
@@ -60,41 +64,34 @@ public class EditGroupsActivity extends Activity {
 						Group group = new Group(input.getText().toString());
 						groupList.add(group);
 						database.addGroup(group);
+						setupDisplayList();
 						refreshListView();
 					}
 				});
 				builder.create().show();
 			}
-				
+
 		});
 	}
-	
+
 	private void setupListView() {
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		groupList = database.getAllGroups(contactsDB.getAllContacts());
 
-		final String TEXT1 = "text1";
-		final String TEXT2 = "text2";
-		
-		for(Group group : groupList) {
-			final Map<String, String> listItemMap = new HashMap<String, String>();
-			listItemMap.put(TEXT1, group.getName());
-			listItemMap.put(TEXT2, "" + group.getCount());
-			displayList.add(listItemMap);
-		}
-		
+		setupDisplayList();
+
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
 		SimpleAdapter adapter = new SimpleAdapter(EditGroupsActivity.this, displayList,
 				android.R.layout.simple_list_item_2, fromMapKey, ids);
 		listView.setAdapter(adapter);
-		
+
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parentView, View clickedView,
-				final int clickedViewPos, long id) {
+					final int clickedViewPos, long id) {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 
@@ -122,6 +119,7 @@ public class EditGroupsActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									selectedGroup.setName(inputName.getText().toString());
+									setupDisplayList();
 									refreshListView();
 								}
 							});
@@ -136,6 +134,7 @@ public class EditGroupsActivity extends Activity {
 								public void onClick(DialogInterface dialog, int which) {
 									database.deleteGroup(selectedGroup);
 									groupList.remove(clickedViewPos);
+									displayList.remove(clickedViewPos);
 									refreshListView();
 								}
 
@@ -143,16 +142,29 @@ public class EditGroupsActivity extends Activity {
 							builder.setCancelable(true);
 							builder.create().show();
 						}
-						
+
 					}
-					
+
 				});
 				builder.create().show();
 			}
-			
+
 		});
 	}
-	
+
+	private void setupDisplayList() {
+
+		displayList.clear();
+		Collections.sort(groupList);
+
+		for(Group group : groupList) {
+			final Map<String, String> listItemMap = new HashMap<String, String>();
+			listItemMap.put(TEXT1, group.getName());
+			listItemMap.put(TEXT2, "" + group.getCount());
+			displayList.add(listItemMap);
+		}
+	}
+
 	private void refreshListView() {
 		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 		listView.setSelection(0);
