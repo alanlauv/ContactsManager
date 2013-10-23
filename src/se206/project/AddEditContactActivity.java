@@ -3,7 +3,7 @@ package se206.project;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.net.Uri;
@@ -172,12 +172,10 @@ public class AddEditContactActivity extends Activity {
 	public void setupSpinner() {
 
 		spinnerGroup = (Spinner) findViewById(R.id.add_spinner_group);
-		List list = new ArrayList();
-		list.add("Item 1");
-		list.add("Item 2");
-		list.add("Item 3");
-		list.add("Item 4");
-		ArrayAdapter dataAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, list);
+		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
+		List<String> groupNameList = database.getAllGroupNames();
+		Collections.sort(groupNameList);
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, groupNameList);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerGroup.setAdapter(dataAdapter);
 	}
