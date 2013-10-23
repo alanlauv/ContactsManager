@@ -78,4 +78,22 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 		return groupList;
 	}
+	
+	public List<String> getAllGroupNames() {
+		List<String> groupNameList = new ArrayList<String>();
+		// Select All Query
+		String buildSQL = "SELECT * FROM " + TABLE_GROUPS;
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(buildSQL, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				groupNameList.add(cursor.getString(1));
+			} while (cursor.moveToNext());
+		}
+
+		return groupNameList;
+	}
 }
