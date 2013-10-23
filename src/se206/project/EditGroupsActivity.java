@@ -66,6 +66,7 @@ public class EditGroupsActivity extends Activity {
 						database.addGroup(group);
 						setupDisplayList();
 						refreshListView();
+						setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
 					}
 				});
 				builder.create().show();

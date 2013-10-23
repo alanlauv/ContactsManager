@@ -162,13 +162,12 @@ public class AddEditContactActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(AddEditContactActivity.this, EditGroupsActivity.class);
-				startActivity(intent);
-				//TODO
+				startActivityForResult(intent, 2); //TODO "2"
 			}
 		});
 
 	}
-// TODO
+
 	public void setupSpinner() {
 
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
@@ -209,6 +208,10 @@ public class AddEditContactActivity extends Activity {
 				buttonPhoto.setImageURI(selectedImage);
 			}
 			break;
+		case 2: // TODO "2" new group added
+			if(resultCode == Activity.RESULT_OK){
+				setupSpinner();
+			}
 		}
 	}
 
