@@ -64,26 +64,17 @@ public class Contact implements Comparable<Contact>, Serializable {
 		this.group = group;
 	}
 
-	public void editContact(//TODO contact argument
-			String firstName,
-			String lastName,
-			String mobileph,
-			String homeph,
-			String workph,
-			String email,
-			String homeAdd,
-			String doa,
-			String group) {
-
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mobileph = mobileph;
-		this.homeph = homeph;
-		this.workph = workph;
-		this.email = email;
-		this.homeAdd = homeAdd;
-		this.doa = doa;
-		this.group = group;
+	public void editContact(Contact edittedContact) {
+		this.firstName = edittedContact.firstName;
+		this.lastName = edittedContact.lastName;
+		this.mobileph = edittedContact.mobileph;
+		this.homeph = edittedContact.homeph;
+		this.workph = edittedContact.workph;
+		this.email = edittedContact.email;
+		this.homeAdd = edittedContact.homeAdd;
+		this.doa = edittedContact.doa;
+		this.group = edittedContact.group;
+		this.photo = edittedContact.photo;
 	}
 
 	public String getFullName() {
@@ -152,14 +143,14 @@ public class Contact implements Comparable<Contact>, Serializable {
 		public static Comparator<Contact> FIRSTNAME = new Comparator<Contact>() {
 			@Override
 			public int compare(Contact c1, Contact c2) {
-				return c1.firstName.compareTo(c2.firstName);
+				return c1.firstName.compareToIgnoreCase(c2.firstName);
 			}
 		};
 
 		public static Comparator<Contact> LASTNAME = new Comparator<Contact>() {
 			@Override
 			public int compare(Contact c1, Contact c2) {
-				return c1.lastName.compareTo(c2.lastName);
+				return c1.lastName.compareToIgnoreCase(c2.lastName);
 			}
 		};
 
