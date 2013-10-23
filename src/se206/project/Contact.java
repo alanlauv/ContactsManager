@@ -64,17 +64,17 @@ public class Contact implements Comparable<Contact>, Serializable {
 		this.group = group;
 	}
 
-	public void editContact(Contact edittedContact) {
-		this.firstName = edittedContact.firstName;
-		this.lastName = edittedContact.lastName;
-		this.mobileph = edittedContact.mobileph;
-		this.homeph = edittedContact.homeph;
-		this.workph = edittedContact.workph;
-		this.email = edittedContact.email;
-		this.homeAdd = edittedContact.homeAdd;
-		this.doa = edittedContact.doa;
-		this.group = edittedContact.group;
-		this.photo = edittedContact.photo;
+	public void editContact(Contact editedContact) {
+		this.firstName = editedContact.firstName;
+		this.lastName = editedContact.lastName;
+		this.mobileph = editedContact.mobileph;
+		this.homeph = editedContact.homeph;
+		this.workph = editedContact.workph;
+		this.email = editedContact.email;
+		this.homeAdd = editedContact.homeAdd;
+		this.doa = editedContact.doa;
+		this.group = editedContact.group;
+		this.photo = editedContact.photo;
 	}
 
 	public String getFullName() {
