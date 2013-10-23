@@ -40,11 +40,15 @@ public class Group implements Comparable<Group>, Serializable {
 	}
 
 	public String getIdList() {
-		String idList = "" + groupList.get(0).getID();
-		for (int i=0; i<groupList.size(); i++) {
-			idList = idList + "," + groupList.get(i).getID();
+		if (groupList.isEmpty()) {
+			return "";
+		} else {
+			String idList = "" + groupList.get(0).getID();
+			for (int i=0; i<groupList.size(); i++) {
+				idList = idList + "," + groupList.get(i).getID();
+			}
+			return idList;
 		}
-		return idList;
 	}
 
 	public int getID() {
