@@ -43,7 +43,7 @@ public class EditGroupsActivity extends Activity {
 		setContentView(R.layout.activity_groups);
 
 		buttonNewGroup = (Button)findViewById(R.id.groups_button_new);
-		listView = (ListView)findViewById(R.id.groups_listview1);
+		listView = (ListView)findViewById(R.id.groups_listview);
 
 		setupListView();
 
