@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 								searchList.add(c);
 							}
 						}
-						if (searchList.isEmpty()) {
+						if (true){//(searchList.isEmpty()) {
 							String displayString = "0 results found: " + searchInput;
 							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
 						//} else { TODO
