@@ -64,7 +64,7 @@ public class Contact implements Comparable<Contact>, Serializable {
 		this.group = group;
 	}
 
-	public void editContact(
+	public void editContact(//TODO contact argument
 			String firstName,
 			String lastName,
 			String mobileph,
