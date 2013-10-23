@@ -45,6 +45,7 @@ public class AddEditContactActivity extends Activity {
 	private int contactID;
 	private Uri selectedImage = null;
 	private byte[] bytesPhoto = null;
+	private Contact contact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class AddEditContactActivity extends Activity {
 		isEdit = (action == MainActivity.EDIT_CONTACT);
 
 		Intent intent = getIntent();
-		Contact contact = (Contact) intent.getSerializableExtra("Contact");
+		contact = (Contact) intent.getSerializableExtra("Contact");
 
 		buttonDone = (Button)findViewById(R.id.add_button_done);
 		buttonPhoto = (ImageButton)findViewById(R.id.add_button_photo);
@@ -73,7 +74,7 @@ public class AddEditContactActivity extends Activity {
 		buttonGroup = (Button)findViewById(R.id.add_button_group);
 		spinnerGroup = (Spinner)findViewById(R.id.add_spinner_group);
 		
-		setupSpinner();//TODO
+		setupSpinner(contact);//TODO
 
 		// activity running in edit mode, presets all EditText fields with info
 		// from the selected contact
@@ -168,12 +169,18 @@ public class AddEditContactActivity extends Activity {
 
 	}
 
-	public void setupSpinner() {
+	public void setupSpinner(Contact contact) {
 
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
-		groupNameList.add(0, "No Selection");
+		if (contact.getGroup() != null) {
+			groupNameList.remove(contact.getGroup());
+			groupNameList.add(0, contact.getGroup());
+			groupNameList.add(groupNameList.size()-1, "No Selection");
+		} else {
+			groupNameList.add(0, "No Selection");
+		}
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, groupNameList);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerGroup.setAdapter(dataAdapter);
@@ -210,7 +217,7 @@ public class AddEditContactActivity extends Activity {
 			break;
 		case 2: // TODO "2" new group added
 			if(resultCode == Activity.RESULT_OK){
-				setupSpinner();
+				setupSpinner(contact);
 			}
 		}
 	}
