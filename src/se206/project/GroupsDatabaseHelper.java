@@ -97,5 +97,15 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 		return groupNameList;
 	}
 	
-	//TODO updateGroup method
+	public int updateGroup(Group group) {
+	    SQLiteDatabase db = this.getWritableDatabase();
+	 
+	    ContentValues values = new ContentValues();
+		values.put(GroupsDatabaseHelper.GROUP_NAME, group.getName());
+		values.put(GroupsDatabaseHelper.GROUP_LIST, group.getIdList());
+	 
+	    // updating row
+	    return db.update(TABLE_GROUPS, values, GROUP_ID + " = ?",
+	            new String[] { String.valueOf(group.getID()) }); //TODO
+	}
 }
