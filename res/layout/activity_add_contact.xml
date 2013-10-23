@@ -2,23 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="5dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddEditContactActivity" >
 
-    <Button
-        android:id="@+id/add_button_done"
+    <LinearLayout
+        android:id="@+id/add_linearlayout_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/done" />
+        android:orientation="horizontal"
+        android:background="#33B5E5" >
+
+        <Button
+            android:id="@+id/add_button_done"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            
+            android:text="@string/done" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/add_button_done" >
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+   		android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_above="@id/add_linearlayout_button" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,8 +44,8 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/grey_android_logo"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:src="@drawable/grey_android_logo" />
 
             <EditText
                 android:id="@+id/add_firstname_input"
@@ -174,13 +182,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/add_group_label"
                 android:layout_toLeftOf="@+id/add_button_group" />
-            
+
             <Button
                 android:id="@+id/add_button_group"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_below="@id/add_doa_input"
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/add_doa_input"
                 android:text="@string/edit_groups" />
         </RelativeLayout>
     </ScrollView>
