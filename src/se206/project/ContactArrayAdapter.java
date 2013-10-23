@@ -38,6 +38,7 @@ public class ContactArrayAdapter extends ArrayAdapter {
 			holder = new ContactHolder();
 			holder.imgPhoto = (ImageView)row.findViewById(R.id.main_contact_img);
 			holder.txtName = (TextView)row.findViewById(R.id.main_contact_name);
+			holder.txtNumber = (TextView)row.findViewById(R.id.main_contact_number);
 
 			row.setTag(holder);
 		}
@@ -47,6 +48,7 @@ public class ContactArrayAdapter extends ArrayAdapter {
 
 		Contact contact = data.get(position);
 		holder.txtName.setText(contact.getFullName());
+		holder.txtNumber.setText(contact.getMobileph());
 		byte[] bytesPhoto = contact.getPhoto();
 		if (bytesPhoto != null) {
 			Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
@@ -60,6 +62,6 @@ public class ContactArrayAdapter extends ArrayAdapter {
 
 	static class ContactHolder {
 		private ImageView imgPhoto;
-		private TextView txtName;
+		private TextView txtName, txtNumber;
 	}
 }
