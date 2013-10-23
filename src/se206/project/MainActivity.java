@@ -156,10 +156,10 @@ public class MainActivity extends Activity {
 	private void setupListView() {
 		
 		contactList = database.getAllContacts();
-
+/*
 		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
 		int[] ids = {android.R.id.text1, android.R.id.text2};
-
+*/
 		sortDisplayList(SORT_FIRSTNAME);
 		
 		ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
