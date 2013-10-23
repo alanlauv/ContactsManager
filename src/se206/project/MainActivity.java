@@ -25,12 +25,7 @@ import android.widget.ListView;
  *
  */
 public class MainActivity extends Activity {
-	
-	private static final int SORT_FIRSTNAME = 0;
-	private static final int SORT_LASTNAME = 1;
-	private static final int SORT_MOBILEPH = 2;
-	private static final String TEXT1 = "text1";
-	private static final String TEXT2 = "text2";
+
 	private static final int ADD_CONTACT = 1;
 	protected static final int EDIT_CONTACT = 2;
 
@@ -41,7 +36,6 @@ public class MainActivity extends Activity {
 	private Button buttonGroup;
 	private Button buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
-	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
 	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 
 	@Override
@@ -155,25 +149,11 @@ public class MainActivity extends Activity {
 	private void setupListView() {
 		
 		contactList = database.getAllContacts();
-/*
-		final String[] fromMapKey = new String[] {TEXT1, TEXT2};
-		int[] ids = {android.R.id.text1, android.R.id.text2};
-*/
-		sortDisplayList(SORT_FIRSTNAME);
+
+		Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 		
 		ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
 		listView.setAdapter(adapter);
-/*
-		// Using the simple_list_item_2 layout to show Name at top line and phone number
-		// at the bottom line
-		SimpleAdapter la = new SimpleAdapter(MainActivity.this, displayList,
-				android.R.layout.simple_list_item_2, fromMapKey, ids);
-		listView.setAdapter(la);
-
-		SimpleAdapter adapter = new SimpleAdapter(this, arrlist,
-                R.layout.sample, new String[] { "key", "title", "subtitle" },
-                new int[] { R.id.imageView1, R.id.title, R.id.subtitle });
-                */
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -218,7 +198,6 @@ public class MainActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									database.deleteContact(selectedContact);
-									displayList.remove(clickedViewPos);
 									contactList.remove(clickedViewPos);
 									refreshListView();
 								}
@@ -235,37 +214,6 @@ public class MainActivity extends Activity {
 			}
 
 		});
-	}
-	
-	private void sortDisplayList(int sortType) {
-
-		displayList.clear();
-
-		if (sortType == SORT_FIRSTNAME) {
-			Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
-			for(Contact c : contactList) {
-				final Map<String, String> listItemMap = new HashMap<String, String>();
-				listItemMap.put(TEXT1, c.getFullName());
-				listItemMap.put(TEXT2, c.getMobileph());
-				displayList.add(listItemMap);
-			}
-		} else if (sortType == SORT_LASTNAME) {
-			Collections.sort(contactList, Contact.Comparators.LASTNAME);
-			for(Contact c : contactList) {
-				final Map<String, String> listItemMap = new HashMap<String, String>();
-				listItemMap.put(TEXT1, c.getLastName() + " " + c.getFirstName());
-				listItemMap.put(TEXT2, c.getMobileph());
-				displayList.add(listItemMap);
-			}
-		} else if (sortType == SORT_MOBILEPH) {
-			Collections.sort(contactList, Contact.Comparators.MOBILEPH);
-			for(Contact c : contactList) {
-				final Map<String, String> listItemMap = new HashMap<String, String>();
-				listItemMap.put(TEXT1, c.getFullName());
-				listItemMap.put(TEXT2, c.getMobileph());
-				displayList.add(listItemMap);
-			}
-		}
 	}
 	
 	private void refreshListView() {
