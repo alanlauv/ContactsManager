@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				//contactList.clear();
-				//contactList = database.getAllContacts();
+				//contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
@@ -260,7 +260,7 @@ public class MainActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				database.updateContact(contact);
-				contactList.clear(); //TODO
+				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
