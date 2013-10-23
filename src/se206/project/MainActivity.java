@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 /**
  * This class represents the main screen of the contacts manager application
  * 
@@ -114,8 +115,19 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//String value = searchInput.toString();
-						// TODO
+						String value = searchInput.getText().toString();
+						List<Contact> searchList = new ArrayList<Contact>();
+						for (Contact c : contactList) {
+							if (c.getFirstName().compareToIgnoreCase(value) == 0
+								|| c.getLastName().compareToIgnoreCase(value) == 0
+								|| c.getMobileph().compareTo(value) == 0) {
+								searchList.add(c);
+							}
+						}
+						if (searchList.isEmpty()) {
+							String displayString = "0 results found";
+							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 				builder.create().show();
