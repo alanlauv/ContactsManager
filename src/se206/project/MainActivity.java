@@ -125,8 +125,12 @@ public class MainActivity extends Activity {
 							}
 						}
 						if (searchList.isEmpty()) {
-							String displayString = "0 results found";
+							String displayString = "0 results found: " + searchInput;
 							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
+						//} else { TODO
+						//	contactList.clear();
+						//	contactList = searchList;
+						//	refreshListView();
 						}
 					}
 				});
@@ -150,6 +154,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				//contactList.clear();
+				//contactList = database.getAllContacts();
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
@@ -162,7 +168,7 @@ public class MainActivity extends Activity {
 	 * 
 	 */
 	private void setupListView() {
-		
+
 		contactList = database.getAllContacts();
 
 		Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
@@ -254,7 +260,7 @@ public class MainActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				database.updateContact(contact);
-				contactList.clear();
+				contactList.clear(); //TODO
 				contactList = database.getAllContacts();
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
