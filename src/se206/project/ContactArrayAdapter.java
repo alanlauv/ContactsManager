@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ContactArrayAdapter extends ArrayAdapter {
+public class ContactArrayAdapter extends ArrayAdapter<Contact> {
 
 	private Context context;
 	private int layoutResourceId;   

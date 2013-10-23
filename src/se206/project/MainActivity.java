@@ -18,7 +18,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 /**
  * This class represents the main screen of the contacts manager application
  * 
