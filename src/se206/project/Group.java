@@ -26,7 +26,7 @@ public class Group implements Comparable<Group>, Serializable {
 	public void add(Contact contact) {
 		groupList.add(contact);
 	}
-	
+
 	public void remove(Contact contact) {
 		groupList.remove(contact);
 	}
@@ -34,11 +34,11 @@ public class Group implements Comparable<Group>, Serializable {
 	public String getName() {
 		return name;
 	}
-	
+
 	public int getCount() {
 		return groupList.size();
 	}
-	
+
 	public String getIdList() {
 		String idList = "" + groupList.get(0).getID();
 		for (int i=0; i<groupList.size(); i++) {
@@ -46,7 +46,7 @@ public class Group implements Comparable<Group>, Serializable {
 		}
 		return idList;
 	}
-	
+
 	public int getID() {
 		return id;
 	}
@@ -54,22 +54,24 @@ public class Group implements Comparable<Group>, Serializable {
 	public void setName(String newName) {
 		name = newName;
 	}
-	
+
 	public void setID(int id) {
 		this.id = id;
 	}
-	
+
 	public void setGroupList(String idList, List<Contact> contactList) {
-		String splitList[] = idList.split(",");
-		for (int i=0; i<splitList.length; i++) {
-			for (Contact c : contactList) {
-				if (c.getID() == Integer.parseInt(splitList[i])) {
-					groupList.add(c);
-				}
-			}	
+		if (idList != null) {
+			String splitList[] = idList.split(",");
+			for (int i=0; i<splitList.length; i++) {
+				for (Contact c : contactList) {
+					if (c.getID() == Integer.parseInt(splitList[i])) {
+						groupList.add(c);
+					}
+				}	
+			}
 		}
 	}
-	
+
 	@Override
 	public int compareTo(Group g) {
 		return this.name.compareTo(g.getName());
