@@ -161,14 +161,16 @@ public class MainActivity extends Activity {
 		int[] ids = {android.R.id.text1, android.R.id.text2};
 
 		sortDisplayList(SORT_FIRSTNAME);
-
+		
+		ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
+		listView.setAdapter(adapter);
+/*
 		// Using the simple_list_item_2 layout to show Name at top line and phone number
 		// at the bottom line
 		SimpleAdapter la = new SimpleAdapter(MainActivity.this, displayList,
 				android.R.layout.simple_list_item_2, fromMapKey, ids);
 		listView.setAdapter(la);
-		
-		/*
+
 		SimpleAdapter adapter = new SimpleAdapter(this, arrlist,
                 R.layout.sample, new String[] { "key", "title", "subtitle" },
                 new int[] { R.id.imageView1, R.id.title, R.id.subtitle });
