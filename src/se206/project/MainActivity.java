@@ -2,10 +2,7 @@ package se206.project;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -85,7 +82,13 @@ public class MainActivity extends Activity {
 						// The 'which' argument contains the index position
 						// of the selected item
 						if (which >= 0 && which <= 2) {
-							sortDisplayList(which);
+							if (which == 0) {
+								Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+							} else if (which == 1) {
+								Collections.sort(contactList, Contact.Comparators.LASTNAME);
+							} else if (which == 2) {
+								Collections.sort(contactList, Contact.Comparators.MOBILEPH);
+							}
 							refreshListView();
 						}
 					}
@@ -135,7 +138,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				sortDisplayList(SORT_FIRSTNAME);
+				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
 		});
@@ -229,8 +232,8 @@ public class MainActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				contactList.add(contact);
-				sortDisplayList(SORT_FIRSTNAME);
 				database.addContact(contact);
+				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
 			break;
@@ -241,7 +244,7 @@ public class MainActivity extends Activity {
 				database.updateContact(contact);
 				contactList.clear();
 				contactList = database.getAllContacts();
-				sortDisplayList(SORT_FIRSTNAME);
+				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
 		}
