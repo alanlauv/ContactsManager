@@ -45,13 +45,14 @@ public class ContactArrayAdapter extends ArrayAdapter {
 			holder = (ContactHolder)row.getTag();
 		}
 
-		
 		Contact contact = data.get(position);
 		holder.txtName.setText(contact.getFullName());
 		byte[] bytesPhoto = contact.getPhoto();
 		if (bytesPhoto != null) {
 			Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 			holder.imgPhoto.setImageBitmap(bmpPhoto);
+		} else { // no photo
+			holder.imgPhoto.setImageResource(R.drawable.grey_android_logo);
 		}
 
 		return row;
