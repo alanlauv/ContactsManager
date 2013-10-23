@@ -31,6 +31,7 @@ public class EditGroupsActivity extends Activity {
 	private ListView listView;
 	private GroupsDatabaseHelper database = new GroupsDatabaseHelper(EditGroupsActivity.this);
 	private List<Group> groupList = new ArrayList<Group>();
+	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,10 @@ public class EditGroupsActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//String groupName =input.getText().toString();
-						
+						Group group = new Group(input.getText().toString());
+						groupList.add(group);
+						database.addGroup(group);
+						refreshListView();
 					}
 				});
 				builder.create().show();
@@ -69,7 +72,7 @@ public class EditGroupsActivity extends Activity {
 	private void setupListView() {
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		groupList = database.getAllGroups(contactsDB.getAllContacts());
-		List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
+
 		final String TEXT1 = "text1";
 		final String TEXT2 = "text2";
 		
