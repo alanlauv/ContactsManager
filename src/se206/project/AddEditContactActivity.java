@@ -174,6 +174,7 @@ public class AddEditContactActivity extends Activity {
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
+		groupNameList.add(0, "No Selection");
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, groupNameList);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerGroup.setAdapter(dataAdapter);
