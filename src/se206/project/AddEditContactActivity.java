@@ -171,7 +171,6 @@ public class AddEditContactActivity extends Activity {
 // TODO
 	public void setupSpinner() {
 
-		spinnerGroup = (Spinner) findViewById(R.id.add_spinner_group);
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
