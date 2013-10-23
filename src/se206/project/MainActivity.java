@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				database.updateContact(contact);
 				contactList.clear(); //TODO
-				contactList = database.getAllContacts();
+				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
