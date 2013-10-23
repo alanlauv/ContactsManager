@@ -42,10 +42,10 @@ public class EditGroupsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groups);
 
-		setupListView();
-
 		buttonNewGroup = (Button)findViewById(R.id.groups_button_new);
-		listView = (ListView)findViewById(R.id.groups_listview);
+		listView = (ListView)findViewById(R.id.groups_listview1);
+
+		setupListView();
 
 		// New group button which shows a dialog box allowing user to input a
 		// new group name and then creates a new group
@@ -77,6 +77,7 @@ public class EditGroupsActivity extends Activity {
 	private void setupListView() {
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		groupList = database.getAllGroups(contactsDB.getAllContacts());
+		//groupList.add(new Group("group1"));
 
 		setupDisplayList();
 
@@ -85,6 +86,7 @@ public class EditGroupsActivity extends Activity {
 
 		SimpleAdapter adapter = new SimpleAdapter(EditGroupsActivity.this, displayList,
 				android.R.layout.simple_list_item_2, fromMapKey, ids);
+
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
