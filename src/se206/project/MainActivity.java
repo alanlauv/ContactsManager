@@ -167,6 +167,12 @@ public class MainActivity extends Activity {
 		SimpleAdapter la = new SimpleAdapter(MainActivity.this, displayList,
 				android.R.layout.simple_list_item_2, fromMapKey, ids);
 		listView.setAdapter(la);
+		
+		/*
+		SimpleAdapter adapter = new SimpleAdapter(this, arrlist,
+                R.layout.sample, new String[] { "key", "title", "subtitle" },
+                new int[] { R.id.imageView1, R.id.title, R.id.subtitle });
+                */
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
