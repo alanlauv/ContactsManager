@@ -43,7 +43,7 @@ public class EditGroupsActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//String groupName =input.toString();
+						//String groupName =input.getText().toString();
 						
 					}
 				});
