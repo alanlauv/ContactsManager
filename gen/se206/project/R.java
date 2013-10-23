@@ -47,8 +47,8 @@ public final class R {
         public static final int add_spinner_group=0x7f080013;
         public static final int add_workph_input=0x7f08000b;
         public static final int add_workph_label=0x7f08000a;
-        public static final int groups_button_new=0x7f080015;
-        public static final int groups_listview=0x7f080016;
+        public static final int groups_button_new=0x7f080016;
+        public static final int groups_listview=0x7f080015;
         public static final int main_button_add=0x7f08001c;
         public static final int main_button_all=0x7f080018;
         public static final int main_button_group=0x7f080017;
