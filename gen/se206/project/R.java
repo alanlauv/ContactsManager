@@ -98,6 +98,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int doa=0x7f050013;
         public static final int done=0x7f05000b;
+        public static final int edit_groups=0x7f05001b;
         public static final int email=0x7f050011;
         public static final int first_name=0x7f05000c;
         public static final int group=0x7f050006;

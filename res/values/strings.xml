@@ -28,5 +28,6 @@
     <string name="home">Home</string>
     <string name="work">Work</string>
     <string name="other">Other</string>
+    <string name="edit_groups">Edit Groups</string>
 
 </resources>
