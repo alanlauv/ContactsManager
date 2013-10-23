@@ -10,20 +10,20 @@ import java.util.List;
  * @author Alan Lau, alau645, 2714269
  *
  */
-public class GroupList extends ContactList {
-	
-	private String groupName;
-	
-	GroupList(String groupName) {
-		this.groupName = groupName;
+public class Group {
+
+	private String name;
+
+	Group(String groupName) {
+		name = groupName;
 	}
-	
+
 	public void rename(String newName) {
-		groupName = newName;
+		name = newName;
 	}
-	
-	public String getGroupName() {
-		return groupName;
+
+	public String getName() {
+		return name;
 	}
 
 }
