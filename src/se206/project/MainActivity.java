@@ -253,8 +253,9 @@ public class MainActivity extends Activity {
 		case (ADD_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
+				int id = database.addContact(contact);
+				contact.setID(id);
 				contactList.add(contact);
-				database.addContact(contact);
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}
@@ -264,6 +265,7 @@ public class MainActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				database.updateContact(contact);
+				//contactList.get(id).editContact(contact); TODO
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
