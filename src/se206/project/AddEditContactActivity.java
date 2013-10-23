@@ -58,9 +58,6 @@ public class AddEditContactActivity extends Activity {
 		int action = extras.getInt("Action");
 		isEdit = (action == MainActivity.EDIT_CONTACT);
 
-		Intent intent = getIntent();
-		contact = (Contact) intent.getSerializableExtra("Contact");
-
 		buttonDone = (Button)findViewById(R.id.add_button_done);
 		buttonPhoto = (ImageButton)findViewById(R.id.add_button_photo);
 		editTextFirstName = (EditText)findViewById(R.id.add_firstname_input);
@@ -73,12 +70,13 @@ public class AddEditContactActivity extends Activity {
 		editTextDoa = (EditText)findViewById(R.id.add_doa_input);
 		buttonGroup = (Button)findViewById(R.id.add_button_group);
 		spinnerGroup = (Spinner)findViewById(R.id.add_spinner_group);
-		
-		setupSpinner(contact);//TODO
 
 		// activity running in edit mode, presets all EditText fields with info
 		// from the selected contact
-		if (isEdit) { // stub fields
+		if (isEdit) {
+			Intent intent = getIntent();
+			contact = (Contact) intent.getSerializableExtra("Contact");
+
 			setTitle(contact.getFullName());
 			editTextFirstName.setText(contact.getFirstName());
 			editTextLastName.setText(contact.getLastName());
@@ -94,9 +92,10 @@ public class AddEditContactActivity extends Activity {
 			if (bytesPhoto != null) {
 				Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 				buttonPhoto.setImageBitmap(bmpPhoto);
-				//buttonPhoto.setLayoutParams(new LayoutParams(50,50));
 			}
 		}
+		
+		setupSpinner(contact);
 
 		// Done button which takes all the info and creates a new contact or finalises
 		// the editing of a contact, then finishes this activity and returns to previous
@@ -113,7 +112,7 @@ public class AddEditContactActivity extends Activity {
 				String email = editTextEmail.getText().toString();
 				String homeAdd = editTextHomeAdd.getText().toString();
 				String doa = editTextDoa.getText().toString();
-				String group = "";
+				String group = spinnerGroup.getSelectedItem().toString();;//TODO
 
 				// TODO if name is ""
 				Contact contact = new Contact(firstName, lastName, mobileph,
@@ -174,10 +173,10 @@ public class AddEditContactActivity extends Activity {
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
-		if (contact.getGroup() != null) {
+		if (isEdit && contact.getGroup() != null) {
 			groupNameList.remove(contact.getGroup());
 			groupNameList.add(0, contact.getGroup());
-			groupNameList.add(groupNameList.size()-1, "No Selection");
+			groupNameList.add(groupNameList.size(), "No Selection");
 		} else {
 			groupNameList.add(0, "No Selection");
 		}
