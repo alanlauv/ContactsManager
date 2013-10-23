@@ -1,5 +1,6 @@
 package se206.project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Alan Lau, alau645, 2714269
  *
  */
-public class Group {
+public class Group implements Serializable {
 
 	private int id;
 	private String name;
