@@ -164,7 +164,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * Sets up ListView using android.R.layout.simple_list_item_2
+	 * Sets up ListView using a custom ContactArrayAdapter
 	 * 
 	 */
 	private void setupListView() {
@@ -237,6 +237,10 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Refreshes the listview when the underlying dataset is changed, and returns
+	 * the view back to the top of the list.
+	 */
 	private void refreshListView() {
 		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 		listView.setSelection(0);
