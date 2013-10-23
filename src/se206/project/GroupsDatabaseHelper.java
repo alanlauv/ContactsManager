@@ -96,4 +96,6 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 		return groupNameList;
 	}
+	
+	//TODO updateGroup method
 }

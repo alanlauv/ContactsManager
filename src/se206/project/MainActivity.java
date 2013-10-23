@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						String value = searchInput.getText().toString();
+						String value = searchInput.getText().toString(); //TODO
 						List<Contact> searchList = new ArrayList<Contact>();
 						for (Contact c : contactList) {
 							if (c.getFirstName().compareToIgnoreCase(value) == 0
@@ -154,8 +154,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				//contactList.clear();
-				//contactList.addAll(database.getAllContacts());
+				contactList.clear();
+				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 			}

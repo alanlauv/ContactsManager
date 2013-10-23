@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import se206.project.Contact.Comparators;
-
 /**
  * This class represents a list of contacts in a particular group currently in
  * the contacts manager application.
@@ -13,6 +11,7 @@ import se206.project.Contact.Comparators;
  * @author Alan Lau, alau645, 2714269
  *
  */
+@SuppressWarnings("serial")
 public class Group implements Comparable<Group>, Serializable {
 
 	private int id;

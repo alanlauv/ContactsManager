@@ -78,7 +78,6 @@ public class EditGroupsActivity extends Activity {
 	private void setupListView() {
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		groupList = database.getAllGroups(contactsDB.getAllContacts());
-		//groupList.add(new Group("group1"));
 
 		setupDisplayList();
 
@@ -106,7 +105,7 @@ public class EditGroupsActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (which == 0) { // View group
+						if (which == 0) { // View group TODO
 							//Intent intent = new Intent();
 							//intent.setClass(EditGroupsActivity.this, ViewGroupActivity.class);
 							//intent.putExtra("Group", selectedGroup);
@@ -121,7 +120,7 @@ public class EditGroupsActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									selectedGroup.setName(inputName.getText().toString());
+									selectedGroup.setName(inputName.getText().toString());//TODO update group
 									setupDisplayList();
 									refreshListView();
 								}

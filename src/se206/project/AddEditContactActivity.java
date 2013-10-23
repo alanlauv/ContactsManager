@@ -42,9 +42,9 @@ public class AddEditContactActivity extends Activity {
 	private Spinner spinnerGroup;
 
 	private boolean isEdit = false;
-	private int contactID;
-	private Uri selectedImage = null;
-	private byte[] bytesPhoto = null;
+	private int contactID;//TODO fix up
+	private Uri selectedImage = null;//TODO fix up
+	private byte[] bytesPhoto = null;//TODO fix up
 	private Contact contact;
 
 	@Override
@@ -112,7 +112,7 @@ public class AddEditContactActivity extends Activity {
 				String email = editTextEmail.getText().toString();
 				String homeAdd = editTextHomeAdd.getText().toString();
 				String doa = editTextDoa.getText().toString();
-				String group = spinnerGroup.getSelectedItem().toString();;//TODO
+				String group = spinnerGroup.getSelectedItem().toString();;//TODO add group in database if not "No Selection"
 
 				// TODO if name is ""
 				Contact contact = new Contact(firstName, lastName, mobileph,
