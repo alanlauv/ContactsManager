@@ -20,7 +20,6 @@ public class EditGroupsActivity extends Activity {
 	
 	private Button buttonNewGroup;
 	private ListView listView;
-	private ListOfGroups listOfGroups = new ListOfGroups();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
