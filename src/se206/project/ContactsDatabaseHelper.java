@@ -56,7 +56,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void addContact(Contact contact) {
+	public int addContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -71,8 +71,10 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, contact.getPhoto());
 		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
 
-		db.insert(TABLE_CONTACTS, null, values);
+		long id = db.insert(TABLE_CONTACTS, null, values);
 		db.close();
+		
+		return (int) id;
 	}
 
 	public void deleteContact(Contact contact) {
