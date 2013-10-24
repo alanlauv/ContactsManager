@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 	private static final int ADD_CONTACT = 1;
 	protected static final int EDIT_CONTACT = 2;
 	protected static final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
+	private boolean isGroupView = false;
 
 	private ListView listView;
 	private ImageButton buttonAddContact;
@@ -158,8 +159,17 @@ public class MainActivity extends Activity {
 				// TODO
 				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
 				List<Group> groupList = groupDB.getAllGroups(contactList);
+				Collections.sort(groupList);
+				//List<Contact> groupContacts = new ArrayList<Contact>();
+				//for (Group group : groupList) {
+				//	groupContacts.addAll(group.getGroupList());
+				//}
 				contactList.clear();
-				contactList.addAll(groupList.get(0).getGroupList());
+				for (Group group : groupList) {
+					contactList.addAll(group.getGroupList());
+				}
+				GroupArrayAdapter adapter = new GroupArrayAdapter(MainActivity.this, R.layout.main_group_listview_item, contactList);
+				listView.setAdapter(adapter);
 				refreshListView();
 			}
 		});
@@ -173,6 +183,8 @@ public class MainActivity extends Activity {
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+				ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
+				listView.setAdapter(adapter);
 				refreshListView();
 			}
 		});
