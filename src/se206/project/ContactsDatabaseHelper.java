@@ -8,7 +8,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * This class represents a database of the contacts
+ * 
+ * @author Alan Lau, alau645, 2714269
+ *
+ */
 public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
@@ -56,6 +61,12 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	/**
+	 * Adds this contact into this database
+	 * 
+	 * @param contact
+	 * @return int contact ID
+	 */
 	public int addContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -73,19 +84,27 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 
 		long id = db.insert(TABLE_CONTACTS, null, values);
 		db.close();
-		
+
 		return (int) id;
 	}
 
+	/**
+	 * Deletes this contact from this database
+	 * 
+	 * @param contact
+	 */
 	public void deleteContact(Contact contact) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		//db.delete(TABLE_CONTACTS, CONTACT_ID + " = ?",
-		//		new String[] { String.valueOf(contact.getID()) });
 		db.delete(TABLE_CONTACTS, CONTACT_ID + "=" + contact.getID(), null);
 		db.close();
 	}
 
-	// { String.valueOf(id) }
+	/**
+	 * Returns the contact of this ID from this database
+	 * 
+	 * @param id contact ID
+	 * @return contact
+	 */
 	public Contact getContact(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -93,7 +112,7 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 				CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_MOBILEPH,
 				CONTACT_HOMEPH, CONTACT_WORKPH, CONTACT_EMAIL, CONTACT_HOMEADD,
 				CONTACT_DOA, CONTACT_PHOTO, CONTACT_GROUP }, CONTACT_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null); //TODO
+				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
@@ -107,6 +126,11 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		return contact;
 	}
 
+	/**
+	 * Returns a list of all contacts in this database
+	 * 
+	 * @return contact list
+	 */
 	public List<Contact> getAllContacts() {
 		List<Contact> contactList = new ArrayList<Contact>();
 		// Select All Query
@@ -124,19 +148,24 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 						cursor.getString(8), cursor.getString(10));
 				contact.setID(Integer.parseInt(cursor.getString(0)));
 				contact.setPhoto(cursor.getBlob(9));
-				// Adding contact to list
+
 				contactList.add(contact);
 			} while (cursor.moveToNext());
 		}
 
 		return contactList;
 	}
-	
-	// A little cropspas, change return int?? // { String.valueOf(id) }
+
+	/**
+	 * Updates this database with the updated contact
+	 * 
+	 * @param contact
+	 * @return contact ID
+	 */
 	public int updateContact(Contact contact) {
-	    SQLiteDatabase db = this.getWritableDatabase();
-	 
-	    ContentValues values = new ContentValues();
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
 		values.put(ContactsDatabaseHelper.CONTACT_FIRSTNAME, contact.getFirstName());
 		values.put(ContactsDatabaseHelper.CONTACT_LASTNAME, contact.getLastName());
 		values.put(ContactsDatabaseHelper.CONTACT_MOBILEPH, contact.getMobileph());
@@ -147,9 +176,9 @@ public class ContactsDatabaseHelper extends SQLiteOpenHelper {
 		values.put(ContactsDatabaseHelper.CONTACT_DOA, contact.getDoa());
 		values.put(ContactsDatabaseHelper.CONTACT_PHOTO, contact.getPhoto());
 		values.put(ContactsDatabaseHelper.CONTACT_GROUP, contact.getGroup());
-	 
-	    // updating row
-	    return db.update(TABLE_CONTACTS, values, CONTACT_ID + " = ?",
-	            new String[] { String.valueOf(contact.getID()) }); //TODO
+
+		// updating row
+		return db.update(TABLE_CONTACTS, values, CONTACT_ID + " = ?",
+				new String[] { String.valueOf(contact.getID()) });
 	}
 }
