@@ -17,12 +17,10 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String GROUP_ID = "_id";
 	private static final String GROUP_NAME = "name";
-	private static final String GROUP_LIST = "list";
 	
 	private static final String CREATE_GROUPS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GROUPS + " ("
 			+ GROUP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-			+ GROUP_NAME + " TEXT,"
-			+ GROUP_LIST  + " TEXT);";
+			+ GROUP_NAME + " TEXT);";
 	private static final String DELETE_GROUPS_TABLE = "DROP TABLE IF EXISTS " + TABLE_GROUPS;
 
 	public GroupsDatabaseHelper(Context context) {
@@ -45,7 +43,6 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 		ContentValues values = new ContentValues();
 		values.put(GroupsDatabaseHelper.GROUP_NAME, group.getName());
-		values.put(GroupsDatabaseHelper.GROUP_LIST, group.getIdList());
 
 		db.insert(TABLE_GROUPS, null, values);
 		db.close();
@@ -71,7 +68,6 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 				Group group = new Group(cursor.getString(1));
 				group.setID(Integer.parseInt(cursor.getString(0)));
 				group.setGroupList(contactList);
-				//group.setGroupList(cursor.getString(2), contactList);
 				// Adding group to list
 				groupList.add(group);
 			} while (cursor.moveToNext());
@@ -103,7 +99,6 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 	 
 	    ContentValues values = new ContentValues();
 		values.put(GroupsDatabaseHelper.GROUP_NAME, group.getName());
-		values.put(GroupsDatabaseHelper.GROUP_LIST, group.getIdList());
 	 
 	    // updating row
 	    return db.update(TABLE_GROUPS, values, GROUP_ID + " = ?",
