@@ -112,7 +112,12 @@ public class AddEditContactActivity extends Activity {
 				String email = editTextEmail.getText().toString();
 				String homeAdd = editTextHomeAdd.getText().toString();
 				String doa = editTextDoa.getText().toString();
-				String group = spinnerGroup.getSelectedItem().toString();;//TODO add group in database if not "No Selection"
+				String group = null;
+				if (spinnerGroup.getSelectedItem().toString().compareTo("No Selection") != 0) {
+					group = spinnerGroup.getSelectedItem().toString();//TODO add group in database if not "No Selection"
+					//GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
+					//List<Group> groupList = database.getAllGroups();
+				}
 
 				// TODO if name is ""
 				Contact contact = new Contact(firstName, lastName, mobileph,
