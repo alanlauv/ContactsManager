@@ -70,7 +70,8 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 			do {
 				Group group = new Group(cursor.getString(1));
 				group.setID(Integer.parseInt(cursor.getString(0)));
-				group.setGroupList(cursor.getString(2), contactList);
+				group.setGroupList(contactList);
+				//group.setGroupList(cursor.getString(2), contactList);
 				// Adding group to list
 				groupList.add(group);
 			} while (cursor.moveToNext());
