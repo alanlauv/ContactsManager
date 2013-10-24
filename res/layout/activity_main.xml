@@ -39,12 +39,14 @@
         android:background="@android:color/darker_gray"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/main_button_search"
             android:layout_width="0px"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/search" />
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/search_icon" />
 
         <Button
             android:id="@+id/main_button_sort"
@@ -60,8 +62,7 @@
             android:layout_weight="1"
             android:background="#33B5E5"
             android:scaleType="centerInside"
-            android:src="@drawable/add_contact"
-            android:text="@string/add" />
+            android:src="@drawable/add_contact" />
     </LinearLayout>
 
 </LinearLayout>
