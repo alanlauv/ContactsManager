@@ -239,7 +239,7 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * Refreshes the listview when the underlying dataset is changed, and returns
+	 * Refreshes the listview to the changed underlying data set, and returns
 	 * the view back to the top of the list.
 	 */
 	private void refreshListView() {
