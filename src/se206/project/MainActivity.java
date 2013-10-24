@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	private ImageButton buttonSearch;
 	private ImageButton buttonGroup;
 	private ImageButton buttonAll;
+
 	private List<Contact> contactList = new ArrayList<Contact>();
 	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 
@@ -52,9 +53,6 @@ public class MainActivity extends Activity {
 
 		//buttonAll.setEnabled(true);
 
-		//database.addContact(new Contact("Alan", "Lau", "021 0210 0210", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
-		//database.addContact(new Contact("James", "Chen", "023 0230 0230", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
-		//database.addContact(new Contact("John", "Lee", "022 0220 0220", "09123456", "09654321", "myemail", "myhomeadd", "mydoa", "mygroup"));
 		setupListView();
 
 		// Button listener for adding a new contact. Starts the add contact activity
