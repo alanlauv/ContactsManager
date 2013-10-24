@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 /**
  * This class represents the edit groups activity, which allows users to edit
  * all the groups currently in the contacts manager application.
@@ -63,12 +64,18 @@ public class EditGroupsActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Group group = new Group(input.getText().toString());
-						groupList.add(group);
-						database.addGroup(group);
-						setupDisplayList();
-						refreshListView();
-						setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+						String groupName = input.getText().toString().trim();
+						if (groupName.isEmpty()) {
+							String displayString =  "Invalid group name";
+							Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
+						} else {
+							Group group = new Group(input.getText().toString());
+							groupList.add(group);
+							database.addGroup(group);
+							setupDisplayList();
+							refreshListView();
+							setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+						}
 					}
 				});
 				builder.create().show();
