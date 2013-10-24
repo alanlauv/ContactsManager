@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
-    
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -35,6 +35,10 @@
         <activity
             android:name="se206.project.ViewContactActivity"
             android:label="@string/title_activity_view_contact" >
+        </activity>
+        <activity
+            android:name="se206.project.AllGroupsActivity"
+            android:label="@string/title_activity_all_groups" >
         </activity>
     </application>
 

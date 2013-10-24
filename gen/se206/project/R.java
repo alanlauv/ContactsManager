@@ -25,7 +25,7 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080034;
+        public static final int action_settings=0x7f08003a;
         public static final int add_button_done=0x7f080001;
         public static final int add_button_group=0x7f080015;
         public static final int add_button_photo=0x7f080003;
@@ -48,49 +48,57 @@ public final class R {
         public static final int add_spinner_group=0x7f080014;
         public static final int add_workph_input=0x7f08000c;
         public static final int add_workph_label=0x7f08000b;
-        public static final int groups_button_new=0x7f080017;
-        public static final int groups_listview=0x7f080016;
-        public static final int main_button_add=0x7f08001d;
-        public static final int main_button_all=0x7f080019;
-        public static final int main_button_group=0x7f080018;
-        public static final int main_button_search=0x7f08001b;
-        public static final int main_button_sort=0x7f08001c;
-        public static final int main_contact_img=0x7f080031;
-        public static final int main_contact_name=0x7f080032;
-        public static final int main_contact_number=0x7f080033;
-        public static final int main_listview=0x7f08001a;
-        public static final int view_doa=0x7f08002e;
-        public static final int view_doa_label=0x7f08002d;
-        public static final int view_email=0x7f08002a;
-        public static final int view_email_label=0x7f080029;
-        public static final int view_group=0x7f080030;
-        public static final int view_group_label=0x7f08002f;
-        public static final int view_homeAdd=0x7f08002c;
-        public static final int view_homeAdd_label=0x7f08002b;
-        public static final int view_image=0x7f08001e;
-        public static final int view_other_label=0x7f080027;
-        public static final int view_phone_home=0x7f080024;
-        public static final int view_phone_home_label=0x7f080023;
-        public static final int view_phone_label=0x7f08001f;
-        public static final int view_phone_mobile=0x7f080022;
-        public static final int view_phone_mobile_label=0x7f080021;
-        public static final int view_phone_work=0x7f080026;
-        public static final int view_phone_work_label=0x7f080025;
-        public static final int view_sep_line1=0x7f080020;
-        public static final int view_sep_line2=0x7f080028;
+        public static final int all_groups_button_add=0x7f08001b;
+        public static final int all_groups_button_all=0x7f080017;
+        public static final int all_groups_button_group=0x7f080016;
+        public static final int all_groups_button_search=0x7f080019;
+        public static final int all_groups_button_sort=0x7f08001a;
+        public static final int all_groups_listview=0x7f080018;
+        public static final int groups_button_new=0x7f08001d;
+        public static final int groups_listview=0x7f08001c;
+        public static final int main_button_add=0x7f080023;
+        public static final int main_button_all=0x7f08001f;
+        public static final int main_button_group=0x7f08001e;
+        public static final int main_button_search=0x7f080021;
+        public static final int main_button_sort=0x7f080022;
+        public static final int main_contact_img=0x7f080037;
+        public static final int main_contact_name=0x7f080038;
+        public static final int main_contact_number=0x7f080039;
+        public static final int main_listview=0x7f080020;
+        public static final int view_doa=0x7f080034;
+        public static final int view_doa_label=0x7f080033;
+        public static final int view_email=0x7f080030;
+        public static final int view_email_label=0x7f08002f;
+        public static final int view_group=0x7f080036;
+        public static final int view_group_label=0x7f080035;
+        public static final int view_homeAdd=0x7f080032;
+        public static final int view_homeAdd_label=0x7f080031;
+        public static final int view_image=0x7f080024;
+        public static final int view_other_label=0x7f08002d;
+        public static final int view_phone_home=0x7f08002a;
+        public static final int view_phone_home_label=0x7f080029;
+        public static final int view_phone_label=0x7f080025;
+        public static final int view_phone_mobile=0x7f080028;
+        public static final int view_phone_mobile_label=0x7f080027;
+        public static final int view_phone_work=0x7f08002c;
+        public static final int view_phone_work_label=0x7f08002b;
+        public static final int view_sep_line1=0x7f080026;
+        public static final int view_sep_line2=0x7f08002e;
     }
     public static final class layout {
         public static final int activity_add_contact=0x7f030000;
-        public static final int activity_groups=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_view_contact=0x7f030003;
-        public static final int main_listview_item=0x7f030004;
+        public static final int activity_all_groups=0x7f030001;
+        public static final int activity_groups=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_view_contact=0x7f030004;
+        public static final int main_listview_item=0x7f030005;
     }
     public static final class menu {
         public static final int add_contact=0x7f070000;
-        public static final int edit_groups=0x7f070001;
-        public static final int main=0x7f070002;
-        public static final int view_contact=0x7f070003;
+        public static final int all_groups=0x7f070001;
+        public static final int edit_groups=0x7f070002;
+        public static final int main=0x7f070003;
+        public static final int view_contact=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -117,6 +125,7 @@ public final class R {
         public static final int search=0x7f050008;
         public static final int sort=0x7f050009;
         public static final int title_activity_add_contact=0x7f050003;
+        public static final int title_activity_all_groups=0x7f05001c;
         public static final int title_activity_edit_groups=0x7f050004;
         public static final int title_activity_view_contact=0x7f050005;
         public static final int work=0x7f050019;

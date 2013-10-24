@@ -29,5 +29,6 @@
     <string name="work">Work</string>
     <string name="other">Other</string>
     <string name="edit_groups">Edit Groups</string>
+    <string name="title_activity_all_groups">Contacts Manager</string>
 
 </resources>
