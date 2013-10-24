@@ -66,7 +66,7 @@ public class EditGroupsActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						String groupName = input.getText().toString().trim();
 						if (groupName.isEmpty()) {
-							String displayString =  "Invalid group name";
+							String displayString = "Invalid group name";
 							Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
 						} else {
 							Group group = new Group(input.getText().toString());

@@ -192,6 +192,7 @@ public class AddEditContactActivity extends Activity {
 				groupNameList.add(groupNameList.size(), "No Selection");
 			} else {
 				contact.setGroup(null);
+				groupNameList.add(0, "No Selection");
 			}
 		} else {
 			groupNameList.add(0, "No Selection");
