@@ -41,8 +41,7 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact> {
 			holder.txtNumber = (TextView)row.findViewById(R.id.main_contact_number);
 
 			row.setTag(holder);
-		}
-		else {
+		} else {
 			holder = (ContactHolder)row.getTag();
 		}
 
