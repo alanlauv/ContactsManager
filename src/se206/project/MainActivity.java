@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 
 	private static final int ADD_CONTACT = 1;
 	protected static final int EDIT_CONTACT = 2;
+	private static final int EDIT_GROUPS = 3;
 	protected static final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
 	private boolean isGroupView = false;
 
@@ -80,7 +81,7 @@ public class MainActivity extends Activity {
 				if (listView.getAdapter().getClass() == GroupArrayAdapter.class) {
 					Intent intent = new Intent();
 					intent.setClass(MainActivity.this, EditGroupsActivity.class);
-					startActivity(intent);
+					startActivityForResult(intent, EDIT_GROUPS);
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
@@ -325,6 +326,12 @@ public class MainActivity extends Activity {
 				//updateGroups(contact); TODO
 			}
 		break;
+		case (EDIT_GROUPS):
+			if (resultCode == Activity.RESULT_OK) {
+				contactList.clear();
+				contactList.addAll(database.getAllContacts());
+				refreshListView();
+			}
 		}
 	}
 

@@ -140,7 +140,9 @@ public class EditGroupsActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									groupList.get(clickedViewPos).setName(inputName.getText().toString());
+									String newName = inputName.getText().toString();
+									groupList.get(clickedViewPos).setName(newName);
+									updateContactsDB(clickedViewPos);
 									database.updateGroup(groupList.get(clickedViewPos));
 									setupDisplayList();
 									refreshListView();
@@ -158,6 +160,8 @@ public class EditGroupsActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									database.deleteGroup(selectedGroup);
+									groupList.get(clickedViewPos).setName(null);
+									updateContactsDB(clickedViewPos);
 									groupList.remove(clickedViewPos);
 									displayList.remove(clickedViewPos);
 									refreshListView();
@@ -188,6 +192,13 @@ public class EditGroupsActivity extends Activity {
 			listItemMap.put(TEXT1, group.getName());
 			listItemMap.put(TEXT2, group.getCount() + " contact(s)");
 			displayList.add(listItemMap);
+		}
+	}
+	
+	private void updateContactsDB(int position) {
+		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
+		for (Contact contact : groupList.get(position).getGroupList()) {
+			contactsDB.updateContact(contact);
 		}
 	}
 
