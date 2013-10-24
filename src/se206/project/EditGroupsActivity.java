@@ -126,10 +126,10 @@ public class EditGroupsActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) { // View group TODO
-							//Intent intent = new Intent();
-							//intent.setClass(EditGroupsActivity.this, ViewGroupActivity.class);
-							//intent.putExtra("Group", selectedGroup);
-							//startActivity(intent);
+							Intent intent = new Intent();
+							intent.setClass(EditGroupsActivity.this, ViewGroupActivity.class);
+							intent.putExtra("Group", selectedGroup);
+							startActivity(intent);
 						} else if (which == 1) { // Edit group name
 							AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 
