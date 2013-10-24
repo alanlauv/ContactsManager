@@ -15,8 +15,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 /**
@@ -34,7 +34,7 @@ public class EditGroupsActivity extends Activity {
 	private List<Group> groupList = new ArrayList<Group>();
 	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
 
-	private Button buttonNewGroup;
+	private ImageButton buttonNewGroup;
 	private ListView listView;
 
 	@Override
@@ -42,7 +42,7 @@ public class EditGroupsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_groups);
 
-		buttonNewGroup = (Button)findViewById(R.id.groups_button_new);
+		buttonNewGroup = (ImageButton)findViewById(R.id.groups_button_new);
 		listView = (ListView)findViewById(R.id.groups_listview);
 
 		setupListView();
@@ -53,6 +53,8 @@ public class EditGroupsActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(MainActivity.buttonClick);
+
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 				builder.setTitle("Enter new group name:");
 				final EditText input = new EditText(EditGroupsActivity.this);
