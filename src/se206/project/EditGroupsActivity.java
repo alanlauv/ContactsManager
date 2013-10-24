@@ -29,6 +29,7 @@ import android.widget.Toast;
  */
 public class EditGroupsActivity extends Activity {
 
+	private static final int EDIT_GROUP = 1;
 	private static final String TEXT1 = "text1";
 	private static final String TEXT2 = "text2";
 	private GroupsDatabaseHelper database = new GroupsDatabaseHelper(EditGroupsActivity.this);
@@ -129,7 +130,7 @@ public class EditGroupsActivity extends Activity {
 							Intent intent = new Intent();
 							intent.setClass(EditGroupsActivity.this, ViewGroupActivity.class);
 							intent.putExtra("Group", selectedGroup);
-							startActivity(intent);
+							startActivityForResult(intent, EDIT_GROUP);
 						} else if (which == 1) { // Edit group name
 							AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 
@@ -205,6 +206,23 @@ public class EditGroupsActivity extends Activity {
 	private void refreshListView() {
 		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 		listView.setSelection(0);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		switch(requestCode) {
+		case (EDIT_GROUP):
+			if (resultCode == Activity.RESULT_OK) {
+				ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
+				groupList.clear();
+				groupList.addAll(database.getAllGroups(contactsDB.getAllContacts()));
+				setupDisplayList();
+				refreshListView();
+				setResult(Activity.RESULT_OK, new Intent());
+			}
+		break;
+		}
 	}
 
 	@Override
