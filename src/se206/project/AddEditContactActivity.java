@@ -28,7 +28,7 @@ import android.widget.Spinner;
  */
 public class AddEditContactActivity extends Activity {
 
-	private Button buttonDone;
+	private ImageButton buttonDone;
 	private ImageButton buttonPhoto;
 	private EditText editTextFirstName;
 	private EditText editTextLastName;
@@ -58,7 +58,7 @@ public class AddEditContactActivity extends Activity {
 		int action = extras.getInt("Action");
 		isEdit = (action == MainActivity.EDIT_CONTACT);
 
-		buttonDone = (Button)findViewById(R.id.add_button_done);
+		buttonDone = (ImageButton)findViewById(R.id.add_button_done);
 		buttonPhoto = (ImageButton)findViewById(R.id.add_button_photo);
 		editTextFirstName = (EditText)findViewById(R.id.add_firstname_input);
 		editTextLastName = (EditText)findViewById(R.id.add_lastname_input);
@@ -104,6 +104,8 @@ public class AddEditContactActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(MainActivity.buttonClick);
+
 				String firstName = editTextFirstName.getText().toString();
 				String lastName = editTextLastName.getText().toString();
 				String mobileph = editTextMobileph.getText().toString();

@@ -8,17 +8,18 @@
     <LinearLayout
         android:id="@+id/add_linearlayout_button"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="#33B5E5" >
+        android:background="@android:color/darker_gray" >
 
-        <Button
+        <ImageButton
             android:id="@+id/add_button_done"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            
-            android:text="@string/done" />
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/done_icon" />
     </LinearLayout>
 
     <ScrollView
@@ -185,13 +186,12 @@
 
             <Button
                 android:id="@+id/add_button_group"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/add_doa_input"
                 android:text="@string/edit_groups"
-                android:textSize="13sp"
-                android:background="#33B5E5" />
+                android:textSize="9sp" />
         </RelativeLayout>
     </ScrollView>
 
