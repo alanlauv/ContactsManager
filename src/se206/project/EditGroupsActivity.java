@@ -168,7 +168,7 @@ public class EditGroupsActivity extends Activity {
 		for(Group group : groupList) {
 			final Map<String, String> listItemMap = new HashMap<String, String>();
 			listItemMap.put(TEXT1, group.getName());
-			listItemMap.put(TEXT2, "" + group.getCount());
+			listItemMap.put(TEXT2, group.getCount() + " contact(s)");
 			displayList.add(listItemMap);
 		}
 	}
