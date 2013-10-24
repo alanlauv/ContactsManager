@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:background="#33B5E5"
             android:scaleType="centerInside"
-            android:src="@drawable/add_contact" />
+            android:src="@drawable/contact_all_add" />
     </LinearLayout>
 
 </LinearLayout>

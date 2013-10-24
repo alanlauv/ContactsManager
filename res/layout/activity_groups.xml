@@ -14,15 +14,17 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:background="#33B5E5"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/groups_button_new"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_group" />
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/contact_group_add" />
     </LinearLayout>
 
 </LinearLayout>
