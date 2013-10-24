@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
 	private ImageButton buttonAddContact;
 	private ImageButton buttonSort;
 	private ImageButton buttonSearch;
-	private Button buttonGroup;
-	private Button buttonAll;
+	private ImageButton buttonGroup;
+	private ImageButton buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
 	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
 
@@ -48,8 +48,8 @@ public class MainActivity extends Activity {
 		buttonAddContact = (ImageButton)findViewById(R.id.main_button_add);
 		buttonSort = (ImageButton)findViewById(R.id.main_button_sort);
 		buttonSearch = (ImageButton)findViewById(R.id.main_button_search);
-		buttonGroup = (Button)findViewById(R.id.main_button_group);
-		buttonAll = (Button)findViewById(R.id.main_button_all);
+		buttonGroup = (ImageButton)findViewById(R.id.main_button_group);
+		buttonAll = (ImageButton)findViewById(R.id.main_button_all);
 
 		//buttonAll.setEnabled(true);
 
@@ -152,6 +152,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(buttonClick);
 				// TODO
 				//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
@@ -162,6 +163,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(buttonClick);
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);

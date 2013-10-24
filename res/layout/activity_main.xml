@@ -7,23 +7,27 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:background="@android:color/darker_gray"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/main_button_group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="@string/group" />
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/contact_group" />
 
-        <Button
+        <ImageButton
             android:id="@+id/main_button_all"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="@string/all" />
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/contact_all" />
     </LinearLayout>
 
     <ListView
