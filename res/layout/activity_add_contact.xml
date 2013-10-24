@@ -185,11 +185,13 @@
 
             <Button
                 android:id="@+id/add_button_group"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/add_doa_input"
-                android:text="@string/edit_groups" />
+                android:text="@string/edit_groups"
+                android:textSize="13sp"
+                android:background="#33B5E5" />
         </RelativeLayout>
     </ScrollView>
 
