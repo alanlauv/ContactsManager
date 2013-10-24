@@ -8,7 +8,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * This class represents a database of the groups
+ * 
+ * @author Alan Lau, alau645, 2714269
+ *
+ */
 public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
@@ -17,7 +22,7 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String GROUP_ID = "_id";
 	private static final String GROUP_NAME = "name";
-	
+
 	private static final String CREATE_GROUPS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GROUPS + " ("
 			+ GROUP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ GROUP_NAME + " TEXT);";
@@ -37,7 +42,12 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(DELETE_GROUPS_TABLE);
 		onCreate(db);
 	}
-	
+
+	/**
+	 * Adds this group into this database
+	 * 
+	 * @param group
+	 */
 	public void addGroup(Group group) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -47,13 +57,24 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 		db.insert(TABLE_GROUPS, null, values);
 		db.close();
 	}
-	
+
+	/**
+	 * Deletes this group from this database
+	 * 
+	 * @param group
+	 */
 	public void deleteGroup(Group group) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_GROUPS, GROUP_ID + "=" + group.getID(), null);
 		db.close();
 	}
-	
+
+	/**
+	 * Returns a list of all the groups in this database
+	 * 
+	 * @param contactList from contacts database
+	 * @return List<Group>
+	 */
 	public List<Group> getAllGroups(List<Contact> contactList) {
 		List<Group> groupList = new ArrayList<Group>();
 		// Select All Query
@@ -68,14 +89,19 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 				Group group = new Group(cursor.getString(1));
 				group.setID(Integer.parseInt(cursor.getString(0)));
 				group.setGroupList(contactList);
-				// Adding group to list
+
 				groupList.add(group);
 			} while (cursor.moveToNext());
 		}
 
 		return groupList;
 	}
-	
+
+	/**
+	 * Returns a list of the names of all the groups in this database
+	 * 
+	 * @return List<String>
+	 */
 	public List<String> getAllGroupNames() {
 		List<String> groupNameList = new ArrayList<String>();
 		// Select All Query
@@ -93,15 +119,21 @@ public class GroupsDatabaseHelper extends SQLiteOpenHelper {
 
 		return groupNameList;
 	}
-	
+
+	/**
+	 * Updates this database with this group
+	 * 
+	 * @param group edited group
+	 * @return int group ID
+	 */
 	public int updateGroup(Group group) {
-	    SQLiteDatabase db = this.getWritableDatabase();
-	 
-	    ContentValues values = new ContentValues();
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
 		values.put(GroupsDatabaseHelper.GROUP_NAME, group.getName());
-	 
-	    // updating row
-	    return db.update(TABLE_GROUPS, values, GROUP_ID + " = ?",
-	            new String[] { String.valueOf(group.getID()) }); //TODO
+
+		// updating row
+		return db.update(TABLE_GROUPS, values, GROUP_ID + " = ?",
+				new String[] { String.valueOf(group.getID()) });
 	}
 }
