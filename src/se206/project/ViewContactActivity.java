@@ -16,7 +16,7 @@ import android.widget.TextView;
  *
  */
 public class ViewContactActivity extends Activity {
-	
+
 	private ImageView imageView;
 	private TextView mobilephTextView;
 	private TextView homephTextView;
@@ -31,11 +31,12 @@ public class ViewContactActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_contact);
 
+		// Get this contact form the previous activity
 		Intent intent = getIntent();
 		Contact contact = (Contact) intent.getSerializableExtra("Contact");
 
 		setTitle(contact.getFullName());
-		
+
 		imageView = (ImageView)findViewById(R.id.view_image);
 		mobilephTextView = (TextView)findViewById(R.id.view_phone_mobile);
 		homephTextView = (TextView)findViewById(R.id.view_phone_home);
@@ -45,11 +46,14 @@ public class ViewContactActivity extends Activity {
 		doaTextView = (TextView)findViewById(R.id.view_doa);
 		groupTextView = (TextView)findViewById(R.id.view_group);
 
+		// check if contact has an existing photo, then convert to bitmap and set it
 		byte[] bytesPhoto = contact.getPhoto();
 		if (bytesPhoto != null) {
 			Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 			imageView.setImageBitmap(bmpPhoto);
 		}
+
+		// Set other fields of the contact
 		mobilephTextView.setText(contact.getMobileph());
 		homephTextView.setText(contact.getHomeph());
 		workphTextView.setText(contact.getWorkph());
@@ -57,7 +61,6 @@ public class ViewContactActivity extends Activity {
 		homeAddTextView.setText(contact.getHomeAdd());
 		doaTextView.setText(contact.getDoa());
 		groupTextView.setText(contact.getGroup());
-		//TODO mobilephTextView.setVisibility(View.GONE);
 	}
 
 	@Override
