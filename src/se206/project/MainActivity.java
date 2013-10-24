@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 							// Reset and get fresh data before search
 							contactList.clear();
 							contactList.addAll(database.getAllContacts());
-							
+
 							// Search, and add into another contact list
 							List<Contact> searchList = new ArrayList<Contact>();
 							for (Contact c : contactList) {
@@ -161,11 +161,11 @@ public class MainActivity extends Activity {
 									searchList.add(c);
 								}
 							}
-							
+
 							// Display how many results were found to user
 							String displayString = searchList.size() + " result(s) found for " + value;
 							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
-							
+
 							// Results found, clear data list and add the results into it
 							if (!searchList.isEmpty()) {
 								contactList.clear();
@@ -303,7 +303,7 @@ public class MainActivity extends Activity {
 		if (isGroupView && listView.getAdapter().getClass() == GroupArrayAdapter.class) {
 			// Change image of sort button to add group button image
 			buttonSort.setImageResource(R.drawable.contact_group_add);
-			
+
 			// Get contacts from all groups and feed into data list
 			// not all contacts will show (contacts without a group)
 			GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
@@ -315,14 +315,14 @@ public class MainActivity extends Activity {
 			}
 			GroupArrayAdapter adapter = new GroupArrayAdapter(MainActivity.this, R.layout.main_group_listview_item, contactList);
 			listView.setAdapter(adapter);
-			
+
 			// Change view from Group to All
 		} else if (!isGroupView && listView.getAdapter().getClass() == GroupArrayAdapter.class) {
 			// Change image button back to sort
 			buttonSort.setImageResource(R.drawable.sort_icon);
 			ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
 			listView.setAdapter(adapter);
-			
+
 			// Normal update, no change in views
 		} else {
 			((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
@@ -344,7 +344,7 @@ public class MainActivity extends Activity {
 				int id = database.addContact(contact);
 				contact.setID(id);
 				contactList.add(contact);
-				
+
 				// Check if contact assigned to a group. If not then should go to All view so
 				// set isGroupView to false so contact can be shown on All view
 				if (contact.getGroup() == null) {
