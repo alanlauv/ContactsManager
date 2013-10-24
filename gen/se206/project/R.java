@@ -28,12 +28,13 @@ public final class R {
         public static final int contact_group_add=0x7f020004;
         public static final int done_icon=0x7f020005;
         public static final int grey_android_logo=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int search_icon=0x7f020008;
-        public static final int sort_icon=0x7f020009;
+        public static final int group_remove=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int search_icon=0x7f020009;
+        public static final int sort_icon=0x7f02000a;
     }
     public static final class id {
-        public static final int action_settings=0x7f08003d;
+        public static final int action_settings=0x7f08003e;
         public static final int add_button_done=0x7f080001;
         public static final int add_button_group=0x7f080015;
         public static final int add_button_photo=0x7f080003;
@@ -64,22 +65,23 @@ public final class R {
         public static final int all_groups_listview=0x7f080018;
         public static final int groups_button_new=0x7f08001d;
         public static final int groups_listview=0x7f08001c;
-        public static final int linearLayout=0x7f080038;
+        public static final int linearLayout=0x7f080039;
         public static final int main_button_add=0x7f080023;
         public static final int main_button_all=0x7f08001f;
         public static final int main_button_group=0x7f08001e;
         public static final int main_button_search=0x7f080021;
         public static final int main_button_sort=0x7f080022;
-        public static final int main_contact_img=0x7f08003a;
-        public static final int main_contact_name=0x7f08003b;
-        public static final int main_contact_number=0x7f08003c;
-        public static final int main_divider=0x7f080039;
+        public static final int main_contact_img=0x7f08003b;
+        public static final int main_contact_name=0x7f08003c;
+        public static final int main_contact_number=0x7f08003d;
+        public static final int main_divider=0x7f08003a;
         public static final int main_listview=0x7f080020;
         public static final int view_doa=0x7f080034;
         public static final int view_doa_label=0x7f080033;
         public static final int view_email=0x7f080030;
         public static final int view_email_label=0x7f08002f;
         public static final int view_group=0x7f080036;
+        public static final int view_group_button_remove=0x7f080038;
         public static final int view_group_label=0x7f080035;
         public static final int view_group_listview=0x7f080037;
         public static final int view_homeAdd=0x7f080032;

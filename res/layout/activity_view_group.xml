@@ -7,9 +7,26 @@
 
     <ListView
         android:id="@+id/view_group_listview"
+        android:choiceMode="singleChoice" 
+        android:listSelector="@android:color/holo_blue_bright"
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="1"
         android:text="@string/hello_world" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#33B5E5"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/view_group_button_remove"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/group_remove" />
+    </LinearLayout>
 
 </LinearLayout>
