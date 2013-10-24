@@ -121,7 +121,6 @@ public class EditGroupsActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									groupList.get(clickedViewPos).setName(inputName.getText().toString());
-									//selectedGroup.setName(inputName.getText().toString());//TODO update group
 									database.updateGroup(groupList.get(clickedViewPos));
 									setupDisplayList();
 									refreshListView();
