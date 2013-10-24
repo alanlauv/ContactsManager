@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(final View v) {
 				v.startAnimation(buttonClick);
-				
+
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", ADD_CONTACT); // extra info sent to the transitioning
@@ -122,22 +122,27 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String value = searchInput.getText().toString(); //TODO
-						contactList.clear();
-						contactList.addAll(database.getAllContacts());
-						List<Contact> searchList = new ArrayList<Contact>();
-						for (Contact c : contactList) {
-							if (c.getFirstName().compareToIgnoreCase(value) == 0
-								|| c.getLastName().compareToIgnoreCase(value) == 0
-								|| c.getMobileph().compareTo(value) == 0) {
-								searchList.add(c);
-							}
-						}
-						String displayString = searchList.size() + " result(s) found for " + value;
-						Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
-						if (!searchList.isEmpty()) {
+						if (value.isEmpty()) {
+							String displayString = "Invalid search input";
+							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
+						} else {
 							contactList.clear();
-							contactList.addAll(searchList);
-							refreshListView();
+							contactList.addAll(database.getAllContacts());
+							List<Contact> searchList = new ArrayList<Contact>();
+							for (Contact c : contactList) {
+								if (c.getFirstName().compareToIgnoreCase(value) == 0
+										|| c.getLastName().compareToIgnoreCase(value) == 0
+										|| c.getMobileph().compareTo(value) == 0) {
+									searchList.add(c);
+								}
+							}
+							String displayString = searchList.size() + " result(s) found for " + value;
+							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
+							if (!searchList.isEmpty()) {
+								contactList.clear();
+								contactList.addAll(searchList);
+								refreshListView();
+							}
 						}
 					}
 				});
@@ -156,10 +161,10 @@ public class MainActivity extends Activity {
 				//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 			}
 		});
-		
+
 		// Button listener for showing all contacts (default view)
 		buttonAll.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				v.startAnimation(buttonClick);
@@ -181,7 +186,7 @@ public class MainActivity extends Activity {
 		contactList = database.getAllContacts();
 
 		Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
-		
+
 		ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
 		listView.setAdapter(adapter);
 
@@ -209,15 +214,15 @@ public class MainActivity extends Activity {
 							intent.setClass(MainActivity.this, ViewContactActivity.class);
 							intent.putExtra("Contact", selectedContact);
 							startActivity(intent);
-						// Edit contact which will start the edit contact activity
+							// Edit contact which will start the edit contact activity
 						} else if (which == 1) {
 							Intent intent = new Intent();
 							intent.setClass(MainActivity.this, AddEditContactActivity.class);
 							intent.putExtra("Action", EDIT_CONTACT);
 							intent.putExtra("Contact", selectedContact);
 							startActivityForResult(intent, EDIT_CONTACT);
-						// Delete contact which will show a dialog box asking user to confirm deletion
-						// of the selected contact
+							// Delete contact which will show a dialog box asking user to confirm deletion
+							// of the selected contact
 						} else if (which == 2) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 							builder.setTitle("Delete this contact?");
@@ -245,7 +250,7 @@ public class MainActivity extends Activity {
 
 		});
 	}
-	
+
 	/**
 	 * Refreshes the listview to the changed underlying data set, and returns
 	 * the view back to the top of the list.
@@ -267,7 +272,7 @@ public class MainActivity extends Activity {
 				contactList.add(contact);
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
-				
+
 				/*
 				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this); //TODO
 				List<Group> groupList = groupDB.getAllGroups(contactList);
@@ -278,7 +283,7 @@ public class MainActivity extends Activity {
 					}
 				}*/
 			}
-			break;
+		break;
 		case (EDIT_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
@@ -291,7 +296,7 @@ public class MainActivity extends Activity {
 
 				//updateGroups(id);
 			}
-			break;
+		break;
 		}
 	}
 
