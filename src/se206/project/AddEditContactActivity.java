@@ -38,7 +38,7 @@ public class AddEditContactActivity extends Activity {
 	private EditText editTextEmail;
 	private EditText editTextHomeAdd;
 	private EditText editTextDoa;
-	private Button buttonGroup;
+	private ImageButton buttonGroup;
 	private Spinner spinnerGroup;
 
 	private boolean isEdit = false;
@@ -68,7 +68,7 @@ public class AddEditContactActivity extends Activity {
 		editTextEmail = (EditText)findViewById(R.id.add_email_input);
 		editTextHomeAdd = (EditText)findViewById(R.id.add_homeadd_input);
 		editTextDoa = (EditText)findViewById(R.id.add_doa_input);
-		buttonGroup = (Button)findViewById(R.id.add_button_group);
+		buttonGroup = (ImageButton)findViewById(R.id.add_button_group);
 		spinnerGroup = (Spinner)findViewById(R.id.add_spinner_group);
 
 		// activity running in edit mode, presets all EditText fields with info
