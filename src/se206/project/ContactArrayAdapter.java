@@ -13,6 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * This class represents a custom ArrayAdapter for displaying contacts on a list view.
+ * Has a ImageView, title and subtitle TextViews
+ * 
+ * @author Alan Lau, alau645, 2714269
+ *
+ */
 public class ContactArrayAdapter extends ArrayAdapter<Contact> {
 
 	private Context context;
@@ -42,17 +49,23 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact> {
 
 			row.setTag(holder);
 		} else {
+			// View is unchanged, get data from cache
 			holder = (ContactHolder)row.getTag();
 		}
 
+		// Get contact data and set it into the view
 		Contact contact = data.get(position);
 		holder.txtName.setText(contact.getFullName());
 		holder.txtNumber.setText(contact.getMobileph());
+
+		// Check if contact has photo and convert to bitmap and set it
 		byte[] bytesPhoto = contact.getPhoto();
 		if (bytesPhoto != null) {
 			Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 			holder.imgPhoto.setImageBitmap(bmpPhoto);
-		} else { // no photo
+
+			// no contact photo, set default photo
+		} else {
 			holder.imgPhoto.setImageResource(R.drawable.grey_android_logo);
 		}
 
