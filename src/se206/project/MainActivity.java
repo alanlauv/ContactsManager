@@ -76,30 +76,38 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				v.startAnimation(buttonClick);
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-				builder.setTitle("Sort contacts by:");
-				String[] sortOptions = {"First name", "Last name", "Mobile number"};
-				builder.setItems(sortOptions, new DialogInterface.OnClickListener() {
+				if (listView.getAdapter().getClass() == GroupArrayAdapter.class) {
+					Intent intent = new Intent();
+					intent.setClass(MainActivity.this, EditGroupsActivity.class);
+					startActivity(intent);
+				} else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// The 'which' argument contains the index position
-						// of the selected item
-						if (which >= 0 && which <= 2) {
-							if (which == 0) {
-								Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
-							} else if (which == 1) {
-								Collections.sort(contactList, Contact.Comparators.LASTNAME);
-							} else if (which == 2) {
-								Collections.sort(contactList, Contact.Comparators.MOBILEPH);
+					builder.setTitle("Sort contacts by:");
+					String[] sortOptions = {"First name", "Last name", "Mobile number"};
+					builder.setItems(sortOptions, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// The 'which' argument contains the index position
+							// of the selected item
+							if (which >= 0 && which <= 2) {
+								if (which == 0) {
+									Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+								} else if (which == 1) {
+									Collections.sort(contactList, Contact.Comparators.LASTNAME);
+								} else if (which == 2) {
+									Collections.sort(contactList, Contact.Comparators.MOBILEPH);
+								}
+								isGroupView = false;
+								refreshListView();
 							}
-							refreshListView();
 						}
-					}
 
-				});
-				builder.create().show();
+					});
+					builder.create().show();
+				}
 			}
 
 		});
@@ -140,6 +148,7 @@ public class MainActivity extends Activity {
 							if (!searchList.isEmpty()) {
 								contactList.clear();
 								contactList.addAll(searchList);
+								isGroupView = false;
 								refreshListView();
 							}
 						}
@@ -157,19 +166,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				v.startAnimation(buttonClick);
 				// TODO
-				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
-				List<Group> groupList = groupDB.getAllGroups(contactList);
-				Collections.sort(groupList);
-				//List<Contact> groupContacts = new ArrayList<Contact>();
-				//for (Group group : groupList) {
-				//	groupContacts.addAll(group.getGroupList());
-				//}
-				contactList.clear();
-				for (Group group : groupList) {
-					contactList.addAll(group.getGroupList());
-				}
-				GroupArrayAdapter adapter = new GroupArrayAdapter(MainActivity.this, R.layout.main_group_listview_item, contactList);
-				listView.setAdapter(adapter);
+				isGroupView = true;
+				listView.setAdapter(new GroupArrayAdapter(MainActivity.this, R.layout.main_group_listview_item, new ArrayList<Contact>()));
 				refreshListView();
 			}
 		});
@@ -180,11 +178,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				v.startAnimation(buttonClick);
+
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
-				ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
-				listView.setAdapter(adapter);
+				//ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
+				//listView.setAdapter(adapter);
+				isGroupView = false;
 				refreshListView();
 			}
 		});
@@ -270,7 +270,24 @@ public class MainActivity extends Activity {
 	 * the view back to the top of the list.
 	 */
 	private void refreshListView() {
-		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+		if (isGroupView && listView.getAdapter().getClass() == GroupArrayAdapter.class) {
+			buttonSort.setImageResource(R.drawable.contact_group_add);
+			GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+			List<Group> groupList = groupDB.getAllGroups(contactList);
+			Collections.sort(groupList);
+			contactList.clear();
+			for (Group group : groupList) {
+				contactList.addAll(group.getGroupList());
+			}
+			GroupArrayAdapter adapter = new GroupArrayAdapter(MainActivity.this, R.layout.main_group_listview_item, contactList);
+			listView.setAdapter(adapter);
+		} else if (!isGroupView && listView.getAdapter().getClass() == GroupArrayAdapter.class) {
+			buttonSort.setImageResource(R.drawable.sort_icon);
+			ContactArrayAdapter adapter = new ContactArrayAdapter(MainActivity.this, R.layout.main_listview_item, contactList);
+			listView.setAdapter(adapter);
+		} else {
+			((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+		}
 		listView.setSelection(0);
 	}
 
@@ -284,7 +301,12 @@ public class MainActivity extends Activity {
 				int id = database.addContact(contact);
 				contact.setID(id);
 				contactList.add(contact);
-				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+				if (contact.getGroup() == null) {
+					contactList.clear();
+					contactList.addAll(database.getAllContacts());
+					Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
+					isGroupView = false;
+				}
 				refreshListView();
 
 				//updateGroups(contact); TODO
