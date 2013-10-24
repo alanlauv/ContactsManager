@@ -10,10 +10,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 /**
@@ -28,13 +30,14 @@ public class MainActivity extends Activity {
 	protected static final int EDIT_CONTACT = 2;
 
 	private ListView listView;
-	private Button buttonAddContact;
+	private ImageButton buttonAddContact;
 	private Button buttonSort;
 	private Button buttonSearch;
 	private Button buttonGroup;
 	private Button buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
 	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
+	private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		listView = (ListView)findViewById(R.id.main_listview);
-		buttonAddContact = (Button)findViewById(R.id.main_button_add);
+		buttonAddContact = (ImageButton)findViewById(R.id.main_button_add);
 		buttonSort = (Button)findViewById(R.id.main_button_sort);
 		buttonSearch = (Button)findViewById(R.id.main_button_search);
 		buttonGroup = (Button)findViewById(R.id.main_button_group);
@@ -59,7 +62,9 @@ public class MainActivity extends Activity {
 		buttonAddContact.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(final View v) {
+				v.startAnimation(buttonClick);
+				
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, AddEditContactActivity.class);
 				intent.putExtra("Action", ADD_CONTACT); // extra info sent to the transitioning
