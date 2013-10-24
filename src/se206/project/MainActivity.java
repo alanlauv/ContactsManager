@@ -158,7 +158,11 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				v.startAnimation(buttonClick);
 				// TODO
-				//((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+				List<Group> groupList = groupDB.getAllGroups(contactList);
+				contactList.clear();
+				contactList.addAll(groupList.get(0).getGroupList());
+				refreshListView();
 			}
 		});
 
@@ -273,7 +277,7 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 
-				updateGroups(contact);
+				//updateGroups(contact); TODO
 			}
 		break;
 		case (EDIT_CONTACT):
@@ -286,22 +290,24 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 
-				updateGroups(contact);
+				//updateGroups(contact); TODO
 			}
 		break;
 		}
 	}
 
-	public void updateGroups(Contact contact) { //TODO
-		GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
-		List<Group> groupList = groupDB.getAllGroups(contactList);
-		for (Group group : groupList) {
-			if (contact.getGroup().compareTo(group.getName()) == 0) {
-				group.add(contact);
-				groupDB.updateGroup(group);
+	/*public void updateGroups(Contact contact) { //TODO
+		if (contact.getGroup() != null) {
+			GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+			List<Group> groupList = groupDB.getAllGroups(contactList);
+			for (Group group : groupList) {
+				if (contact.getGroup().compareTo(group.getName()) == 0) {
+					group.add(contact);
+					groupDB.updateGroup(group);
+				}
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
