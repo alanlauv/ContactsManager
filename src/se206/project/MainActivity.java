@@ -116,6 +116,8 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String value = searchInput.getText().toString(); //TODO
+						contactList.clear();
+						contactList.addAll(database.getAllContacts());
 						List<Contact> searchList = new ArrayList<Contact>();
 						for (Contact c : contactList) {
 							if (c.getFirstName().compareToIgnoreCase(value) == 0
@@ -124,13 +126,12 @@ public class MainActivity extends Activity {
 								searchList.add(c);
 							}
 						}
-						if (true){//(searchList.isEmpty()) {
-							String displayString = "0 results found: " + searchInput;
-							Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
-						//} else { TODO
-						//	contactList.clear();
-						//	contactList = searchList;
-						//	refreshListView();
+						String displayString = searchList.size() + " result(s) found for " + value;
+						Toast.makeText(MainActivity.this, displayString, Toast.LENGTH_LONG).show();
+						if (!searchList.isEmpty()) {
+							contactList.clear();
+							contactList.addAll(searchList);
+							refreshListView();
 						}
 					}
 				});
@@ -220,7 +221,7 @@ public class MainActivity extends Activity {
 								public void onClick(DialogInterface dialog, int which) {
 									database.deleteContact(selectedContact);
 									contactList.remove(clickedViewPos);
-									refreshListView();
+									refreshListView();//TODO
 								}
 
 							});
@@ -259,7 +260,7 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 				
-				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this); //TODO
 				List<Group> groupList = groupDB.getAllGroups(contactList);
 				for (Group group : groupList) {
 					if (contactList.get(id).getGroup().compareTo(group.getName()) == 0) {
@@ -279,17 +280,21 @@ public class MainActivity extends Activity {
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
-				
-				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
-				List<Group> groupList = groupDB.getAllGroups(contactList);
-				for (Group group : groupList) {
-					if (contactList.get(id).getGroup().compareTo(group.getName()) == 0) {
-						group.add(contactList.get(id));
-						groupDB.updateGroup(group);
-					}
-				}
+
+				updateGroups(id);
 			}
 		}
+		}
+	}
+
+	public void updateGroups(int contactID) { //TODO
+		GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+		List<Group> groupList = groupDB.getAllGroups(contactList);
+		for (Group group : groupList) {
+			if (contactList.get(contactID).getGroup().compareTo(group.getName()) == 0) {
+				group.add(contactList.get(contactID));
+				groupDB.updateGroup(group);
+			}
 		}
 	}
 
