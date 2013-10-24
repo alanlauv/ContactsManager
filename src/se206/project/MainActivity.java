@@ -28,16 +28,16 @@ public class MainActivity extends Activity {
 
 	private static final int ADD_CONTACT = 1;
 	protected static final int EDIT_CONTACT = 2;
+	protected static final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
 
 	private ListView listView;
 	private ImageButton buttonAddContact;
 	private Button buttonSort;
-	private Button buttonSearch;
+	private ImageButton buttonSearch;
 	private Button buttonGroup;
 	private Button buttonAll;
 	private List<Contact> contactList = new ArrayList<Contact>();
 	private ContactsDatabaseHelper database = new ContactsDatabaseHelper(MainActivity.this);
-	private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.5F);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		listView = (ListView)findViewById(R.id.main_listview);
 		buttonAddContact = (ImageButton)findViewById(R.id.main_button_add);
 		buttonSort = (Button)findViewById(R.id.main_button_sort);
-		buttonSearch = (Button)findViewById(R.id.main_button_search);
+		buttonSearch = (ImageButton)findViewById(R.id.main_button_search);
 		buttonGroup = (Button)findViewById(R.id.main_button_group);
 		buttonAll = (Button)findViewById(R.id.main_button_all);
 
@@ -110,6 +110,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(buttonClick);
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
 				builder.setTitle("Search contacts:");
