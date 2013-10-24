@@ -268,6 +268,7 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 				
+				/*
 				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this); //TODO
 				List<Group> groupList = groupDB.getAllGroups(contactList);
 				for (Group group : groupList) {
@@ -275,7 +276,7 @@ public class MainActivity extends Activity {
 						group.add(contactList.get(id));
 						groupDB.updateGroup(group);
 					}
-				}
+				}*/
 			}
 			break;
 		}
@@ -289,7 +290,7 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 
-				updateGroups(id);
+				//updateGroups(id);
 			}
 		}
 		}
