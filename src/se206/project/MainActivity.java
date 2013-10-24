@@ -259,7 +259,7 @@ public class MainActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		switch(requestCode) {
-		case (ADD_CONTACT) : {
+		case (ADD_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				int id = database.addContact(contact);
@@ -279,8 +279,7 @@ public class MainActivity extends Activity {
 				}*/
 			}
 			break;
-		}
-		case (EDIT_CONTACT) : {
+		case (EDIT_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
 				int id = database.updateContact(contact);
@@ -292,7 +291,7 @@ public class MainActivity extends Activity {
 
 				//updateGroups(id);
 			}
-		}
+			break;
 		}
 	}
 

@@ -225,6 +225,7 @@ public class AddEditContactActivity extends Activity {
 			if(resultCode == Activity.RESULT_OK){
 				setupSpinner(contact);
 			}
+			break;
 		}
 	}
 
