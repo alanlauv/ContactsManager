@@ -32,6 +32,8 @@ public class EditGroupsActivity extends Activity {
 	private static final int EDIT_GROUP = 1;
 	private static final String TEXT1 = "text1";
 	private static final String TEXT2 = "text2";
+
+	// data used to feed into adapter
 	private GroupsDatabaseHelper database = new GroupsDatabaseHelper(EditGroupsActivity.this);
 	private List<Group> groupList = new ArrayList<Group>();
 	private List<Map<String, String>> displayList =  new ArrayList<Map<String, String>>();
@@ -66,29 +68,20 @@ public class EditGroupsActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String groupName = input.getText().toString().trim();
-						if (groupName.isEmpty()) {
-							String displayString = "Invalid group name";
-							Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
-						} else {
-							boolean groupAlreadyExists = false;
-							for (Group group : groupList) {
-								if (group.getName().compareTo(groupName) == 0) {
-									String displayString = groupName + " already exists";
-									Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
-									groupAlreadyExists = true;
-									break;
-								}
-							}
-							if (!groupAlreadyExists) {
-								Group group = new Group(input.getText().toString());
-								groupList.add(group);
-								database.addGroup(group);
-								setupDisplayList();
-								refreshListView();
-								setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
-							}
+
+						boolean isValidName = checkGroupName(groupName);
+
+						// If group does not already exist, make group, add into database, refresh view
+						if (isValidName) {
+							Group group = new Group(input.getText().toString());
+							groupList.add(group);
+							database.addGroup(group);
+							setupDisplayList();
+							refreshListView();
+							setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
 						}
 					}
+
 				});
 				builder.create().show();
 			}
@@ -96,7 +89,13 @@ public class EditGroupsActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Sets up ListView using a SimpleAdapter. Top text shows group name and subtitle shows
+	 * the number in the group.
+	 * 
+	 */
 	private void setupListView() {
+		// Set up data to feed into adapter
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		groupList = database.getAllGroups(contactsDB.getAllContacts());
 
@@ -112,6 +111,8 @@ public class EditGroupsActivity extends Activity {
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			// When user clicks on a contact on the list a dialog box will show with three
+			// options: view group, edit group name, delete group
 			@Override
 			public void onItemClick(AdapterView<?> parentView, View clickedView,
 					final int clickedViewPos, long id) {
@@ -126,12 +127,15 @@ public class EditGroupsActivity extends Activity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (which == 0) { // View group TODO
+						// View group, takes user to view group activity
+						if (which == 0) {
 							Intent intent = new Intent();
 							intent.setClass(EditGroupsActivity.this, ViewGroupActivity.class);
 							intent.putExtra("Group", selectedGroup);
 							startActivityForResult(intent, EDIT_GROUP);
-						} else if (which == 1) { // Edit group name
+
+							// Edit group, asks user for new name in dialog box
+						} else if (which == 1) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 
 							builder.setTitle("Enter new group name:");
@@ -142,16 +146,25 @@ public class EditGroupsActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									String newName = inputName.getText().toString();
-									groupList.get(clickedViewPos).setName(newName);
-									updateContactsDB(clickedViewPos);
-									database.updateGroup(groupList.get(clickedViewPos));
-									setupDisplayList();
-									refreshListView();
-									setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+
+									// Check if newName is valid
+									boolean isValidName = checkGroupName(newName);
+
+									// Add to database etc, if valid name
+									if (isValidName) {
+										groupList.get(clickedViewPos).setName(newName);
+										updateContactsDB(clickedViewPos);
+										database.updateGroup(groupList.get(clickedViewPos));
+										setupDisplayList();
+										refreshListView();
+										setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+									}
 								}
 							});
 							builder.create().show();
-						} else if (which == 2) { // Delete group
+
+							// Delete group, asks user to confirm deletion
+						} else if (which == 2) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(EditGroupsActivity.this);
 							builder.setTitle("Delete this group?");
 							builder.setMessage("This cannot be undone!");
@@ -160,6 +173,7 @@ public class EditGroupsActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
+									// Delete from database and refresh view etc
 									database.deleteGroup(selectedGroup);
 									groupList.get(clickedViewPos).setName(null);
 									updateContactsDB(clickedViewPos);
@@ -183,11 +197,16 @@ public class EditGroupsActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Sets up the data list that is being fed into the adapter for the list view
+	 * Sorts by alphabetical order
+	 */
 	private void setupDisplayList() {
 
 		displayList.clear();
 		Collections.sort(groupList);
 
+		// Top line - group name, Bottom line - number of contacts in this group
 		for(Group group : groupList) {
 			final Map<String, String> listItemMap = new HashMap<String, String>();
 			listItemMap.put(TEXT1, group.getName());
@@ -195,7 +214,45 @@ public class EditGroupsActivity extends Activity {
 			displayList.add(listItemMap);
 		}
 	}
-	
+
+	/**
+	 * Checks if the naming of a new or editing of a group name is a valid name
+	 * 
+	 * @param newName name of group
+	 * @return boolean true if name is valid, otherwise false
+	 */
+	private boolean checkGroupName(String newName) {
+
+		// Check is input is not "" - invalid - show toast message
+		if (newName.isEmpty()) {
+			String displayString = "Invalid group name";
+			Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
+			return false;
+
+			// Valid string
+		} else {
+
+			// Check if group already exists
+			boolean groupAlreadyExists = false;
+			for (Group group : groupList) {
+
+				// If already exists then show toast message
+				if (group.getName().compareTo(newName) == 0) {
+					String displayString = newName + " already exists";
+					Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
+					groupAlreadyExists = true;
+					break;
+				}
+			}
+			return !groupAlreadyExists;
+		}
+	}
+
+	/**
+	 * Updates the contact Db when a contact gets assigned to a group
+	 * 
+	 * @param position int position of item on the list
+	 */
 	private void updateContactsDB(int position) {
 		ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 		for (Contact contact : groupList.get(position).getGroupList()) {
@@ -203,23 +260,29 @@ public class EditGroupsActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Refreshes the list view and sets view to the top of the list
+	 */
 	private void refreshListView() {
 		((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
 		listView.setSelection(0);
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		switch(requestCode) {
 		case (EDIT_GROUP):
+			// A group has been edited from the View group activity
+			// deletion of contact from the this group
 			if (resultCode == Activity.RESULT_OK) {
+				// update the database, unassign any contact groups that have been removed, refresh, etc.
 				ContactsDatabaseHelper contactsDB = new ContactsDatabaseHelper(EditGroupsActivity.this);
 				groupList.clear();
 				groupList.addAll(database.getAllGroups(contactsDB.getAllContacts()));
 				setupDisplayList();
 				refreshListView();
-				setResult(Activity.RESULT_OK, new Intent());
+				setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
 			}
 		break;
 		}
