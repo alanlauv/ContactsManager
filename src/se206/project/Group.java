@@ -91,6 +91,6 @@ public class Group implements Comparable<Group>, Serializable {
 
 	@Override
 	public int compareTo(Group g) {
-		return this.name.compareTo(g.getName());
+		return this.name.compareToIgnoreCase(g.getName());
 	}
 }

@@ -33,7 +33,7 @@ public final class R {
         public static final int sort_icon=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f08003a;
+        public static final int action_settings=0x7f08003c;
         public static final int add_button_done=0x7f080001;
         public static final int add_button_group=0x7f080015;
         public static final int add_button_photo=0x7f080003;
@@ -64,14 +64,16 @@ public final class R {
         public static final int all_groups_listview=0x7f080018;
         public static final int groups_button_new=0x7f08001d;
         public static final int groups_listview=0x7f08001c;
+        public static final int linearLayout=0x7f080037;
         public static final int main_button_add=0x7f080023;
         public static final int main_button_all=0x7f08001f;
         public static final int main_button_group=0x7f08001e;
         public static final int main_button_search=0x7f080021;
         public static final int main_button_sort=0x7f080022;
-        public static final int main_contact_img=0x7f080037;
-        public static final int main_contact_name=0x7f080038;
-        public static final int main_contact_number=0x7f080039;
+        public static final int main_contact_img=0x7f080039;
+        public static final int main_contact_name=0x7f08003a;
+        public static final int main_contact_number=0x7f08003b;
+        public static final int main_divider=0x7f080038;
         public static final int main_listview=0x7f080020;
         public static final int view_doa=0x7f080034;
         public static final int view_doa_label=0x7f080033;
@@ -100,7 +102,8 @@ public final class R {
         public static final int activity_main=0x7f030003;
         public static final int activity_view_contact=0x7f030004;
         public static final int activity_view_group=0x7f030005;
-        public static final int main_listview_item=0x7f030006;
+        public static final int main_group_listview_item=0x7f030006;
+        public static final int main_listview_item=0x7f030007;
     }
     public static final class menu {
         public static final int add_contact=0x7f070000;
