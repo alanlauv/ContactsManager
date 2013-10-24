@@ -62,6 +62,9 @@ public class Group implements Comparable<Group>, Serializable {
 
 	public void setName(String newName) {
 		name = newName;
+		for (Contact contact : groupList) {
+			contact.setGroup(newName);
+		}
 	}
 
 	public void setID(int id) {
