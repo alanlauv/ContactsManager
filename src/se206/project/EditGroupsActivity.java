@@ -69,12 +69,23 @@ public class EditGroupsActivity extends Activity {
 							String displayString = "Invalid group name";
 							Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
 						} else {
-							Group group = new Group(input.getText().toString());
-							groupList.add(group);
-							database.addGroup(group);
-							setupDisplayList();
-							refreshListView();
-							setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+							boolean groupAlreadyExists = false;
+							for (Group group : groupList) {
+								if (group.getName().compareTo(groupName) == 0) {
+									String displayString = groupName + " already exists";
+									Toast.makeText(EditGroupsActivity.this, displayString, Toast.LENGTH_LONG).show();
+									groupAlreadyExists = true;
+									break;
+								}
+							}
+							if (!groupAlreadyExists) {
+								Group group = new Group(input.getText().toString());
+								groupList.add(group);
+								database.addGroup(group);
+								setupDisplayList();
+								refreshListView();
+								setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
+							}
 						}
 					}
 				});
