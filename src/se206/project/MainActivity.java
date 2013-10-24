@@ -273,39 +273,31 @@ public class MainActivity extends Activity {
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 
-				/*
-				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this); //TODO
-				List<Group> groupList = groupDB.getAllGroups(contactList);
-				for (Group group : groupList) {
-					if (contactList.get(id).getGroup().compareTo(group.getName()) == 0) {
-						group.add(contactList.get(id));
-						groupDB.updateGroup(group);
-					}
-				}*/
+				updateGroups(contact);
 			}
 		break;
 		case (EDIT_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
-				int id = database.updateContact(contact);
+				database.updateContact(contact);
 				//contactList.get(id).editContact(contact); TODO
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
 
-				//updateGroups(id);
+				updateGroups(contact);
 			}
 		break;
 		}
 	}
 
-	public void updateGroups(int contactID) { //TODO
+	public void updateGroups(Contact contact) { //TODO
 		GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
 		List<Group> groupList = groupDB.getAllGroups(contactList);
 		for (Group group : groupList) {
-			if (contactList.get(contactID).getGroup().compareTo(group.getName()) == 0) {
-				group.add(contactList.get(contactID));
+			if (contact.getGroup().compareTo(group.getName()) == 0) {
+				group.add(contact);
 				groupDB.updateGroup(group);
 			}
 		}
