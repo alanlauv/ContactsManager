@@ -124,6 +124,10 @@ public class Contact implements Comparable<Contact>, Serializable {
 	public void setID(int id) {
 		this.id = id;
 	}
+	
+	public void setGroup(String groupName) {
+		group = groupName;
+	}
 
 	public void setPhoto(byte[] imageData) {
         photo = imageData;
