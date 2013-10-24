@@ -28,8 +28,13 @@ import android.widget.Toast;
  */
 public class AddEditContactActivity extends Activity {
 
-	private ImageButton buttonDone;
-	private ImageButton buttonPhoto;
+	// Values used for passing between activities through intents
+	private static final int CHOOSE_PHOTO = 1;
+	private static final int EDIT_GROUP = 2;
+
+	private static final String NO_SELECTION = "No Selection";
+
+	private ImageButton buttonDone, buttonPhoto, buttonGroup;
 	private EditText editTextFirstName;
 	private EditText editTextLastName;
 	private EditText editTextMobileph;
@@ -38,13 +43,15 @@ public class AddEditContactActivity extends Activity {
 	private EditText editTextEmail;
 	private EditText editTextHomeAdd;
 	private EditText editTextDoa;
-	private ImageButton buttonGroup;
 	private Spinner spinnerGroup;
 
+	// Edit mode
 	private boolean isEdit = false;
-	private int contactID;//TODO fix up
-	private Uri selectedImage = null;//TODO fix up
-	private byte[] bytesPhoto = null;//TODO fix up
+
+	// Image from gallery user selects
+	private Uri selectedImage = null;
+
+	// This contact
 	private Contact contact;
 
 	@Override
@@ -86,16 +93,16 @@ public class AddEditContactActivity extends Activity {
 			editTextEmail.setText(contact.getEmail());
 			editTextHomeAdd.setText(contact.getHomeAdd());
 			editTextDoa.setText(contact.getDoa());
-			contactID = contact.getID();
 
-			bytesPhoto = contact.getPhoto();
+			// Check if contact has a photo already, convert into bitmap and set the image button
+			byte[] bytesPhoto = contact.getPhoto();
 			if (bytesPhoto != null) {
 				Bitmap bmpPhoto = BitmapFactory.decodeByteArray(bytesPhoto, 0, bytesPhoto.length);
 				buttonPhoto.setImageBitmap(bmpPhoto);
 			}
 		}
-		
-		setupSpinner(contact);
+
+		setupSpinner();
 
 		// Done button which takes all the info and creates a new contact or finalises
 		// the editing of a contact, then finishes this activity and returns to previous
@@ -106,6 +113,7 @@ public class AddEditContactActivity extends Activity {
 			public void onClick(View v) {
 				v.startAnimation(MainActivity.buttonClick);
 
+				// Get text from all edit boxes
 				String firstName = editTextFirstName.getText().toString().trim();
 				String lastName = editTextLastName.getText().toString().trim();
 				String mobileph = editTextMobileph.getText().toString();
@@ -114,42 +122,45 @@ public class AddEditContactActivity extends Activity {
 				String email = editTextEmail.getText().toString();
 				String homeAdd = editTextHomeAdd.getText().toString();
 				String doa = editTextDoa.getText().toString();
+
+				// Group will be null if no group chosen
 				String group = null;
-				if (spinnerGroup.getSelectedItem().toString().compareTo("No Selection") != 0) {
-					group = spinnerGroup.getSelectedItem().toString();//TODO add group in database if not "No Selection"
-					//GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
-					//List<Group> groupList = database.getAllGroups();
+				if (spinnerGroup.getSelectedItem().toString().compareTo(NO_SELECTION) != 0) {
+					group = spinnerGroup.getSelectedItem().toString();
 				}
 
-				// TODO if name is ""
-				Contact contact = new Contact(firstName, lastName, mobileph,
+				Contact newContact = new Contact(firstName, lastName, mobileph,
 						homeph, workph, email, homeAdd, doa, group);
 
+				// Check if edit mode, set the ID so it can be updated in DB
 				if (isEdit) {
-					contact.setID(contactID);
+					newContact.setID(contact.getID());
 					// Unchanged contact photo
-					if (bytesPhoto != null && selectedImage == null) {
-						contact.setPhoto(bytesPhoto);
+					if (contact.getPhoto() != null && selectedImage == null) {
+						newContact.setPhoto(contact.getPhoto());
 					}
 				}
 
-				// Changed contact photo
+				// Changed contact photo, convert into byte array and store
 				if (selectedImage != null) {
 					byte[] newPhoto;
 					try {
 						newPhoto = readBytes(selectedImage);
-						contact.setPhoto(newPhoto);
+						newContact.setPhoto(newPhoto);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 
+				// Check if name is entered and not empty strings - display toast message if invalid name
 				if (firstName.isEmpty() && lastName.isEmpty()) {
 					String displayString =  "Contact requires at least a name";
 					Toast.makeText(AddEditContactActivity.this, displayString, Toast.LENGTH_LONG).show();
+
+					// Finish this activity and send back the new contact
 				} else {
 					Intent resultIntent = new Intent();
-					resultIntent.putExtra("Contact", contact);
+					resultIntent.putExtra("Contact", newContact);
 					setResult(Activity.RESULT_OK, resultIntent);
 					finish();
 				}
@@ -163,7 +174,7 @@ public class AddEditContactActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_PICK,
 						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				startActivityForResult(intent, 1); //TODO "1"
+				startActivityForResult(intent, CHOOSE_PHOTO);
 			}
 		});
 
@@ -174,36 +185,61 @@ public class AddEditContactActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(AddEditContactActivity.this, EditGroupsActivity.class);
-				startActivityForResult(intent, 2); //TODO "2"
+				startActivityForResult(intent, EDIT_GROUP);
 			}
 		});
 
 	}
 
-	public void setupSpinner(Contact contact) {
+	/**
+	 * Sets up the spinner by getting all group names and displaying it on a simple spinner
+	 * dropdown item list
+	 * 
+	 * @param contact this contact
+	 */
+	private void setupSpinner() {
 
+		// Get all groups from the database and sort
 		GroupsDatabaseHelper database = new GroupsDatabaseHelper(AddEditContactActivity.this);
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
+
+		// Check if in edit mode and this contact is assigned to a group
 		if (isEdit && contact.getGroup() != null) {
+
+			// Make this contact's group as the first item on spinner and "No Selection" as last
 			if (groupNameList.contains(contact.getGroup())) {
 				groupNameList.remove(contact.getGroup());
 				groupNameList.add(0, contact.getGroup());
-				groupNameList.add(groupNameList.size(), "No Selection");
+				groupNameList.add(groupNameList.size(), NO_SELECTION);
+
+				// This contact has no group, so make first item as "No Selection"
 			} else {
 				contact.setGroup(null);
-				groupNameList.add(0, "No Selection");
+				groupNameList.add(0, NO_SELECTION);
 			}
+
+			// In add mode, this contact has no group, so make first item as "No Selection"
 		} else {
-			groupNameList.add(0, "No Selection");
+			groupNameList.add(0, NO_SELECTION);
 		}
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, groupNameList);
+
+		// Setup spinner with the data
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AddEditContactActivity.this,
+				android.R.layout.simple_spinner_item, groupNameList);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerGroup.setAdapter(dataAdapter);
 	}
 
+	/**
+	 * Converts URI image to Btye[] image.
+	 * 
+	 * @param uri photo choosen from gallery
+	 * @return byte array of photo
+	 * @throws IOException
+	 */
 	public byte[] readBytes(Uri uri) throws IOException {
-		// this dynamically extends to take the bytes you read
+		// this dynamically extends to take the bytes to read
 		InputStream inputStream = getContentResolver().openInputStream(uri);
 		ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
 
@@ -217,7 +253,6 @@ public class AddEditContactActivity extends Activity {
 			byteBuffer.write(buffer, 0, len);
 		}
 
-		// and then we can return your byte array.
 		return byteBuffer.toByteArray();
 	}
 
@@ -225,15 +260,18 @@ public class AddEditContactActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		switch(requestCode) {
-		case 1: //TODO "1"
-			if(resultCode == Activity.RESULT_OK){  
+		// User chose photo from gallery
+		case CHOOSE_PHOTO:
+			if(resultCode == Activity.RESULT_OK){
+				// Set button with the chosen image
 				selectedImage = intent.getData();
 				buttonPhoto.setImageURI(selectedImage);
 			}
 			break;
-		case 2: // TODO "2" new group added
+			// Groups have been edited, data set of spinner changed, so re-setup
+		case EDIT_GROUP:
 			if(resultCode == Activity.RESULT_OK){
-				setupSpinner(contact);
+				setupSpinner();
 			}
 			break;
 		}
