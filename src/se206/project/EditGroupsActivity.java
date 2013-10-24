@@ -120,10 +120,12 @@ public class EditGroupsActivity extends Activity {
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									selectedGroup.setName(inputName.getText().toString());//TODO update group
-									database.updateGroup(selectedGroup);
+									groupList.get(clickedViewPos).setName(inputName.getText().toString());
+									//selectedGroup.setName(inputName.getText().toString());//TODO update group
+									database.updateGroup(groupList.get(clickedViewPos));
 									setupDisplayList();
 									refreshListView();
+									setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
 								}
 							});
 							builder.create().show();
@@ -140,6 +142,7 @@ public class EditGroupsActivity extends Activity {
 									groupList.remove(clickedViewPos);
 									displayList.remove(clickedViewPos);
 									refreshListView();
+									setResult(Activity.RESULT_OK, new Intent()); // refresh spinner in AddEdit
 								}
 
 							});
