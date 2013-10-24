@@ -258,18 +258,36 @@ public class MainActivity extends Activity {
 				contactList.add(contact);
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
+				
+				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+				List<Group> groupList = groupDB.getAllGroups(contactList);
+				for (Group group : groupList) {
+					if (contactList.get(id).getGroup().compareTo(group.getName()) == 0) {
+						group.add(contactList.get(id));
+						groupDB.updateGroup(group);
+					}
+				}
 			}
 			break;
 		}
 		case (EDIT_CONTACT) : {
 			if (resultCode == Activity.RESULT_OK) {
 				Contact contact = (Contact) intent.getSerializableExtra("Contact");
-				database.updateContact(contact);
+				int id = database.updateContact(contact);
 				//contactList.get(id).editContact(contact); TODO
 				contactList.clear();
 				contactList.addAll(database.getAllContacts());
 				Collections.sort(contactList, Contact.Comparators.FIRSTNAME);
 				refreshListView();
+				
+				GroupsDatabaseHelper groupDB = new GroupsDatabaseHelper(MainActivity.this);
+				List<Group> groupList = groupDB.getAllGroups(contactList);
+				for (Group group : groupList) {
+					if (contactList.get(id).getGroup().compareTo(group.getName()) == 0) {
+						group.add(contactList.get(id));
+						groupDB.updateGroup(group);
+					}
+				}
 			}
 		}
 		}
