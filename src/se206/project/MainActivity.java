@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
 	private ListView listView;
 	private ImageButton buttonAddContact;
-	private Button buttonSort;
+	private ImageButton buttonSort;
 	private ImageButton buttonSearch;
 	private Button buttonGroup;
 	private Button buttonAll;
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 
 		listView = (ListView)findViewById(R.id.main_listview);
 		buttonAddContact = (ImageButton)findViewById(R.id.main_button_add);
-		buttonSort = (Button)findViewById(R.id.main_button_sort);
+		buttonSort = (ImageButton)findViewById(R.id.main_button_sort);
 		buttonSearch = (ImageButton)findViewById(R.id.main_button_search);
 		buttonGroup = (Button)findViewById(R.id.main_button_group);
 		buttonAll = (Button)findViewById(R.id.main_button_all);
@@ -77,6 +77,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				v.startAnimation(buttonClick);
 				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
 				builder.setTitle("Sort contacts by:");
