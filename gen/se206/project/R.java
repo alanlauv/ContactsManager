@@ -50,9 +50,9 @@ public final class R {
         public static final int add_workph_label=0x7f08000b;
         public static final int all_groups_button_add=0x7f08001b;
         public static final int all_groups_button_all=0x7f080017;
+        public static final int all_groups_button_edit=0x7f08001a;
         public static final int all_groups_button_group=0x7f080016;
         public static final int all_groups_button_search=0x7f080019;
-        public static final int all_groups_button_sort=0x7f08001a;
         public static final int all_groups_listview=0x7f080018;
         public static final int groups_button_new=0x7f08001d;
         public static final int groups_listview=0x7f08001c;
