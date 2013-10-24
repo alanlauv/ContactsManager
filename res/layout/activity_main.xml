@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#33B5E5" >
+        android:background="#33B5E5"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/main_button_group"
@@ -36,8 +36,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#33B5E5" >
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/main_button_search"
@@ -53,11 +53,14 @@
             android:layout_weight="1"
             android:text="@string/sort" />
 
-        <Button
+        <ImageButton
             android:id="@+id/main_button_add"
             android:layout_width="0px"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#33B5E5"
+            android:scaleType="centerInside"
+            android:src="@drawable/add_contact"
             android:text="@string/add" />
     </LinearLayout>
 
