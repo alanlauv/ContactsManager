@@ -99,7 +99,8 @@ public final class R {
         public static final int activity_groups=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_view_contact=0x7f030004;
-        public static final int main_listview_item=0x7f030005;
+        public static final int activity_view_group=0x7f030005;
+        public static final int main_listview_item=0x7f030006;
     }
     public static final class menu {
         public static final int add_contact=0x7f070000;
@@ -107,6 +108,7 @@ public final class R {
         public static final int edit_groups=0x7f070002;
         public static final int main=0x7f070003;
         public static final int view_contact=0x7f070004;
+        public static final int view_group=0x7f070005;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -136,6 +138,7 @@ public final class R {
         public static final int title_activity_all_groups=0x7f05001c;
         public static final int title_activity_edit_groups=0x7f050004;
         public static final int title_activity_view_contact=0x7f050005;
+        public static final int title_activity_view_group=0x7f05001d;
         public static final int work=0x7f050019;
         public static final int work_phone=0x7f050010;
     }

@@ -30,5 +30,6 @@
     <string name="other">Other</string>
     <string name="edit_groups">Edit Groups</string>
     <string name="title_activity_all_groups">Contacts Manager</string>
+    <string name="title_activity_view_group">ViewGroupActivity</string>
 
 </resources>
