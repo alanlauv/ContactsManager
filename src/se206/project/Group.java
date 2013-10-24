@@ -23,7 +23,13 @@ public class Group implements Comparable<Group>, Serializable {
 	}
 
 	public void add(Contact contact) {
-		groupList.add(contact);
+		boolean alreadyInList = false;
+		for (Contact c : groupList) {
+			if (c.getID() == contact.getID())
+				alreadyInList = true;
+		}
+		if (!alreadyInList)
+			groupList.add(contact);
 	}
 
 	public void remove(Contact contact) {
