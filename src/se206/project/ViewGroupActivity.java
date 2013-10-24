@@ -27,6 +27,7 @@ public class ViewGroupActivity extends Activity {
 		setTitle(group.getName());
 		listView = (ListView)findViewById(R.id.view_group_listview);
 
+		setupListView();
 	}
 
 	/**
