@@ -15,10 +15,10 @@ import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 /**
  * This class represents the add and edit contact screen of the contacts
  * manager application
@@ -106,8 +106,8 @@ public class AddEditContactActivity extends Activity {
 			public void onClick(View v) {
 				v.startAnimation(MainActivity.buttonClick);
 
-				String firstName = editTextFirstName.getText().toString();
-				String lastName = editTextLastName.getText().toString();
+				String firstName = editTextFirstName.getText().toString().trim();
+				String lastName = editTextLastName.getText().toString().trim();
 				String mobileph = editTextMobileph.getText().toString();
 				String homeph = editTextHomeph.getText().toString();
 				String workph = editTextWorkph.getText().toString();
@@ -144,10 +144,15 @@ public class AddEditContactActivity extends Activity {
 					}
 				}
 
-				Intent resultIntent = new Intent();
-				resultIntent.putExtra("Contact", contact);
-				setResult(Activity.RESULT_OK, resultIntent);
-				finish();
+				if (firstName.isEmpty() && lastName.isEmpty()) {
+					String displayString =  "Contact requires at least a name";
+					Toast.makeText(AddEditContactActivity.this, displayString, Toast.LENGTH_LONG).show();
+				} else {
+					Intent resultIntent = new Intent();
+					resultIntent.putExtra("Contact", contact);
+					setResult(Activity.RESULT_OK, resultIntent);
+					finish();
+				}
 			}
 		});
 
@@ -181,9 +186,13 @@ public class AddEditContactActivity extends Activity {
 		List<String> groupNameList = database.getAllGroupNames();
 		Collections.sort(groupNameList);
 		if (isEdit && contact.getGroup() != null) {
-			groupNameList.remove(contact.getGroup());
-			groupNameList.add(0, contact.getGroup());
-			groupNameList.add(groupNameList.size(), "No Selection");
+			if (groupNameList.contains(contact.getGroup())) {
+				groupNameList.remove(contact.getGroup());
+				groupNameList.add(0, contact.getGroup());
+				groupNameList.add(groupNameList.size(), "No Selection");
+			} else {
+				contact.setGroup(null);
+			}
 		} else {
 			groupNameList.add(0, "No Selection");
 		}
